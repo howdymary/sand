@@ -58,8 +58,6 @@
   .view-heading { flex:0 0 auto; padding:3px 0 0; display:flex; justify-content:space-between; align-items:flex-start; gap:20px; pointer-events:none; }
   .view-heading h2 { font-size:clamp(24px,2.2vw,32px); line-height:1.25; letter-spacing:-.03em; font-weight:400; margin:8px 0 9px; }
   .view-heading p { font-size:13px; line-height:1.7; color:var(--muted); max-width:520px; }
-  .view-count { display:flex; align-items:baseline; gap:7px; padding-top:10px; font:9px ui-monospace,SFMono-Regular,Menlo,monospace; color:#8a8a8a; white-space:nowrap; }
-  .view-count #view-number { font-size:22px; font-weight:400; color:var(--ink); letter-spacing:-.045em; }
   .visual-canvas-wrap { position:relative; flex:1 1 auto; min-height:0; padding-top:8px; }
   .scene-canvas { position:absolute; inset:7px 0 0; background:var(--paper) !important; }
   .scene-canvas > svg { display:block; height:100%; width:100%; }
@@ -70,9 +68,6 @@
   .components-toggle { display:none; background:transparent; border:0; padding:4px 0; color:var(--muted); font:inherit; white-space:nowrap; }
   .concept-label { display:none; font-size:8px; letter-spacing:.04em; }
   .component-strip { flex:0 0 auto; display:flex; justify-content:flex-start; gap:5px; overflow-x:auto; padding:10px 2px 14px; scrollbar-width:thin; }
-  .journey-footer { position:relative; flex:0 0 auto; height:69px; display:flex; align-items:center; gap:10px; border-top:1px solid var(--line); background:var(--paper); }
-  .chapter-nav { display:flex; flex:1; overflow-x:auto; gap:0; padding:8px 1px; scrollbar-width:none; }
-  .chapter-nav::-webkit-scrollbar { display:none; }
   .inspector { position:absolute; z-index:25; right:0; top:15px; width:min(280px,92%); max-height:calc(100% - 30px); overflow-y:auto; padding:19px 21px 24px; background:var(--paper); border:1px solid var(--line); border-radius:2px; box-shadow:0 12px 40px #0000000d; }
   .inspector-heading { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; }
   .inspector h3 { font-size:24px; line-height:1.28; font-weight:400; letter-spacing:-.03em; margin:12px 0; }
@@ -102,16 +97,6 @@
   .component-chip { flex:0 0 auto; background:transparent; border:1px solid var(--line); border-radius:2px; padding:7px 10px; font-size:10px; color:#555; display:flex; align-items:center; gap:9px; }
   .component-chip::after { content:'+'; color:#888; font-size:12px; }
   .component-chip:hover,.component-chip[aria-pressed=true] { border-color:var(--orange); color:#b44320; background:#fff7f3; }
-  .view-arrow { display:grid; place-items:center; flex:0 0 29px; height:30px; background:transparent; border:1px solid var(--line); border-radius:50%; font-size:16px; line-height:1; }
-  .view-arrow:disabled { opacity:.3; }
-  .view-arrow:not(:disabled):hover { border-color:var(--orange); color:var(--orange); }
-  .chapter-nav button { flex:1 0 66px; position:relative; padding:10px 3px 7px; min-height:48px; border:0; background:transparent; border-radius:2px; text-align:center; }
-  .chapter-nav button::before { position:absolute; content:''; top:1px; left:7px; right:7px; height:1px; background:#d7d7d7; }
-  .chapter-nav .nav-number { display:block; margin-bottom:6px; color:#888; font:8px/1 ui-monospace,SFMono-Regular,Menlo,monospace; }
-  .chapter-nav .nav-label { display:block; color:#555; font-size:9px; line-height:1.3; white-space:nowrap; }
-  .chapter-nav button[aria-current=step]::before { background:var(--orange); }
-  .chapter-nav button[aria-current=step] .nav-number,.chapter-nav button[aria-current=step] .nav-label { color:#bd4822; }
-  .chapter-nav button:hover { background:#f7f7f7; }
   .icon-button { background:transparent; border:0; width:30px; height:30px; padding:0; color:var(--muted); font-size:23px; line-height:1; }
   .component-tooltip { position:fixed; z-index:70; width:245px; padding:14px 16px; color:#fff; background:#202020; border:1px solid #333; border-radius:2px; box-shadow:0 5px 25px #00000012; pointer-events:none; }
   .component-tooltip strong { display:block; font-size:13px; font-weight:400; margin-bottom:6px; }
@@ -153,8 +138,6 @@
     .eyebrow { font-size:9px; }
     .view-heading h2 { font-size:16px; line-height:1.2; margin:0 0 3px; }
     .view-heading p { display:none; }
-    .view-count { padding-top:2px; font-size:8px; gap:6px; }
-    .view-count #view-number { font-size:15px; }
     .visual-canvas-wrap { padding-top:0; }
     .scene-canvas { inset:0 -4px; }
     .scene-canvas > svg { width:100%; height:100%; }
@@ -166,12 +149,6 @@
     .component-strip { display:none; padding:4px 1px 6px; }
     .components-open .component-strip { display:flex; }
     .component-chip { min-height:25px; padding:4px 8px; font-size:9px; }
-    .journey-footer { height:30px; gap:8px; }
-    .view-arrow { flex-basis:27px; height:28px; font-size:15px; }
-    .chapter-nav { padding:5px 1px; }
-    .chapter-nav button { flex:1 0 70px; min-height:24px; padding:4px 2px; }
-    .chapter-nav .nav-label { font-size:8px; }
-    .chapter-nav .nav-number { display:none; }
     .essay-column { max-width:680px; width:100%; margin:auto; padding:36px 28px calc(var(--mobile-visual) + env(safe-area-inset-bottom,0px) + 70px); }
     .essay-intro { min-height:58svh; padding:0 0 52px; }
     .essay-title { font-size:36px; line-height:1.25; margin:16px 0 22px; }
@@ -205,7 +182,6 @@
     .view-heading p { font-size:11px; }
     .component-strip { padding:5px 0 8px; }
     .component-chip { font-size:9px; padding:5px 8px; }
-    .journey-footer { height:58px; }
     :root { --header:65px; }
   }
   @media (max-height:600px) and (max-width:900px) {
@@ -214,14 +190,8 @@
     .view-heading { position:absolute; top:6px; left:16px; right:16px; z-index:2; }
     .view-heading h2 { font-size:16px; margin:0; }
     .view-heading .eyebrow { display:none; }
-    .view-count { padding-top:0; }
-    .view-count #view-number { font-size:16px; }
     .component-strip { padding:2px 1px 4px; }
     .component-chip { min-height:23px; padding:3px 7px; font-size:8px; }
-    .journey-footer { height:30px; }
-    .view-arrow { height:24px; flex-basis:24px; }
-    .chapter-nav button { min-height:24px; padding:4px 2px; }
-    .chapter-nav .nav-number { display:none; }
     .visual-toolbar { min-height:25px; }
     .visual-toolbar > span:first-child { display:none; }
   }
@@ -402,9 +372,9 @@
   .teardown-detail-link { fill:none; stroke:#aaa; stroke-width:1; }
   .teardown-detail-frame { fill:none; stroke:#ff642e; stroke-width:1; vector-effect:non-scaling-stroke; }
   .teardown-stage[data-compact="true"] .teardown-compact-detail { display:inline; }
-  .teardown-stage[data-compact="true"] .teardown-breadcrumb,
-  .teardown-stage[data-compact="true"] .teardown-annotation,
-  .teardown-stage[data-compact="true"] .teardown-caption { display:none; }
+  .teardown-stage[data-framed="true"] .teardown-breadcrumb,
+  .teardown-stage[data-framed="true"] .teardown-annotation,
+  .teardown-stage[data-framed="true"] .teardown-caption { display:none; }
   .teardown-carrier rect { fill:#fafafa; fill-opacity:.5; stroke:#aaa; stroke-width:3; }
   .teardown-carrier path { fill:none; stroke:#b9b9b9; stroke-width:2; stroke-dasharray:9 10; }
   .teardown-annotation path { fill:none; stroke:#b5b5b5; stroke-width:1; }
@@ -464,23 +434,8 @@ const chapters = [
     ]
   },
   {
-    "id": "quantization",
-    "kicker": "04 / An architectural tradeoff",
-    "title": "Formats are system decisions",
-    "caption": "Compare the payload for 32 values at eight and four bits, then account for conversion, metadata, and numerical quality.",
-    "sceneTitle": "One block, two representations",
-    "sceneSubtitle": "32 × 8 = 256 bits → 32 × 4 = 128 bits, before scales and metadata.",
-    "componentIds": [
-      "conversion",
-      "hbm",
-      "buffer",
-      "compute",
-      "ai"
-    ]
-  },
-  {
     "id": "microarchitecture",
-    "kicker": "05 / Team two · Microarchitecture & RTL",
+    "kicker": "04 / Team two · Microarchitecture & RTL",
     "title": "Microarchitecture and RTL",
     "caption": "Turn the block contract into cycle-by-cycle behavior within power, performance, and area constraints.",
     "sceneTitle": "Inside the math block",
@@ -497,7 +452,7 @@ const chapters = [
   },
   {
     "id": "verification",
-    "kicker": "06 / Team three · Design verification",
+    "kicker": "05 / Team three · Design verification",
     "title": "Design verification",
     "caption": "Check intended behavior independently, investigate disagreements, and feed ambiguous requirements back to architecture.",
     "sceneTitle": "Test the intended behavior",
@@ -513,7 +468,7 @@ const chapters = [
   },
   {
     "id": "physical-design",
-    "kicker": "07 / Team four · Physical design",
+    "kicker": "06 / Team four · Physical design",
     "title": "Physical design",
     "caption": "Place and connect the circuit, then return timing, congestion, and power findings to the designers who can act on them.",
     "sceneTitle": "From logic to physical layout",
@@ -530,20 +485,23 @@ const chapters = [
   },
   {
     "id": "tapeout",
-    "kicker": "08 / The organization behind the chip",
-    "title": "From idea to production",
-    "caption": "Four disciplines converge on signoff, fabrication, packaging, and silicon bring-up, with evidence feeding back across the boundaries.",
-    "sceneTitle": "Layout → wafer → package",
-    "sceneSubtitle": "A conceptual manufacturing sequence after design signoff.",
+    "kicker": "07 / The organization behind the chip",
+    "title": "Organize the engineering loop",
+    "caption": "Shared intent connects architecture and RTL to parallel verification and physical implementation. Findings return to the people who can change the decision.",
+    "sceneTitle": "The organization behind the chip",
+    "sceneSubtitle": "Distinct responsibilities, shared requirements, and continuous feedback toward production.",
     "componentIds": [
+      "specification",
+      "rtl",
+      "testbench",
+      "cells",
       "tapeout",
-      "wafer",
       "package"
     ]
   },
   {
     "id": "ai-and-coordination",
-    "kicker": "09 / An AI-native engineering loop",
+    "kicker": "08 / An AI-native engineering loop",
     "title": "AI across the engineering loop",
     "caption": "Explore AI assistance for RTL and performance analysis, and the opportunity to keep requirements, changes, and evidence connected.",
     "sceneTitle": "Connect the engineering evidence",
@@ -559,7 +517,7 @@ const chapters = [
   },
   {
     "id": "rack-scale",
-    "kicker": "10 / Software to deployment",
+    "kicker": "09 / Software to deployment",
     "title": "Software to deployment",
     "caption": "Return to the rack: model execution, serving software, and system validation turn hardware capability into customer inference.",
     "sceneTitle": "The chip returns to the system",
@@ -613,7 +571,7 @@ const components = {
     description: 'Supporting functions prepare numerical representations or layouts for the next operation. Quantization, dequantization, and a matrix transpose are different examples.',
     why: 'Stored data may not already have the representation and layout the arithmetic hardware needs.',
     inputs: 'Values, format information, and any required scales or metadata.', outputs: 'Values in the required numerical representation or arrangement.',
-    tradeoff: 'Conversion must maintain required numerical behavior while keeping pace with the data path.', chapter: 3
+    tradeoff: 'Conversion must maintain required numerical behavior while keeping pace with the data path.', chapter: 2
   },
   interconnect: {
     name: 'On-chip connections', type: 'Architecture',
@@ -634,165 +592,165 @@ const components = {
     description: 'Microarchitects turn the architectural contract into datapaths, control, storage, and cycle-by-cycle behavior in RTL.',
     why: 'The implementation must satisfy functional requirements and its power, performance, and area budgets.',
     inputs: 'Block specifications, interfaces, workload assumptions, and physical feedback.', outputs: 'RTL and implementation choices for verification, synthesis, and physical design.',
-    tradeoff: 'Pipeline stages, buffering, bit widths, and flow control affect neighboring blocks as well as local PPA.', chapter: 4
+    tradeoff: 'Pipeline stages, buffering, bit widths, and flow control affect neighboring blocks as well as local PPA.', chapter: 3
   },
   register: {
     name: 'Register', type: 'Microarchitecture',
     description: 'A register holds data across clock cycles. The example register is part of an illustrative 32-bit datapath.',
     why: 'Stored values and pipeline boundaries let the circuit organize work over time.',
     inputs: 'A value and the control required to capture it.', outputs: 'The stored value for a subsequent operation.',
-    tradeoff: 'Additional registers may improve timing while increasing area, clock load, routing, latency, and power.', chapter: 4
+    tradeoff: 'Additional registers may improve timing while increasing area, clock load, routing, latency, and power.', chapter: 3
   },
   multiply: {
     name: 'Multiplication', type: 'Microarchitecture',
     description: 'An arithmetic stage multiplies operands under the specified width and numerical rules.',
     why: 'The required mathematical behavior must become a circuit that meets the target operating rate.',
     inputs: 'Operands with defined formats and valid-data conditions.', outputs: 'A product with a specified representation.',
-    tradeoff: 'Arithmetic width, pipeline organization, timing, numerical behavior, area, and power interact.', chapter: 4
+    tradeoff: 'Arithmetic width, pipeline organization, timing, numerical behavior, area, and power interact.', chapter: 3
   },
   add: {
     name: 'Addition', type: 'Microarchitecture',
     description: 'This illustrative stage follows multiplication. The real specification must define its operands, result width, and numerical behavior.',
     why: 'The microarchitect maps the required sequence of operations into a complete data path.',
     inputs: 'Defined operands or intermediate values.', outputs: 'A result sent onward under the interface rules.',
-    tradeoff: 'Combining operations or separating them with registers changes timing, storage, latency, and physical cost.', chapter: 4
+    tradeoff: 'Combining operations or separating them with registers changes timing, storage, latency, and physical cost.', chapter: 3
   },
   interface: {
     name: 'Block interface', type: 'Shared contract',
     description: 'The producing and receiving blocks agree on data widths, formats, ordering, accepted rates, and flow control.',
     why: 'A result only contributes to system throughput when the next block accepts and interprets it correctly.',
     inputs: 'Data, validity information, and receiving conditions.', outputs: 'Accepted transfers and any required response signals.',
-    tradeoff: 'A local optimization can shift buffering, timing, or bandwidth demands onto the neighboring block.', chapter: 4
+    tradeoff: 'A local optimization can shift buffering, timing, or bandwidth demands onto the neighboring block.', chapter: 3
   },
   testbench: {
     name: 'Testbench', type: 'Design verification',
     description: 'The verification environment drives scenarios, observes the implementation, and checks required behavior.',
     why: 'Finding a bug before fabrication avoids carrying that error into manufactured silicon.',
     inputs: 'Architectural requirements, test scenarios, and the implementation under test.', outputs: 'Observed behavior, checks, coverage, and reproducible failures.',
-    tradeoff: 'Reusable frameworks help organize tests; meaningful scenarios and expectations remain design-specific.', chapter: 5
+    tradeoff: 'Reusable frameworks help organize tests; meaningful scenarios and expectations remain design-specific.', chapter: 4
   },
   reference: {
     name: 'Independent reference', type: 'Architectural intent',
     description: 'Expected behavior comes from an independent understanding of the specification, including numerical and interface requirements.',
     why: 'Expectations copied entirely from RTL can repeat an incorrect implementation assumption.',
     inputs: 'Specified behavior and the test’s input conditions.', outputs: 'The result or behavior the implementation should produce.',
-    tradeoff: 'An unclear specification needs architectural resolution rather than an arbitrary test expectation.', chapter: 5
+    tradeoff: 'An unclear specification needs architectural resolution. Verification needs an agreed expectation to test.', chapter: 4
   },
   comparator: {
     name: 'Result comparison', type: 'Verification evidence',
     description: 'A check compares expected and observed behavior under the relevant conditions.',
     why: 'A mismatch gives engineers a concrete disagreement to investigate together.',
     inputs: 'Expected results and implementation observations.', outputs: 'Agreement or a failure with context for investigation.',
-    tradeoff: 'A failure may reveal an RTL bug, a test issue, or an ambiguous requirement; its cause must be established.', chapter: 5
+    tradeoff: 'A failure may reveal an RTL bug, a test issue, or an ambiguous requirement; its cause must be established.', chapter: 4
   },
   cells: {
     name: 'Cells & placement', type: 'Physical design',
     description: 'Synthesis maps RTL into circuit cells and connections. Physical implementation places those cells on the die.',
     why: 'Logical behavior needs a realizable physical arrangement of transistor-based circuits.',
     inputs: 'A synthesized netlist, floorplan, and implementation constraints.', outputs: 'Placed cells and physical analysis.',
-    tradeoff: 'Local density and placement affect routing, timing, area use, and power. The view here is stylized.', chapter: 6
+    tradeoff: 'Local density and placement affect routing, timing, area use, and power. The view here is stylized.', chapter: 5
   },
   routing: {
     name: 'Routing', type: 'Physical design',
     description: 'Physical wiring connects the circuit’s cells and blocks while meeting implementation and manufacturing constraints.',
     why: 'Connections consume physical resources and contribute to the circuit’s timing and power.',
     inputs: 'Required connections and placed circuit elements.', outputs: 'Routed connections and analysis of the resulting implementation.',
-    tradeoff: 'Congestion or a long path may require moving a block or changing its organization.', chapter: 6
+    tradeoff: 'Congestion or a long path may require moving a block or changing its organization.', chapter: 5
   },
   clock: {
     name: 'Clock distribution', type: 'Physical design',
     description: 'Clock distribution reaches the storage elements that coordinate state transitions across cycles.',
     why: 'The cycle-by-cycle behavior described in RTL needs a physical timing framework.',
     inputs: 'Clock requirements and the circuit’s storage elements.', outputs: 'An implemented clock distribution network.',
-    tradeoff: 'Clocking, register placement, routing, timing, and power must be evaluated together.', chapter: 6
+    tradeoff: 'Clocking, register placement, routing, timing, and power must be evaluated together.', chapter: 5
   },
   power: {
     name: 'Power delivery & budget', type: 'A system constraint',
     description: 'Power is a design constraint from RTL decisions through physical implementation and rack operation.',
     why: 'The system must supply energy and remove heat while silicon remains within operating limits.',
     inputs: 'Circuit activity and requirements for operating voltage and frequency.', outputs: 'Power analysis and a realizable delivery plan.',
-    tradeoff: 'Storage, switching, wiring, clocks, memory activity, and leakage all contribute; logic count alone is insufficient.', chapter: 6
+    tradeoff: 'Storage, switching, wiring, clocks, memory activity, and leakage all contribute; logic count alone is insufficient.', chapter: 5
   },
   rack: {
     name: 'Server rack', type: 'Inference system',
     description: 'The rack brings compute, memory, communication, power delivery, and cooling into an operating system.',
-    why: 'The workload is served by the complete deployment rather than a chip in isolation.',
+    why: 'The full deployment serves the workload. Chip-level results are one input to its performance.',
     inputs: 'Workloads, software, electrical power, and the required operating environment.', outputs: 'Sustained inference performance under defined conditions.',
-    tradeoff: 'Capacity, interconnect, thermal limits, reliability, and economics all shape useful operation.', chapter: 9
+    tradeoff: 'Capacity, interconnect, thermal limits, reliability, and economics all shape useful operation.', chapter: 8
   },
   cooling: {
     name: 'Cooling', type: 'Rack engineering',
     description: 'Cooling removes heat generated by the system so that hardware can remain within operating limits.',
     why: 'The performance target needs to be sustainable when many chips operate together.',
     inputs: 'Heat from active system components.', outputs: 'Heat removal within the deployment’s thermal design.',
-    tradeoff: 'Thermal capacity and operating cost constrain the performance the system can maintain.', chapter: 9
+    tradeoff: 'Thermal capacity and operating cost constrain the performance the system can maintain.', chapter: 8
   },
   links: {
     name: 'Chip-to-chip communication', type: 'System interconnect',
     description: 'Communication moves data when a model or its execution spans multiple devices.',
     why: 'A token’s generation path can depend on results arriving from another chip.',
     inputs: 'Distributed-workload traffic and the selected communication configuration.', outputs: 'Data delivered with the path’s effective bandwidth and latency.',
-    tradeoff: 'Topology, protocols, contention, electronics, and traffic matter alongside medium and distance.', chapter: 9
+    tradeoff: 'Topology, protocols, contention, electronics, and traffic matter alongside medium and distance.', chapter: 8
   },
   tapeout: {
     name: 'Tapeout release', type: 'Manufacturing handoff',
     description: 'After checks and signoff, the completed physical layout and required manufacturing data are released to the foundry.',
     why: 'Fabrication needs the detailed design that can be manufactured.',
     inputs: 'Signed-off implementation and manufacturing deliverables.', outputs: 'A release that commonly includes a GDSII or OASIS layout database.',
-    tradeoff: 'A serious error discovered after fabrication may require design changes and another tapeout.', chapter: 7
+    tradeoff: 'A serious error discovered after fabrication may require design changes and another tapeout.', chapter: 6
   },
   wafer: {
     name: 'Fabricated silicon', type: 'Manufacturing',
     description: 'Fabrication realizes the released circuit design on silicon. This wafer is a conceptual illustration.',
     why: 'The design must become physical hardware before post-silicon behavior can be evaluated.',
     inputs: 'The released design and manufacturing process.', outputs: 'Fabricated devices for subsequent product stages.',
-    tradeoff: 'Design evidence precedes manufacturing; testing and validation must also establish real silicon behavior.', chapter: 7
+    tradeoff: 'Design evidence precedes manufacturing; testing and validation must also establish real silicon behavior.', chapter: 6
   },
   package: {
     name: 'Accelerator package', type: 'From die to system',
     description: 'Packaging connects fabricated devices into the intended package. HBM stacks are distinct from the compute die.',
     why: 'The compute die needs its memory and external connections as part of the larger system.',
     inputs: 'Fabricated devices and the package design.', outputs: 'Packaged hardware for test, bring-up, and system integration.',
-    tradeoff: 'This conceptual diagram explains roles; it does not reveal an actual Etched package arrangement.', chapter: 7
+    tradeoff: 'This conceptual diagram explains roles; it does not reveal an actual Etched package arrangement.', chapter: 6
   },
   ai: {
     name: 'AI-assisted engineering', type: 'Exploration & coordination',
-    description: 'The interview describes a focus on AI assistance for RTL and performance analysis. Connecting cross-team evidence is a further opportunity.',
+    description: 'AI assistance for RTL and performance analysis is a current focus. Connecting requirements, implementation changes, and test results is a further area to develop.',
     why: 'Candidate implementations and relevant findings can be easier to explore when their context is explicit.',
     inputs: 'Requirements, RTL, analysis, tests, and engineering context.', outputs: 'Proposals or organized evidence for engineers to evaluate.',
-    tradeoff: 'Changes still require relevant functional, performance, and physical checks; verification must retain independent intent.', chapter: 8
+    tradeoff: 'Changes still require relevant functional, performance, and physical checks; verification must retain independent intent.', chapter: 7
   },
   software: {
     name: 'Model execution', type: 'Software and hardware co-design',
     description: 'Kernels, scheduling, memory use, and communication determine how a model uses the available hardware.',
     why: 'Peak arithmetic throughput becomes useful only when the execution path keeps the system productively occupied.',
     inputs: 'The customer model, numerical requirements, workload shape, and hardware interfaces.', outputs: 'An execution plan and software implementation to evaluate on the system.',
-    tradeoff: 'A software choice can change hardware utilization, numerical behavior, memory demand, or communication.', chapter: 9
+    tradeoff: 'A software choice can change hardware utilization, numerical behavior, memory demand, or communication.', chapter: 8
   },
   deployment: {
     name: 'Customer deployment', type: 'The delivered inference service',
     description: 'Bring-up, integration, and validation establish how the complete system serves the intended customer workload.',
     why: 'The design target is a sustainable user experience under defined latency, throughput, reliability, and power conditions.',
     inputs: 'A model execution path, serving software, tested hardware, and representative traffic.', outputs: 'Evidence about the model running on the complete deployment.',
-    tradeoff: 'A deployment result depends on its model, request mix, concurrency, software, and measurement boundary.', chapter: 9
+    tradeoff: 'A deployment result depends on its model, request mix, concurrency, software, and measurement boundary.', chapter: 8
   },
   specification: {
     name: 'Architectural specification', type: 'The shared intent',
     description: 'The specification defines block responsibilities, interfaces, required behavior, and applicable budgets.',
     why: 'Designers, verifiers, performance modelers, and physical engineers need a shared statement of the goal.',
     inputs: 'Workload needs, system goals, and architectural analysis.', outputs: 'Requirements that implementation and independent checks can use.',
-    tradeoff: 'Ambiguities and changing assumptions need explicit feedback rather than separate interpretations.', chapter: 2
+    tradeoff: 'Ambiguities and changed assumptions need to be resolved in the shared specification.', chapter: 2
   }
 };
 
 const sources = [
-  { label: "Etched — official hardware imagery and media kit", url: "https://www.etched.com/media-kit" },
-  { label: "Etched — Frontier Inference Clusters", url: "https://www.etched.com/progress/frontier-inference-clusters" },
-  { label: 'Etched — From Zero to One', url: 'https://www.etched.com/progress/from-zero-to-one' },
-  { label: 'Etched — Engineering roles and ownership', url: 'https://www.etched.com/join' },
-  { label: 'Etched — Inference software and model execution', url: 'https://jobs.ashbyhq.com/Etched/0f9c0162-97c6-4be6-9cb7-d9afdcf0fa7c' },
-  { label: 'Etched — Fleet software and customer deployments', url: 'https://jobs.ashbyhq.com/etched/5726311f-4db2-4c95-8628-d9c8f0f9639d' },
-  { label: 'Etched — Embedded software, bring-up, and production', url: 'https://jobs.ashbyhq.com/etched/8e280db7-f954-4467-b3ea-b9b4386d6632/' },
+  { label: "Etched: official hardware imagery and media kit", url: "https://www.etched.com/media-kit" },
+  { label: "Etched: Frontier Inference Clusters", url: "https://www.etched.com/progress/frontier-inference-clusters" },
+  { label: 'Etched: From Zero to One', url: 'https://www.etched.com/progress/from-zero-to-one' },
+  { label: 'Etched: Engineering roles and ownership', url: 'https://www.etched.com/join' },
+  { label: 'Etched: Inference software and model execution', url: 'https://jobs.ashbyhq.com/Etched/0f9c0162-97c6-4be6-9cb7-d9afdcf0fa7c' },
+  { label: 'Etched: Fleet software and customer deployments', url: 'https://jobs.ashbyhq.com/etched/5726311f-4db2-4c95-8628-d9c8f0f9639d' },
+  { label: 'Etched: Embedded software, bring-up, and production', url: 'https://jobs.ashbyhq.com/etched/8e280db7-f954-4467-b3ea-b9b4386d6632/' },
   { label: 'Etched · Chips, racks, software, and manufacturing', url: 'https://www.etched.com/' },
   { label: 'NVIDIA · LLM inference benchmarking terminology', url: 'https://developer.nvidia.com/blog/llm-benchmarking-fundamental-concepts/' },
   { label: 'NVIDIA cuDNN · Block scaling formats', url: 'https://docs.nvidia.com/cudnn/operations/BlockScaling/' },
@@ -806,20 +764,20 @@ const sources = [
 
 const essay = {
   "title": "Sand to Silicon: How Etched Designs Chips",
-  "deck": "How customer workloads become silicon—and how we connect four engineering disciplines to move better ideas into production.",
-  "kicker": "Engineering / From workload to production",
+  "deck": "How architecture, RTL, verification and physical design work together to build an inference system.",
+  "kicker": "Engineering / Chip development",
   "introduction": [
-    "Long before a design reaches a wafer, someone has to decide what experience the hardware should make possible. An inference chip begins with a model, a customer, and a set of constraints. Its architecture turns those constraints into a machine; its development process determines how effectively engineers can improve that machine.",
-    "At Etched, we treat chips, packages, racks, software, and manufacturing as parts of the same problem. Following that path reveals two connected design challenges: rethink the hardware assumptions that limit inference, and rethink the organizational assumptions that slow a good idea on its way to production."
+    "A chip specification cannot settle every implementation question. RTL exposes gaps in the interfaces, verification uncovers different readings of the requirements, and physical design puts costs on connections that looked straightforward in a block diagram. The work depends on engineers being able to resolve those disagreements across team boundaries.",
+    "At Etched, four disciplines share this responsibility: architecture, microarchitecture and RTL, design verification, and physical design. Their work extends into software and manufacturing because we build complete inference systems. The organization has to support that scope. A block owner needs access to the people who wrote the requirement and the people dealing with its consequences elsewhere in the machine."
   ],
   "sections": [
     {
       "chapter": 0,
       "id": "experience",
-      "title": "Start with the experience the customer needs",
+      "title": "Start with the workload",
       "paragraphs": [
-        "A person asking a model a question experiences the hardware as a pause before the answer, a stream of tokens, and a service that remains responsive as demand grows. Behind those observations are different requirements: time to first token, generation latency, aggregate throughput, availability, and cost.",
-        "We design frontier inference systems for both prefill and decode. The objective is to connect customer requirements to the machine that serves them. A model’s arithmetic is one part of the problem. Memory, communication, scheduling, power, and cooling determine how much of the hardware’s capability becomes a useful customer experience."
+        "A customer cares about the wait before an answer and how quickly the response arrives. Serving more users introduces another set of demands on the same hardware. The interaction between latency and throughput depends on the model and the traffic the system receives.",
+        "We design for both prefill and decode, with software, memory and cooling developed alongside the silicon. This gives the teams a common reference during a technical disagreement. An improvement to a block has to be considered in the workload it serves, including the demands it places on neighboring hardware and the software that schedules it."
       ],
       "sourceLinks": [
         {
@@ -831,82 +789,72 @@ const essay = {
     {
       "chapter": 1,
       "id": "requirements",
-      "title": "Translate tokens and latency into engineering requirements",
+      "title": "Make the requirements usable",
       "paragraphs": [
-        "A target such as tokens per second needs a workload attached to it: model, numerical precision, context lengths, request mix, and concurrency. From there, engineers estimate the arithmetic rate, memory capacity and bandwidth, communication, and power required. A model divided across chips brings link latency and bandwidth into the token-generation path.",
-        "Those requirements are coupled. More arithmetic helps only if operands arrive fast enough. Additional memory capacity may require communication that changes latency. Power delivery and cooling limit the operating point the rack can sustain.",
-        "Customer conversations and performance models help make these dependencies explicit before they become physical commitments. The result is a set of budgets and assumptions that architecture, implementation, and evaluation can share—and challenge."
+        "Customer conversations and workload analysis establish the conditions behind a performance target. Model size, precision, context length and concurrency all affect the arithmetic rate and memory bandwidth required. Distributing a model across chips adds communication latency to the generation path.",
+        "Architecture uses these requirements to allocate resources. RTL engineers need the corresponding behavior and rate assumptions; verification needs enough detail to derive expected results. Physical designers need operating conditions and budgets they can evaluate against an implementation.",
+        "A bandwidth target that depends on unrealistic utilization deserves another look at the system model. Giving the block owner a larger target leaves the underlying problem unresolved. The review needs the architect and the engineers familiar with the workload, along with the implementation results that exposed the discrepancy."
       ],
       "sourceLinks": []
     },
     {
       "chapter": 2,
       "id": "architecture",
-      "title": "Architecture: decide what the chip must do",
+      "title": "Architecture sets the specification",
       "paragraphs": [
-        "The architecture team converts system requirements into block responsibilities, interfaces, budgets, specifications, and performance models. Its objective is a chip organization that can meet the workload goals. It needs implementation feedback early enough to distinguish an attractive model from a realizable design.",
-        "Open the package into a conceptual dataflow. Memory supplies values; buffering, conversion, and layout transformations prepare them; arithmetic produces results that must move onward. At every boundary, architecture commits to a representation, a rate, and a way to coordinate the work.",
-        "Our low-voltage inference work illustrates the scope of these decisions: math-array organization and scheduling connect to power delivery and cooling. Our Cluster Scale Memory joins an HBM/SRAM design with a shared memory pool and interconnect across the scale-up domain. The architectural question reaches beyond one block, and often beyond one die."
+        "Architects define the chip’s organization and write the specifications that connect its blocks. Performance models help them evaluate the design against customer workloads before the hardware exists. The specifications also give RTL designers and verifiers a common account of the intended behavior.",
+        "Some choices reach well beyond the die. Our low-voltage inference architecture involves math-array organization and scheduling as well as power delivery, packaging and cold plates. The relevant specialists need to work through these constraints together.",
+        "Other changes look local at first. A numerical format affects the representation at an interface, the conversion logic and the corresponding checks. Implementation feedback can send the discussion back to architecture to revise the requirement or its budget. Keeping the specification current is part of that work."
       ],
       "sourceLinks": [
         {
-          "label": "Etched: Low-voltage inference and Cluster Scale Memory",
+          "label": "Etched: System architecture and low-voltage inference",
           "url": "https://www.etched.com/progress/frontier-inference-clusters"
         }
       ]
     },
     {
       "chapter": 3,
-      "id": "quantization",
-      "title": "Quantization: make an architectural choice concrete",
+      "id": "microarchitecture",
+      "title": "RTL designers work through the implementation",
       "paragraphs": [
-        "Numerical formats show how a workload requirement becomes hardware. In the accompanying visual, 32 eight-bit values occupy 256 raw bits; at four bits, their payload occupies 128 bits before scales and other metadata. That reduction can change memory traffic, storage, and arithmetic opportunities.",
-        "The architectural work is deciding what else must change. Where does conversion happen? Which representation does the consumer accept? What numerical behavior must be preserved, and can the conversion path sustain the required rate?",
-        "Quantization belongs inside these architectural decisions. Its effects reach RTL, verification, performance modeling, and physical implementation. The example is illustrative; it does not specify Etched’s formats or package layout. The useful outcome is a complete requirement whose numerical and implementation consequences can be evaluated together."
+        "Microarchitects choose the detailed organization of a block and express it in RTL. Power, performance and area constrain that work throughout development. Meeting the functional requirement still leaves choices about storage, control and the flow of data through the circuit.",
+        "Much of the coordination happens at interfaces. The designer of a producing block and the designer of its consumer need the same understanding of ordering and backpressure. Changes to buffering or accepted rates affect both sides, even with the arithmetic unchanged.",
+        "The block owner works with verification to investigate behavior and with physical design to understand implementation costs. Architecture remains involved in questions about the original allocation. A block that exceeds its area budget may need a different implementation, or the system may justify revising the budget. That discussion needs all the relevant constraints in view."
       ],
       "sourceLinks": []
     },
     {
       "chapter": 4,
-      "id": "microarchitecture",
-      "title": "Microarchitecture and RTL: implement the contract",
+      "id": "verification",
+      "title": "Verification challenges the implementation",
       "paragraphs": [
-        "Microarchitecture turns a block’s requirements into cycle-by-cycle behavior. RTL designers choose datapaths, storage, control, sequencing, and interfaces while meeting power, performance, and area constraints. Several implementations can compute the same answer and place very different demands on the rest of the chip.",
-        "Consider a block expected to accept a new value each cycle under defined conditions. Pipeline stages, intermediate widths, valid-data handling, and backpressure determine whether that rate is achievable. Its receiving block has to agree on the contract.",
-        "The touchpoints are continuous: architecture supplies intent and budgets; verification challenges behavior; physical design exposes timing and implementation costs. Experienced judgment matters because a local improvement can move work, latency, or power into a neighboring block."
+        "Verifiers develop their own understanding of the specification before building the checks around it. Deriving expected behavior directly from the RTL risks copying an implementation mistake into the testbench. Independent interpretation is particularly useful for requirements with subtle numerical or interface behavior.",
+        "A mismatch starts a conversation between verification and the RTL designer. Implementation errors lead to corrections and further testing; ambiguity in the specification brings the architect back into the discussion. Performance checks also examine the rates and stalls the architecture model assumed.",
+        "This makes verification a regular participant in defining the design. Resolving an unclear requirement early saves the neighboring teams from carrying incompatible interpretations into their own work."
       ],
       "sourceLinks": []
     },
     {
       "chapter": 5,
-      "id": "verification",
-      "title": "Design verification: test an independent understanding",
+      "id": "physical-design",
+      "title": "Physical design brings the constraints back",
       "paragraphs": [
-        "The verification team determines whether the implementation satisfies its intended behavior. Its reference must come from an independent understanding of the specification, including numerical rules, interface conditions, sequencing, and progress. A test that simply repeats the RTL’s assumption can reproduce the same mistake.",
-        "When expected and observed behavior disagree, verification and RTL engineers investigate together. An implementation defect calls for a fix and continued testing. An ambiguous requirement brings the discussion back to architecture. Performance-oriented checks also examine whether implemented behavior supports the assumed rates.",
-        "Verification therefore contributes more than a final gate. It improves the shared description of the design while changes are still possible. Its independence becomes especially valuable when tools make it easier to generate additional candidate implementations."
+        "Physical designers arrange and connect the circuit under timing, power and manufacturing constraints. Routing congestion or a long path can make an otherwise attractive organization difficult to implement. The block diagram and RTL provide an incomplete picture of those costs.",
+        "The response may involve moving logic, changing the RTL or reconsidering an architectural allocation. Reports need to reach the relevant owner with enough context to assess the alternatives. A timing result without its constraints is a poor starting point for that discussion.",
+        "Verification and physical implementation proceed in parallel as usable RTL becomes available. Both can require changes to the design, so their findings need to remain visible to the block owners and architects throughout the work."
       ],
       "sourceLinks": []
     },
     {
       "chapter": 6,
-      "id": "physical-design",
-      "title": "Physical design: make the circuit realizable",
-      "paragraphs": [
-        "Synthesis maps RTL into cells and connections. Physical design gives that circuit an arrangement, routing, clocks, and power delivery that can meet timing and manufacturing constraints. The apparent efficiency of a logical description has to survive those physical conditions.",
-        "A floorplan can expose congestion or long paths that require moving a block, revising its microarchitecture, or reconsidering an architectural budget. That finding needs to reach the engineer who can act on it, with the constraints and analysis that explain the tradeoff.",
-        "Physical implementation and verification proceed in parallel as usable RTL becomes available. They produce different evidence about the same design. Keeping both connected to architecture and block owners makes their discoveries useful before the manufacturing release."
-      ],
-      "sourceLinks": []
-    },
-    {
-      "chapter": 7,
       "id": "tapeout",
-      "title": "From idea to manufacturing: design the organization too",
+      "title": "Keep the work connected through manufacturing",
       "paragraphs": [
-        "After the relevant checks and signoff, tapeout releases the completed layout and manufacturing data to the foundry. Fabrication, packaging, test, bring-up, and system validation follow. Reaching that boundary requires evidence to remain connected as the design changes.",
-        "The four teams have distinct responsibilities, but their work does not fit a sequence of isolated handoffs. When information stops at a team boundary, a problem can wait for another review or be rediscovered downstream. The organization needs explicit paths for changing an assumption as well as implementing it.",
-        "Our math-block designers work alongside inference engineers, and co-design extends into manufacturing. We put twenty years of inherited chip-design habits back on the table, including how we organize the work. First-principles reasoning applies to who needs to see a result, who can change the decision, and which tools remove avoidable waiting. The goal is an efficient workplace where deep experience can carry an idea through to production."
+        "Clear responsibilities help engineers make progress. They also need a practical way to resolve problems that cross those responsibilities. A timing issue can involve a physical designer, an RTL owner and an architect; waiting for each group to reconstruct the history adds little to the solution.",
+        "Our math-block designers work alongside inference engineers, and co-design extends into manufacturing. This gives engineers access to colleagues working on other parts of the same problem. The opportunity is to use that access well, including revisiting the division of work itself.",
+        "We question inherited assumptions about the hardware, and the organization deserves the same scrutiny. A review should include the people able to change the relevant requirement. A specialist should be able to follow a finding into another part of the design without losing responsibility for the original problem. Tools and documentation should make the supporting work easy to find.",
+        "These habits matter through tapeout, the release of the completed layout and manufacturing data after checks and signoff. Fabrication, packaging, test and bring-up follow. The engineers taking the product through those stages need to understand what changed during development and how the resulting design was checked."
       ],
       "sourceLinks": [
         {
@@ -916,13 +864,13 @@ const essay = {
       ]
     },
     {
-      "chapter": 8,
+      "chapter": 7,
       "id": "ai-and-coordination",
-      "title": "AI-native engineering: improve implementation and coordination",
+      "title": "AI assistance in the engineering process",
       "paragraphs": [
-        "One focus is using AI to examine RTL and assist with performance analysis. The engineering test is concrete: does a proposed change improve the resulting implementation while preserving required behavior and physical constraints? Fewer lines of code are insufficient evidence. A promising candidate still needs independent functional checks and the relevant implementation analysis.",
-        "There is a second opportunity in coordination. Connecting a requirement to its RTL, tests, performance assumptions, and physical findings would make the consequences of a change easier to trace. AI could help locate inconsistent interfaces, identify affected checks, or assemble a reproducible failure for the responsible engineers. Building that connected workflow is an engineering problem in its own right.",
-        "Self-improving kernel agents are also part of the work ahead. Across these efforts, experienced engineers help define the search space and the evidence standard. Faster exploration remains valuable only when the accepted result deserves trust."
+        "One focus is using AI to examine RTL and assist with performance analysis. Proposed changes need the same functional and physical evaluation as other implementation work. Producing more candidates also puts more demands on the engineers selecting which ones deserve further analysis.",
+        "Coordination offers another use for AI. Requirements, RTL, tests and physical reports contain related information that engineers often have to assemble themselves. A connected workflow could help locate a conflicting interface assumption or collect the relevant context around a failure. This remains an opportunity to develop, with expected behavior still derived independently of the implementation.",
+        "Self-improving kernel agents are also part of the work ahead. Building these tools requires engineers who understand the constraints well enough to define what the tool may change and how its output will be evaluated."
       ],
       "sourceLinks": [
         {
@@ -932,13 +880,13 @@ const essay = {
       ]
     },
     {
-      "chapter": 9,
+      "chapter": 8,
       "id": "rack-scale",
-      "title": "Software and deployment: return to the customer’s model",
+      "title": "Software takes the hardware into deployment",
       "paragraphs": [
-        "The design becomes useful when software turns a customer’s model into correct, efficient execution. Our inference software work spans model porting, abstractions and tests, multi-node runtime, communication, and profiling. Firmware and drivers connect the physical machine to that execution. Hardware capability has to survive the complete path to a running model.",
-        "Operating a fleet adds staged software and firmware rollouts, recovery, and telemetry. Deployment failures and performance observations need to return as engineering priorities. We have tested racks in representative deployments, and in August 2026 we announced our first rack shipment to Jane Street. Each customer environment brings the design back to the conditions it was built to serve.",
-        "The process returns to its starting question: what experience does the customer need? We want engineers who have shipped difficult silicon to bring that judgment to both the machine and the way it is built. Reconsidering hardware and organizational assumptions together can give a useful idea a shorter, better-informed path to production."
+        "Our inference software work includes porting models and building the abstractions, tests and multi-node runtime needed to execute them. Communication and profiling sit close to this work. Firmware and drivers connect the machine’s physical behavior to the software using it.",
+        "Deployment adds staged rollouts, recovery and telemetry. Observations from the fleet need to feed back into engineering priorities. We have tested racks in representative deployments, and in August 2026 we announced our first rack shipment to Jane Street. Customer environments continue to expose questions for the hardware and software teams.",
+        "Engineers who have shipped silicon know how much of a product is settled between specialties. We want people who can follow a difficult problem across those boundaries and help improve how the work gets done. Their experience has a direct use here, from questioning an early requirement to understanding the behavior of a system in a customer’s data center."
       ],
       "sourceLinks": [
         {
@@ -1056,8 +1004,8 @@ const union = boxes => {
   return rectangle(x,y,Math.max(...boxes.map(box=>box.x+box.width))-x,Math.max(...boxes.map(box=>box.y+box.height))-y);
 };
 const blendFrame = (a,b,t) => Object.fromEntries(['x','y','width','height'].map(key=>[key,mix(a[key],b[key],t)]));
-const fitFrame = (box,aspect) => {
-  let width=box.width+28,height=box.height+28;
+const fitFrame = (box,aspect,padding=28) => {
+  let width=box.width+padding,height=box.height+padding;
   if (width/height<aspect) width=height*aspect; else height=width/aspect;
   return rectangle(box.x+box.width/2-width/2,box.y+box.height/2-height/2,width,height);
 };
@@ -1151,10 +1099,11 @@ function createTeardown(svg) {
     parts.caption.textContent = first && p < .2 ? 'Official hardware photography · start at the delivered system' : separation > .05 && separation < .96 ? 'Visible photo regions separated for explanation; hidden board detail is not depicted.' : 'Official hardware photography · explanatory sequence';
     const architectureMix = chapterIndex < 2 ? 0 : chapterIndex === 2 ? smooth(.04, .38, p) : 1;
     let hardwareBounds=null,viewBox=null;
+    const parent={x:cx,y:cy,sx:scaleX,sy:scaleY,rotate,skew};
+    const trayBounds=cropBounds(rectangle(1190,275,820,1250),parent);
+    const chipCrop=compact ? rectangle(1120,750,980,1100) : rectangle(1155,770,890,1030);
+    const chipBounds=rectangle(565+(chipCrop.x-1600)*packageScale,mix(460,425,packageReveal)+(chipCrop.y-1280)*packageScale,chipCrop.width*packageScale,chipCrop.height*packageScale);
     if (compact) {
-      const parent={x:cx,y:cy,sx:scaleX,sy:scaleY,rotate,skew};
-      const trayBounds=cropBounds(rectangle(1190,275,820,1250),parent);
-      const chipBounds=rectangle(565+(1120-1600)*packageScale,mix(460,425,packageReveal)+(750-1280)*packageScale,980*packageScale,1100*packageScale);
       const openingFrame=rectangle(225,150,1030,550);
       if (first) {
         // Rack and detail have disappeared before the camera closes around the
@@ -1173,10 +1122,29 @@ function createTeardown(svg) {
         if (packageReveal>0) visibleBounds.push(chipBounds);
         hardwareBounds=union([hardwareBounds,...visibleBounds]);
       } else hardwareBounds=chipBounds;
-      const camera=blendFrame(fitFrame(hardwareBounds,canvasAspect),defaultFrame,architectureMix);
-      viewBox=['x','y','width','height'].map(key=>fixed(camera[key])).join(' ');
+    } else {
+      if (first) {
+        const rackBounds=rectangle(315-75*rackRetreat,165,900*.215,2370*.215);
+        const openingBounds=union([rackBounds,trayBounds]);
+        // The complete rack stays inside the frame until it is invisible.
+        // The last part of the pull-in then follows the tray alone.
+        hardwareBounds=blendFrame(openingBounds,trayBounds,smooth(.94,1,p));
+      } else if (second) {
+        const tubingBounds=cropBounds(rectangle(1230,345,740,1050),parent,{x:-365*tubingLift,y:-115*tubingLift,rotate:-8*tubingLift});
+        const copperBounds=cropBounds(rectangle(1350,420,500,415),parent,{x:330*copperLift,y:-115*copperLift,rotate:6*copperLift,oy:680});
+        const assemblyBounds=union([trayBounds,tubingBounds,copperBounds,...(packageReveal>0 ? [chipBounds] : [])]);
+        // Follow actual transformed photo regions during separation. Once the
+        // tubing and base have faded, close the camera around the package;
+        // still-visible cold plates remain included until their parent fades.
+        const focus=blendFrame(assemblyBounds,chipBounds,smooth(.88,1,p));
+        const plateFrame=p<.96 ? copperBounds : blendFrame(copperBounds,chipBounds,smooth(.96,1,p));
+        hardwareBounds=union([focus,plateFrame,...(packageReveal>0 ? [chipBounds] : [])]);
+      } else hardwareBounds=chipBounds;
     }
+    const camera=blendFrame(fitFrame(hardwareBounds,canvasAspect,compact ? 28 : 16),defaultFrame,architectureMix);
+    viewBox=['x','y','width','height'].map(key=>fixed(camera[key])).join(' ');
     stage.setAttribute('data-compact',String(compact));
+    stage.setAttribute('data-framed','true');
     stage.setAttribute('opacity', fixed(1 - architectureMix));
     stage.setAttribute('data-reduced-motion', String(Boolean(reducedMotion)));
     stage.style.display = visible && architectureMix < 1 ? '' : 'none';
@@ -1191,11 +1159,47 @@ function createTeardown(svg) {
   function setCompact(value,aspect=1000/610) {
     compact=Boolean(value);
     const next=Number(aspect);
-    canvasAspect=Number.isFinite(next) && next>0 ? Math.max(.5,Math.min(4,next)) : 1000/610;
+    canvasAspect=Number.isFinite(next) && next>0 ? Math.max(.2,Math.min(6,next)) : 1000/610;
   }
   setPosition(0, 0, false);
   return { setPosition, setVisible, setCompact, getState: () => ({ ...state }), element: stage };
 }
+
+
+/** Engineering relationships, rather than a reporting hierarchy or service flow. */
+function organizationScene({ comp, rect, text, hint, flow, arrow, title, bottom }) {
+  const disciplines = [
+    { id: 'specification', x: 70, y: 220, label: 'ARCHITECTURE', detail: 'Intent, budgets, specifications', cls: 'scene-control' },
+    { id: 'rtl', x: 660, y: 220, label: 'MICROARCHITECTURE / RTL', detail: 'Logic, storage, interfaces', cls: 'scene-compute' },
+    { id: 'testbench', x: 70, y: 470, label: 'DESIGN VERIFICATION', detail: 'Independent checks, coverage', cls: 'scene-reference' },
+    { id: 'cells', x: 660, y: 470, label: 'PHYSICAL DESIGN', detail: 'Timing, area, power, routing', cls: 'scene-control' }
+  ];
+
+  const feedback = [
+    'M340 255H395V345', 'M425 345V287H340',
+    'M660 255H605V345', 'M575 345V287H660',
+    'M340 500H395V450', 'M425 450V535H340',
+    'M660 500H605V450', 'M575 450V535H660'
+  ].map(path => arrow(path, 'scene-feedback-wire')).join('');
+
+  return `${title(7, 'Design the organization too', 'Keep the people who can change a decision connected.')}
+    ${text(500, 183, 'Let findings change the decision', 'scene-subtitle', 'middle')}
+    ${feedback}
+    ${rect(370, 345, 260, 105, 'scene-interface', 5)}
+    ${text(500, 373, 'Shared requirements', 'scene-label', 'middle')}
+    ${text(500, 402, 'Interfaces + budgets', 'scene-body-label', 'middle')}
+    ${text(500, 430, 'Decisions stay revisable', 'scene-muted', 'middle')}
+    ${disciplines.map(node => comp(node.id, `Inspect ${node.label.toLowerCase()} and its feedback with the other disciplines`, `${rect(node.x, node.y, 270, 100, node.cls, 5)}${text(node.x + 20, node.y + 34, node.label, 'scene-mono scene-block-label')}${text(node.x + 20, node.y + 65, node.detail, 'scene-body-label')}${hint(node.x + 248, node.y + 80)}`)).join('')}
+    ${text(500, 594, 'Verification and physical design proceed in parallel.', 'scene-body-label', 'middle')}
+    ${flow('M205 570V617H350V650H355', 'organization-verification-release')}
+    ${arrow('M355 650H375')}
+    ${flow('M795 570V617H650V650H645', 'organization-physical-release')}
+    ${arrow('M645 650H625')}
+    ${text(500, 617, 'Converging evidence', 'scene-accent-label', 'middle')}
+    ${comp('tapeout', 'Inspect signoff, tapeout, and the path to production', `${rect(375, 631, 250, 46, 'scene-conversion', 5)}${text(394, 659, 'Tapeout → production', 'scene-mono scene-block-label')}${hint(605, 654)}`)}
+    ${bottom('FINDINGS RETURN TO THE ENGINEER WHO CAN ACT', 'CONCEPTUAL ENGINEERING RELATIONSHIPS')}`;
+}
+
 
 
 
@@ -1284,18 +1288,9 @@ function architectureScene() {
     ${text(89, 670, 'Capacity → bandwidth → dataflow → useful computation', 'scene-large-label')}
     ${bottom('THE ARCHITECTURE DEFINES RESPONSIBILITIES & INTERFACES')}`;
 }
-function quantizationScene() {
-  const vals = [0.4, -0.2, 0.7, 1.1, -0.9, 0.1, 0.6, -0.3, 0.8, -1.0, 0.3, 0.2, -0.6, 0.5, -0.1, 0.9, -0.4, 0.6, -0.8, 0.3, 1.0, -0.7, 0.2, -0.5, 0.1, 0.9, -0.3, 0.4, -0.2, 0.7, -0.6, 0.5];
-  const grid = (x, low) => vals.map((v, i) => `<g>${rect(x + (i % 8) * 35, 300 + Math.floor(i / 8) * 45, 29, 37, `scene-number-cell ${Math.abs(v) > .65 ? 'scene-number-hot' : ''}`, 3)}${text(x + (i % 8) * 35 + 14.5, 324 + Math.floor(i / 8) * 45, low ? Math.round(v * 5) : v.toFixed(1), 'scene-mono scene-number', 'middle')}</g>`).join('');
-  return `${title(4, 'Numerical formats', 'Fewer bits change the work the hardware must do.')}
-    ${comp('buffer', 'Explore the source block of 32 eight-bit values', `${rect(69, 218, 337, 353, 'scene-format-card', 6)}${text(94, 259, '32 × 8-bit values', 'scene-large-label')}${text(94, 285, 'Illustrative FP8 block', 'scene-body-label')}${grid(94, false)}${text(94, 528, '256 bits of value data', 'scene-mono scene-format-total')}${hint(373, 541)}`)}
-    ${comp('conversion', 'Explore quantization from eight to four bits', `${rect(595, 218, 337, 353, 'scene-format-card scene-format-output', 6)}${text(620, 259, '32 × 4-bit values', 'scene-large-label')}${text(620, 285, 'Illustrative quantized codes', 'scene-body-label')}${grid(620, true)}${text(620, 528, '128 bits of value data', 'scene-mono scene-format-total')}${hint(899, 541)}${arrow('M430 383H565')}${text(500, 345, 'QUANTIZE', 'scene-mono scene-accent-label', 'middle')}${text(500, 431, 'Scale + round', 'scene-body-label', 'middle')}`)}
-    ${line('M238 585V617H765V585', 'scene-bracket')}${text(501, 655, 'Less data to store and move. Numerical quality still needs validation.', 'scene-body-label', 'middle')}${text(501, 684, 'Scale metadata is additional; storage savings depend on the format.', 'scene-caption', 'middle')}
-    ${bottom('A FORMAT DECISION CROSSES MEMORY, COMPUTE & VERIFICATION', 'ILLUSTRATIVE VALUES · NOT A FORMAT SPECIFICATION')}`;
-}
 function microScene() {
   const block = (id, label, x, symbol, detail, cls = '') => comp(id, `Explore ${label.toLowerCase()}`, `${rect(x, 305, 139, 165, `scene-datapath-block ${cls}`, 5)}${text(x + 69.5, 377, symbol, 'scene-operation-symbol', 'middle')}${text(x + 69.5, 418, label, 'scene-mono scene-block-label', 'middle')}${text(x + 69.5, 445, detail, 'scene-datapath-small', 'middle')}${hint(x + 118, 326)}`);
-  return `${title(5, 'Microarchitecture', 'Turn the requirements into a cycle-by-cycle implementation.')}
+  return `${title(4, 'Microarchitecture', 'Turn the requirements into a cycle-by-cycle implementation.')}
     ${tag(61, 214, 'INSIDE THE MATH BLOCK')}
     ${comp('interface', 'Explore the 32-bit block input and output interfaces', `${text(67, 350, '32-bit', 'scene-large-label')}${text(67, 380, 'input', 'scene-body-label')}${text(868, 350, '32-bit', 'scene-large-label')}${text(868, 380, 'output', 'scene-body-label')}${dot(99, 411, 6)}${dot(901, 411, 6)}`)}
     ${block('register', 'REGISTER', 183, 'D', 'Hold a value')}${block('multiply', 'MULTIPLY', 431, '×', 'Compute', 'scene-math-block')}${block('add', 'ADD', 678, '+', 'Accumulate', 'scene-math-block')}
@@ -1305,7 +1300,7 @@ function microScene() {
     ${bottom('RTL DESCRIBES THE LOGIC · PPA CONSTRAINS THE IMPLEMENTATION', 'SIMPLIFIED DATAPATH · ILLUSTRATIVE TIMING')}`;
 }
 function verificationScene() {
-  return `${title(6, 'Design verification', 'Compare the implementation with independent architectural intent.')}
+  return `${title(5, 'Design verification', 'Compare the implementation with independent architectural intent.')}
     ${comp('testbench', 'Explore the verification testbench and stimulus', `${rect(74, 174, 854, 445, 'scene-testbench-boundary', 7)}${text(96, 207, 'TESTBENCH', 'scene-mono scene-muted')}${rect(113, 337, 160, 112, 'scene-test-source', 4)}${text(193, 376, 'STIMULUS', 'scene-mono scene-block-label', 'middle')}${text(193, 406, 'Inputs + edge cases', 'scene-body-label', 'middle')}${hint(250, 357)}`)}
     ${comp('reference', 'Explore the independent expected behavior derived from the specification', `${rect(375, 235, 253, 116, 'scene-reference', 4)}${text(501, 277, 'REFERENCE MODEL', 'scene-mono scene-block-label', 'middle')}${text(501, 310, 'Architectural specification', 'scene-body-label', 'middle')}${hint(607, 255)}`)}
     ${comp('compute', 'Explore the RTL implementation under test', `${rect(375, 424, 253, 116, 'scene-compute', 4)}${text(501, 469, 'RTL IMPLEMENTATION', 'scene-mono scene-block-label', 'middle')}${text(501, 503, 'Design under test', 'scene-body-label', 'middle')}${hint(607, 445)}`)}
@@ -1324,7 +1319,7 @@ function physicalScene() {
     'M758 347H647V421H561V565', 'M758 368H625V401H538V565', 'M192 432H275V527H460',
   ];
   const cells = Array.from({ length: 15 * 12 }, (_, i) => { const col = i % 15; const row = Math.floor(i / 15); const skip = (col > 4 && col < 10 && row > 2 && row < 8); if (skip) return ''; return rect(195 + col * 37, 245 + row * 27, i % 4 === 0 ? 29 : 25, 18, `scene-placed-cell ${i % 11 === 0 ? 'scene-placed-cell-dark' : ''}`, 1); }).join('');
-  return `${title(7, 'Physical design', 'Make the logic fit, connect, and meet its constraints.')}
+  return `${title(6, 'Physical design', 'Make the logic fit, connect, and meet its constraints.')}
     ${rect(154, 204, 651, 406, 'scene-chip-boundary', 5)}
     ${comp('cells', 'Explore standard cells and placement', `${cells}${rect(371, 322, 185, 211, 'scene-compute-physical', 3)}${smallCells(385, 337, 5, 7, 25, 21, 7, 'scene-physical-math-cell')}${hint(180, 229)}`)}
     ${comp('routing', 'Explore routing, congestion, and timing', `${routes.map((d, i) => line(d, `scene-layout-route scene-route-${i % 3}`)).join('')}<ellipse cx="594" cy="397" rx="63" ry="78" class="scene-congestion"/>${hint(618, 411)}${line('M628 391H859V305', 'scene-callout')}${text(833, 266, 'CONGESTION', 'scene-mono scene-accent-label')}${text(833, 292, 'Reroute or move cells', 'scene-body-label')}`)}
@@ -1333,21 +1328,8 @@ function physicalScene() {
     ${tag(152, 664, 'PLACEMENT')}${tag(325, 664, 'ROUTING')}${tag(477, 664, 'TIMING')}${tag(618, 664, 'POWER')}
     ${bottom('PHYSICAL RESULTS FEED BACK INTO RTL & ARCHITECTURE', 'ILLUSTRATIVE ROUTES · NO ETCHED MEASUREMENTS')}`;
 }
-function tapeoutScene() {
-  const waferCells = [];
-  for (let row = -4; row <= 4; row += 1) for (let col = -4; col <= 4; col += 1) {
-    if ((row * row + col * col) < 18) waferCells.push(rect(505 + col * 24, 360 + row * 27, 20, 23, `scene-wafer-die ${((row + col) % 6 === 0) ? 'scene-wafer-die-highlight' : ''}`, 1));
-  }
-  return `${title(8, 'Tapeout to silicon', 'The signed-off design becomes something physical.')}
-    ${comp('tapeout', 'Explore tapeout and the released manufacturing layout', `${rect(92, 288, 219, 239, 'scene-layout-sheet', 4)}${rect(109, 305, 185, 169, 'scene-sheet-layout', 2)}${smallCells(123, 320, 5, 5, 25, 23, 6, 'scene-sheet-cell')}${text(110, 504, 'LAYOUT RELEASE', 'scene-mono scene-block-label')}${hint(288, 312)}`)}
-    ${comp('wafer', 'Explore fabrication and silicon wafers', `<circle cx="515" cy="383" r="150" class="scene-wafer" fill="url(#__ID__-wafer)"/><circle cx="515" cy="383" r="139" class="scene-wafer-inner"/>${waferCells.join('')}<path d="M502 530l13 -10l13 10" class="scene-wafer-notch"/>${hint(619, 285)}`)}
-    ${comp('package', 'Explore packaging, testing, and bring-up', `<path d="M744 343l34 -22h133l-34 22Z" class="scene-substrate-top"/>${rect(744, 343, 133, 132, 'scene-substrate', 2)}<path d="M877 343l34 -22v133l-34 21Z" class="scene-substrate-side"/>${die(775, 363, 72, 72)}${memoryStack(748, 369, '', .28)}${memoryStack(854, 369, '', .28)}${hint(885, 455)}`)}
-    ${arrow('M319 393H350')}${arrow('M675 393H721')}
-    ${text(202, 579, 'Tapeout', 'scene-large-label', 'middle')}${text(202, 610, 'Signed-off layout + data', 'scene-body-label', 'middle')}${text(515, 579, 'Fabrication', 'scene-large-label', 'middle')}${text(515, 610, 'Manufactured silicon', 'scene-body-label', 'middle')}${text(826, 579, 'Packaging + test', 'scene-large-label', 'middle')}${text(826, 610, 'Then silicon bring-up', 'scene-body-label', 'middle')}
-    ${bottom('TAPEOUT CLOSES DESIGN · SILICON STILL NEEDS VALIDATION', 'ILLUSTRATIVE MANUFACTURING SEQUENCE')}`;
-}
 function racksFinal() {
-  return `${title(10, 'Software to deployment', 'The complete system must deliver the intended experience.')}
+  return `${title(9, 'Software to deployment', 'The complete system must deliver the intended experience.')}
     <ellipse cx="499" cy="673" rx="386" ry="29" class="scene-ground"/>
     ${comp('rack', 'Explore the deployed multi-rack inference system', `${rack(84, 300, .68, { muted: true })}${rack(391, 237, .84)}${rack(716, 300, .68, { muted: true })}`)}
     ${comp('links', 'Explore multi-chip communication and latency', `${flow('M267 374H350Q368 374 368 359V346H409', 'rack-link-a')}${flow('M617 346H658Q674 346 674 364V374H732', 'rack-link-b')}${flow('M267 466H340Q358 466 358 478V499H409', 'rack-link-c')}${flow('M617 499H666Q684 499 684 483V466H732', 'rack-link-d')}${text(500, 180, 'MODEL → EXECUTION SOFTWARE → CUSTOMER INFERENCE', 'scene-mono scene-accent-label', 'middle')}${hint(680, 413)}`)}
@@ -1361,7 +1343,7 @@ function aiScene() {
     { x: 94, y: 488, w: 226, h: 118, label: 'VERIFICATION', sub: 'Tests + coverage', id: 'testbench', cls: 'scene-reference' },
     { x: 680, y: 488, w: 226, h: 118, label: 'PHYSICAL DESIGN', sub: 'Area + timing + power', id: 'cells', cls: 'scene-control' },
   ];
-  return `${title(9, 'AI across the process', 'Connect a proposed change to the evidence it needs.')}
+  return `${title(8, 'AI across the process', 'Connect a proposed change to the evidence it needs.')}
     ${nodes.map(n => comp(n.id, `Explore ${n.label.toLowerCase()} and cross-team coordination`, `${rect(n.x, n.y, n.w, n.h, n.cls, 5)}${text(n.x + 20, n.y + 42, n.label, 'scene-mono scene-block-label')}${text(n.x + 20, n.y + 75, n.sub, 'scene-body-label')}${hint(n.x + n.w - 22, n.y + n.h - 22)}`)).join('')}
     ${comp('ai', 'Explore AI assistance and proposed coordination tools', `<circle cx="500" cy="406" r="100" class="scene-ai-ring"/><circle cx="500" cy="406" r="86" class="scene-ai-core"/>${text(500, 391, 'AI ASSISTANCE', 'scene-mono scene-block-label', 'middle')}${text(500, 423, 'Trace a format change', 'scene-body-label', 'middle')}${text(500, 449, 'Keep evidence connected', 'scene-body-label', 'middle')}${hint(568, 346)}`)}
     ${flow('M320 265H373V347H420', 'ai-spec')}${flow('M580 347H627V265H680', 'ai-rtl')}${flow('M320 548H373V465H420', 'ai-dv')}${flow('M580 465H627V548H680', 'ai-pd')}
@@ -1375,16 +1357,16 @@ const photoDetail = (file,x,y,w,h,viewBox,nativeWidth,nativeHeight,label) => `<s
 function hardwareScene(index) {
   if (index === 0) return `${hardwareImage('etched-rack-detail.webp',40,140,920,500,'The exact rack photograph displayed on Etched’s current homepage, showing a compute tray and rack cabling')}${text(500,689,'Etched’s current rack hardware · official homepage photography','scene-hardware-caption','middle')}`;
   if (index === 1) return `${photoDetail('etched-chip.webp',210,140,580,510,'900 500 1400 1600',3200,2562,'Photograph of Etched’s actual packaged chip, from its official media kit')}${text(500,687,'Packaged chip · official Etched photography','scene-hardware-caption','middle')}`;
-  return `<g class="hardware-wide">${photoDetail('etched-tray.webp',90,140,395,510,'1100 180 1050 1400',3200,1800,'Actual liquid-cooled Etched compute tray with copper cold plates and braided tubing')}${photoDetail('etched-rack.webp',565,140,335,510,'800 550 1000 2450',2525,3200,'Actual current Etched inference rack, front view')}${text(285,684,'Compute tray','scene-hardware-label','middle')}${text(735,684,'Inference rack','scene-hardware-label','middle')}</g><g class="hardware-compact">${hardwareImage('etched-rack-detail.webp',40,140,920,438,'Etched’s actual rack and extracted compute tray, photographed from above')}</g>`;
+  return `<g class="hardware-wide">${photoDetail('etched-tray.webp',90,140,395,510,'1190 275 820 1250',3200,1800,'Actual liquid-cooled Etched compute tray with copper cold plates and braided tubing')}${photoDetail('etched-rack.webp',565,140,335,510,'820 600 900 2370',2525,3200,'Actual current Etched inference rack, front view')}${text(285,684,'Compute tray','scene-hardware-label','middle')}${text(735,684,'Inference rack','scene-hardware-label','middle')}</g><g class="hardware-compact">${hardwareImage('etched-rack-detail.webp',40,140,920,438,'Etched’s actual rack and extracted compute tray, photographed from above')}</g>`;
 }
 
-const chapterBuilders = [rackOpening, packageScene, architectureScene, quantizationScene, microScene, verificationScene, physicalScene, tapeoutScene, aiScene, racksFinal];
+const chapterBuilders = [rackOpening, packageScene, architectureScene, microScene, verificationScene, physicalScene, () => organizationScene({comp,rect,text,hint,flow,arrow,title,bottom}), aiScene, racksFinal];
 
 /** A dependency-free, accessible SVG stage for the chip design story. */
 function createScene(host, callbacks = {}) {
   const prefix = `etched-scene-${++sceneSequence}`;
   const svgMarkup = `<svg class="etched-scene" viewBox="0 110 1000 610" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="Interactive diagrams of Etched’s chip design process">
-    <title>From an AI request to silicon and back</title><desc>Official Etched hardware imagery and ten conceptual engineering diagrams. Use Hardware or Diagram to switch presentations. Select a labeled component to read its role and tradeoffs.</desc>
+    <title>From an AI request to silicon and back</title><desc>Official Etched hardware imagery and conceptual engineering diagrams. Use Hardware or Diagram to switch presentations. Select a labeled component to read its role and tradeoffs.</desc>
     <defs>
       <pattern id="__ID__-grid" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".85" fill="#aeb5a8" opacity=".33"/></pattern>
       <marker id="__ID__-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M1 1L9 5L1 9" fill="none" stroke="#e95932" stroke-width="1.5"/></marker>
@@ -1392,7 +1374,7 @@ function createScene(host, callbacks = {}) {
     </defs>
     <rect width="1000" height="800" fill="#ffffff"/>
     <path d="M37 128v-11h11 M952 117h11v11 M37 706v11h11 M952 717h11v-11" class="scene-corner"/>
-    ${chapterBuilders.map((builder, i) => `<g class="scene-layer ${i === 0 ? 'is-active' : ''}" data-scene="${i}" aria-hidden="${i !== 0}"><g class="scene-camera">${[0,1,9].includes(i) ? `<g class="scene-presentation" data-presentation="hardware" aria-hidden="false">${hardwareScene(i)}</g><g class="scene-presentation" data-presentation="diagram" aria-hidden="true">${builder()}</g>` : builder()}</g></g>`).join('')}
+    ${chapterBuilders.map((builder, i) => `<g class="scene-layer ${i === 0 ? 'is-active' : ''}" data-scene="${i}" aria-hidden="${i !== 0}"><g class="scene-camera">${[0,1,8].includes(i) ? `<g class="scene-presentation" data-presentation="hardware" aria-hidden="false">${hardwareScene(i)}</g><g class="scene-presentation" data-presentation="diagram" aria-hidden="true">${builder()}</g>` : builder()}</g></g>`).join('')}
     ${teardownMarkup()}
   </svg>`;
   host.innerHTML = svgMarkup.replaceAll('__ID__', prefix);
@@ -1424,11 +1406,11 @@ function createScene(host, callbacks = {}) {
   setTabStops();
   function syncTeardown() {
     const show = hardwareMode && activeIndex <= 2;
-    layers[9].querySelector('.hardware-wide').setAttribute('aria-hidden',String(compactPreference.matches));
-    layers[9].querySelector('.hardware-compact').setAttribute('aria-hidden',String(!compactPreference.matches));
+    layers[8].querySelector('.hardware-wide').setAttribute('aria-hidden',String(compactPreference.matches));
+    layers[8].querySelector('.hardware-compact').setAttribute('aria-hidden',String(!compactPreference.matches));
     teardown.setCompact(compactPreference.matches, svg.clientWidth / Math.max(1,svg.clientHeight));
     const view = teardown.setPosition(activeIndex, chapterProgress, motionPreference.matches || !playing);
-    svg.setAttribute('viewBox',show && view.viewBox ? view.viewBox : compactPreference.matches && hardwareMode && activeIndex===9 ? '40 140 920 438' : '0 110 1000 610');
+    svg.setAttribute('viewBox',show && view.viewBox ? view.viewBox : compactPreference.matches && hardwareMode && activeIndex===8 ? '40 140 920 438' : hardwareMode && activeIndex===8 ? '110 140 725 565' : '0 110 1000 610');
     teardown.setVisible(show);
     teardown.element.setAttribute('aria-hidden', String(!show || view.architectureMix >= 1));
     teardown.element.setAttribute('role','img');
@@ -1595,17 +1577,16 @@ const originalPhotos = {
   0:'https://cdn.sanity.io/images/rwbees58/production/f1facc083ac390c9607940c12b1eb64d3e387544-2525x3200.png',
   1:'https://cdn.sanity.io/images/rwbees58/production/5465c0a1c0301168e9aa18acb49febce0dc7c358-3200x1800.png',
   2:'https://cdn.sanity.io/images/rwbees58/production/144906a8cf416b08acc145128d2bdd4900b42783-13700x10969.jpg',
-  9:'https://www.etched.com/media-kit'
+  8:'https://www.etched.com/media-kit'
 };
-const navLabels = ['Workload','Requirements','Architecture','Formats','RTL','Verification','Layout','Organization','AI tools','Deployment'];
+const sectionLabels = ['Workload','Requirements','Architecture','RTL','Verification','Layout','Organization','AI tools','Deployment'];
 
 const paragraphHTML = paragraphs => paragraphs.map(p => `<p>${escapeHTML(p)}</p>`).join('');
-$('essay').innerHTML = `<header class="essay-intro"><div class="eyebrow">${escapeHTML(essay.kicker)}</div><h1 class="essay-title" id="essay-title">${escapeHTML(essay.title)}</h1><p class="essay-deck">${escapeHTML(essay.deck)}</p>${paragraphHTML(essay.introduction)}</header>` + essay.sections.map(section => `<section class="essay-section" id="${escapeHTML(section.id)}" data-essay-chapter="${section.chapter}" aria-labelledby="essay-heading-${section.chapter}"><div class="eyebrow">${String(section.chapter+1).padStart(2,'0')} / ${escapeHTML(navLabels[section.chapter])}</div><h2 id="essay-heading-${section.chapter}">${escapeHTML(section.title)}</h2>${paragraphHTML(section.paragraphs)}${section.sourceLinks?.length ? `<div class="essay-sources">${section.sourceLinks.map(source => `<a href="${escapeHTML(source.url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(source.label)} ↗</a>`).join('')}</div>`:''}</section>`).join('') + '<p class="essay-endnote">Independent editorial draft. Hardware photographs are from Etched’s official website and media kit. Diagrams explain engineering relationships and are not Etched specifications.</p>';
+$('essay').innerHTML = `<header class="essay-intro"><div class="eyebrow">${escapeHTML(essay.kicker)}</div><h1 class="essay-title" id="essay-title">${escapeHTML(essay.title)}</h1><p class="essay-deck">${escapeHTML(essay.deck)}</p>${paragraphHTML(essay.introduction)}</header>` + essay.sections.map(section => `<section class="essay-section" id="${escapeHTML(section.id)}" data-essay-chapter="${section.chapter}" aria-labelledby="essay-heading-${section.chapter}"><div class="eyebrow">${String(section.chapter+1).padStart(2,'0')} / ${escapeHTML(sectionLabels[section.chapter])}</div><h2 id="essay-heading-${section.chapter}">${escapeHTML(section.title)}</h2>${paragraphHTML(section.paragraphs)}${section.sourceLinks?.length ? `<div class="essay-sources">${section.sourceLinks.map(source => `<a href="${escapeHTML(source.url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(source.label)} ↗</a>`).join('')}</div>`:''}</section>`).join('') + '<p class="essay-endnote">Independent editorial draft. Hardware photographs are from Etched’s official website and media kit. Diagrams explain engineering relationships and are not Etched specifications.</p>';
 document.title = essay.title;
 const essaySections = [...document.querySelectorAll('[data-essay-chapter]')];
 const compactLayout = matchMedia('(max-width: 900px)');
 
-$('chapter-nav').innerHTML = chapters.map((chapter,i) => `<button type="button" data-chapter-link="${i}" aria-label="View ${i+1}: ${escapeHTML(chapter.title)}"><span class="nav-number">${String(i+1).padStart(2,'0')}</span><span class="nav-label">${navLabels[i]}</span></button>`).join('');
 $('source-links').innerHTML = sources.map((source) => `<li><a href="${escapeHTML(source.url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(source.label)}</a></li>`).join('');
 
 const scene = createScene($('scene'),{onSelect:selectComponent,onHover:showTooltip,onLeave:hideTooltip});
@@ -1665,21 +1646,14 @@ function activateChapter(index,progress=0) {
   if (state.chapter!==index) {
     state.chapter=index; closeInspector(); hideTooltip();
     const chapter=chapters[index];
-    $('view-kicker').textContent=chapter.kicker;
+    $('view-kicker').textContent=chapter.kicker.replace(/^\d+\s*\/\s*/,'');
     $('view-title').textContent=chapter.title;
     $('view-caption').textContent=chapter.caption;
-    $('view-number').textContent=String(index+1).padStart(2,'0');
-    $('fault-toggle').hidden=index!==5;
+    $('fault-toggle').hidden=index!==4;
     updateViewMode();
-    $('previous-view').disabled=index===0;
-    $('next-view').disabled=index===chapters.length-1;
-    const buttons=[...document.querySelectorAll('[data-chapter-link]')];
-    buttons.forEach((button,i) => i===index ? button.setAttribute('aria-current','step') : button.removeAttribute('aria-current'));
-    const active=buttons[index],nav=$('chapter-nav');
-    nav.scrollTo({left:Math.max(0,active.offsetLeft-nav.offsetLeft-nav.clientWidth/2+active.offsetWidth/2),behavior:reducedMotion.matches?'instant':'smooth'});
     $('component-strip').innerHTML=chapter.componentIds.map((id) => `<button type="button" class="component-chip" data-component-link="${id}" aria-pressed="false">${escapeHTML(components[id]?.name || id)}</button>`).join('');
     $('component-strip').scrollLeft=0;
-    $('view-announcement').textContent=`View ${index+1}: ${chapter.title}. ${chapter.caption}`;
+    $('view-announcement').textContent=`${chapter.title}. ${chapter.caption}`;
   }
   state.progress = progress;
   scene.setChapter(index,progress);
@@ -1713,25 +1687,8 @@ function goToChapter(index,instant=false) {
 window.addEventListener('scroll',scheduleScroll,{passive:true});
 window.addEventListener('resize',scheduleScroll,{passive:true});
 document.addEventListener('click',(event) => {
-  const chapterButton=event.target.closest('[data-chapter-link]');
-  if (chapterButton) goToChapter(Number(chapterButton.dataset.chapterLink));
   const componentButton=event.target.closest('[data-component-link]');
   if (componentButton) selectComponent(componentButton.dataset.componentLink);
-});
-$('previous-view').addEventListener('click',() => goToChapter(state.chapter-1));
-$('next-view').addEventListener('click',() => goToChapter(state.chapter+1));
-$('chapter-nav').addEventListener('keydown',(event) => {
-  const button=event.target.closest('[data-chapter-link]'); if (!button) return;
-  let next=Number(button.dataset.chapterLink);
-  if (event.key==='ArrowRight') next++;
-  else if (event.key==='ArrowLeft') next--;
-  else if (event.key==='Home') next=0;
-  else if (event.key==='End') next=chapters.length-1;
-  else return;
-  event.preventDefault();
-  next=Math.max(0,Math.min(chapters.length-1,next));
-  goToChapter(next);
-  document.querySelector(`[data-chapter-link="${next}"]`).focus({preventScroll:true});
 });
 $('inspector-close').addEventListener('click',() => closeInspector(true));
 document.addEventListener('keydown',(event) => { if (event.key==='Escape') { hideTooltip(); closeInspector(true); } });
@@ -1739,13 +1696,13 @@ document.addEventListener('keydown',(event) => { if (event.key==='Escape') { hid
 function updateMotionButton() {
   $('motion-toggle').disabled=reducedMotion.matches;
   $('motion-label').textContent=reducedMotion.matches?'Motion off':state.paused?'Play':'Pause';
-  $('motion-icon').textContent=reducedMotion.matches?'—':state.paused?'▷':'Ⅱ';
+  $('motion-icon').textContent=reducedMotion.matches?'○':state.paused?'▷':'Ⅱ';
   $('motion-toggle').setAttribute('aria-label',reducedMotion.matches?'Animation is off to respect your reduced motion preference':state.paused?'Play diagram animation':'Pause diagram animation');
   $('motion-toggle').setAttribute('aria-pressed',String(state.paused));
 }
 $('motion-toggle').addEventListener('click',() => { state.paused=!state.paused; scene.setPlaying(!state.paused); updateMotionButton(); });
 reducedMotion.addEventListener('change',() => { state.paused=reducedMotion.matches; scene.setPlaying(!state.paused); updateMotionButton(); });
-function hasHardwareView() { return [0,1,2,9].includes(state.chapter); }
+function hasHardwareView() { return [0,1,2,8].includes(state.chapter); }
 function updateViewMode() {
   const hardware = hasHardwareView() && state.hardware;
   $('view-mode-switch').hidden = !hasHardwareView();
@@ -1755,7 +1712,7 @@ function updateViewMode() {
   $('motion-toggle').hidden = hardware;
   $('photo-original').hidden = !hardware;
   if (originalPhotos[state.chapter]) $('photo-original').href = originalPhotos[state.chapter];
-  $('photo-original').textContent = state.chapter===9 ? 'Original photos ↗' : 'View original ↗';
+  $('photo-original').textContent = state.chapter===8 ? 'Original photos ↗' : 'View original ↗';
   scene.setHardwareMode(state.hardware);
   updateHint();
 }
@@ -1787,15 +1744,18 @@ $('sources-close').addEventListener('click',() => $('sources-dialog').close());
 $('sources-dialog').addEventListener('click',(event) => { if (event.target===$('sources-dialog')) { const r=$('sources-dialog').getBoundingClientRect(); if (event.clientX<r.left || event.clientX>r.right || event.clientY<r.top || event.clientY>r.bottom) $('sources-dialog').close(); } });
 document.addEventListener('visibilitychange',() => scene.setPlaying(!state.paused && !document.hidden));
 updateMotionButton(); updateHint(); updateOnScroll();
+function chapterIndexForHash(hash) {
+  const sectionHash=hash==='#quantization'?'#architecture':hash;
+  return chapters.findIndex(chapter => `#${chapter.id}`===sectionHash);
+}
 window.addEventListener('hashchange',() => {
-  const index=chapters.findIndex(chapter => `#${chapter.id}`===location.hash);
+  const index=chapterIndexForHash(location.hash);
   if (index>=0) goToChapter(index,true);
 });
 if (location.hash) {
-  const initialHash=location.hash;
+  const initialIndex=chapterIndexForHash(location.hash);
   const alignInitialChapter=() => {
-    const index=chapters.findIndex((chapter) => `#${chapter.id}`===initialHash);
-    if (location.hash===initialHash && index>=0) { goToChapter(index,true); updateOnScroll(); }
+    if (chapterIndexForHash(location.hash)===initialIndex && initialIndex>=0) { goToChapter(initialIndex,true); updateOnScroll(); }
   };
   alignInitialChapter();
   // The browser can restore its fragment position after module initialization.
@@ -1817,7 +1777,7 @@ if (location.hash) {
       <article id="essay" class="essay-column" aria-label="Engineering essay"><noscript><p>Enable JavaScript to read the essay with its interactive hardware walkthrough.</p></noscript></article>
       <aside class="visual-column" id="visual-column" aria-label="Hardware walkthrough paired with the essay">
       <section id="visual-explorer" class="visual-explorer" aria-label="Interactive chip design explorer">
-      <div class="view-heading"><div><div class="eyebrow" id="view-kicker">01 / THE SYSTEM</div><h2 id="view-title">System</h2><p id="view-caption"></p></div><span class="view-count"><span id="view-number">01</span><span>/ 10</span></span></div>
+      <div class="view-heading"><div><div class="eyebrow" id="view-kicker">01 / THE SYSTEM</div><h2 id="view-title">System</h2><p id="view-caption"></p></div></div>
       <div class="visual-canvas-wrap">
         <div id="scene" class="scene-canvas" aria-label="Hardware imagery and interactive diagrams. Select a component to inspect it."></div>
         <section id="inspector" class="inspector" aria-labelledby="inspector-title" tabindex="-1" hidden>
@@ -1827,7 +1787,6 @@ if (location.hash) {
       </div>
       <div class="visual-toolbar"><span id="explore-hint">Hover to inspect · click to focus</span><div class="toolbar-actions"><button type="button" id="components-toggle" class="components-toggle" aria-label="Inspect components" aria-expanded="false" aria-controls="component-strip">Inspect +</button><div class="view-mode-switch" id="view-mode-switch" role="group" aria-label="View presentation"><button type="button" id="hardware-mode" aria-pressed="true">Hardware</button><button type="button" id="diagram-mode" aria-pressed="false">Diagram</button></div><button id="fault-toggle" class="fault-button" type="button" aria-pressed="false" hidden>Introduce a mismatch</button><button id="motion-toggle" class="motion-button" type="button" aria-label="Pause diagram animation" aria-pressed="false"><span id="motion-icon" aria-hidden="true">Ⅱ</span><span id="motion-label">Pause</span></button><a class="photo-original" id="photo-original" href="https://www.etched.com/media-kit" target="_blank" rel="noopener noreferrer">View original ↗</a><span class="concept-label" id="view-medium">HARDWARE IMAGERY · ETCHED</span></div></div>
       <div class="component-strip" id="component-strip" aria-label="Components in this view"></div>
-    <footer class="journey-footer"><button type="button" class="view-arrow" id="previous-view" aria-label="Previous view">←</button><nav class="chapter-nav" aria-label="Chip design views" id="chapter-nav" tabindex="-1"></nav><button type="button" class="view-arrow" id="next-view" aria-label="Next view">→</button></footer>
       </section>
       </aside>
     </main>

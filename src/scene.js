@@ -1,4 +1,5 @@
-import { teardownMarkup, createTeardown } from './teardown.js?v=20261026-sand-silicon-3';
+import { teardownMarkup, createTeardown } from './teardown.js?v=20261026-focus-3';
+import { organizationScene } from './organization.js?v=20261026-focus-3';
 
 let sceneSequence = 0;
 
@@ -85,18 +86,9 @@ function architectureScene() {
     ${text(89, 670, 'Capacity → bandwidth → dataflow → useful computation', 'scene-large-label')}
     ${bottom('THE ARCHITECTURE DEFINES RESPONSIBILITIES & INTERFACES')}`;
 }
-function quantizationScene() {
-  const vals = [0.4, -0.2, 0.7, 1.1, -0.9, 0.1, 0.6, -0.3, 0.8, -1.0, 0.3, 0.2, -0.6, 0.5, -0.1, 0.9, -0.4, 0.6, -0.8, 0.3, 1.0, -0.7, 0.2, -0.5, 0.1, 0.9, -0.3, 0.4, -0.2, 0.7, -0.6, 0.5];
-  const grid = (x, low) => vals.map((v, i) => `<g>${rect(x + (i % 8) * 35, 300 + Math.floor(i / 8) * 45, 29, 37, `scene-number-cell ${Math.abs(v) > .65 ? 'scene-number-hot' : ''}`, 3)}${text(x + (i % 8) * 35 + 14.5, 324 + Math.floor(i / 8) * 45, low ? Math.round(v * 5) : v.toFixed(1), 'scene-mono scene-number', 'middle')}</g>`).join('');
-  return `${title(4, 'Numerical formats', 'Fewer bits change the work the hardware must do.')}
-    ${comp('buffer', 'Explore the source block of 32 eight-bit values', `${rect(69, 218, 337, 353, 'scene-format-card', 6)}${text(94, 259, '32 × 8-bit values', 'scene-large-label')}${text(94, 285, 'Illustrative FP8 block', 'scene-body-label')}${grid(94, false)}${text(94, 528, '256 bits of value data', 'scene-mono scene-format-total')}${hint(373, 541)}`)}
-    ${comp('conversion', 'Explore quantization from eight to four bits', `${rect(595, 218, 337, 353, 'scene-format-card scene-format-output', 6)}${text(620, 259, '32 × 4-bit values', 'scene-large-label')}${text(620, 285, 'Illustrative quantized codes', 'scene-body-label')}${grid(620, true)}${text(620, 528, '128 bits of value data', 'scene-mono scene-format-total')}${hint(899, 541)}${arrow('M430 383H565')}${text(500, 345, 'QUANTIZE', 'scene-mono scene-accent-label', 'middle')}${text(500, 431, 'Scale + round', 'scene-body-label', 'middle')}`)}
-    ${line('M238 585V617H765V585', 'scene-bracket')}${text(501, 655, 'Less data to store and move. Numerical quality still needs validation.', 'scene-body-label', 'middle')}${text(501, 684, 'Scale metadata is additional; storage savings depend on the format.', 'scene-caption', 'middle')}
-    ${bottom('A FORMAT DECISION CROSSES MEMORY, COMPUTE & VERIFICATION', 'ILLUSTRATIVE VALUES · NOT A FORMAT SPECIFICATION')}`;
-}
 function microScene() {
   const block = (id, label, x, symbol, detail, cls = '') => comp(id, `Explore ${label.toLowerCase()}`, `${rect(x, 305, 139, 165, `scene-datapath-block ${cls}`, 5)}${text(x + 69.5, 377, symbol, 'scene-operation-symbol', 'middle')}${text(x + 69.5, 418, label, 'scene-mono scene-block-label', 'middle')}${text(x + 69.5, 445, detail, 'scene-datapath-small', 'middle')}${hint(x + 118, 326)}`);
-  return `${title(5, 'Microarchitecture', 'Turn the requirements into a cycle-by-cycle implementation.')}
+  return `${title(4, 'Microarchitecture', 'Turn the requirements into a cycle-by-cycle implementation.')}
     ${tag(61, 214, 'INSIDE THE MATH BLOCK')}
     ${comp('interface', 'Explore the 32-bit block input and output interfaces', `${text(67, 350, '32-bit', 'scene-large-label')}${text(67, 380, 'input', 'scene-body-label')}${text(868, 350, '32-bit', 'scene-large-label')}${text(868, 380, 'output', 'scene-body-label')}${dot(99, 411, 6)}${dot(901, 411, 6)}`)}
     ${block('register', 'REGISTER', 183, 'D', 'Hold a value')}${block('multiply', 'MULTIPLY', 431, '×', 'Compute', 'scene-math-block')}${block('add', 'ADD', 678, '+', 'Accumulate', 'scene-math-block')}
@@ -106,7 +98,7 @@ function microScene() {
     ${bottom('RTL DESCRIBES THE LOGIC · PPA CONSTRAINS THE IMPLEMENTATION', 'SIMPLIFIED DATAPATH · ILLUSTRATIVE TIMING')}`;
 }
 function verificationScene() {
-  return `${title(6, 'Design verification', 'Compare the implementation with independent architectural intent.')}
+  return `${title(5, 'Design verification', 'Compare the implementation with independent architectural intent.')}
     ${comp('testbench', 'Explore the verification testbench and stimulus', `${rect(74, 174, 854, 445, 'scene-testbench-boundary', 7)}${text(96, 207, 'TESTBENCH', 'scene-mono scene-muted')}${rect(113, 337, 160, 112, 'scene-test-source', 4)}${text(193, 376, 'STIMULUS', 'scene-mono scene-block-label', 'middle')}${text(193, 406, 'Inputs + edge cases', 'scene-body-label', 'middle')}${hint(250, 357)}`)}
     ${comp('reference', 'Explore the independent expected behavior derived from the specification', `${rect(375, 235, 253, 116, 'scene-reference', 4)}${text(501, 277, 'REFERENCE MODEL', 'scene-mono scene-block-label', 'middle')}${text(501, 310, 'Architectural specification', 'scene-body-label', 'middle')}${hint(607, 255)}`)}
     ${comp('compute', 'Explore the RTL implementation under test', `${rect(375, 424, 253, 116, 'scene-compute', 4)}${text(501, 469, 'RTL IMPLEMENTATION', 'scene-mono scene-block-label', 'middle')}${text(501, 503, 'Design under test', 'scene-body-label', 'middle')}${hint(607, 445)}`)}
@@ -125,7 +117,7 @@ function physicalScene() {
     'M758 347H647V421H561V565', 'M758 368H625V401H538V565', 'M192 432H275V527H460',
   ];
   const cells = Array.from({ length: 15 * 12 }, (_, i) => { const col = i % 15; const row = Math.floor(i / 15); const skip = (col > 4 && col < 10 && row > 2 && row < 8); if (skip) return ''; return rect(195 + col * 37, 245 + row * 27, i % 4 === 0 ? 29 : 25, 18, `scene-placed-cell ${i % 11 === 0 ? 'scene-placed-cell-dark' : ''}`, 1); }).join('');
-  return `${title(7, 'Physical design', 'Make the logic fit, connect, and meet its constraints.')}
+  return `${title(6, 'Physical design', 'Make the logic fit, connect, and meet its constraints.')}
     ${rect(154, 204, 651, 406, 'scene-chip-boundary', 5)}
     ${comp('cells', 'Explore standard cells and placement', `${cells}${rect(371, 322, 185, 211, 'scene-compute-physical', 3)}${smallCells(385, 337, 5, 7, 25, 21, 7, 'scene-physical-math-cell')}${hint(180, 229)}`)}
     ${comp('routing', 'Explore routing, congestion, and timing', `${routes.map((d, i) => line(d, `scene-layout-route scene-route-${i % 3}`)).join('')}<ellipse cx="594" cy="397" rx="63" ry="78" class="scene-congestion"/>${hint(618, 411)}${line('M628 391H859V305', 'scene-callout')}${text(833, 266, 'CONGESTION', 'scene-mono scene-accent-label')}${text(833, 292, 'Reroute or move cells', 'scene-body-label')}`)}
@@ -134,21 +126,8 @@ function physicalScene() {
     ${tag(152, 664, 'PLACEMENT')}${tag(325, 664, 'ROUTING')}${tag(477, 664, 'TIMING')}${tag(618, 664, 'POWER')}
     ${bottom('PHYSICAL RESULTS FEED BACK INTO RTL & ARCHITECTURE', 'ILLUSTRATIVE ROUTES · NO ETCHED MEASUREMENTS')}`;
 }
-function tapeoutScene() {
-  const waferCells = [];
-  for (let row = -4; row <= 4; row += 1) for (let col = -4; col <= 4; col += 1) {
-    if ((row * row + col * col) < 18) waferCells.push(rect(505 + col * 24, 360 + row * 27, 20, 23, `scene-wafer-die ${((row + col) % 6 === 0) ? 'scene-wafer-die-highlight' : ''}`, 1));
-  }
-  return `${title(8, 'Tapeout to silicon', 'The signed-off design becomes something physical.')}
-    ${comp('tapeout', 'Explore tapeout and the released manufacturing layout', `${rect(92, 288, 219, 239, 'scene-layout-sheet', 4)}${rect(109, 305, 185, 169, 'scene-sheet-layout', 2)}${smallCells(123, 320, 5, 5, 25, 23, 6, 'scene-sheet-cell')}${text(110, 504, 'LAYOUT RELEASE', 'scene-mono scene-block-label')}${hint(288, 312)}`)}
-    ${comp('wafer', 'Explore fabrication and silicon wafers', `<circle cx="515" cy="383" r="150" class="scene-wafer" fill="url(#__ID__-wafer)"/><circle cx="515" cy="383" r="139" class="scene-wafer-inner"/>${waferCells.join('')}<path d="M502 530l13 -10l13 10" class="scene-wafer-notch"/>${hint(619, 285)}`)}
-    ${comp('package', 'Explore packaging, testing, and bring-up', `<path d="M744 343l34 -22h133l-34 22Z" class="scene-substrate-top"/>${rect(744, 343, 133, 132, 'scene-substrate', 2)}<path d="M877 343l34 -22v133l-34 21Z" class="scene-substrate-side"/>${die(775, 363, 72, 72)}${memoryStack(748, 369, '', .28)}${memoryStack(854, 369, '', .28)}${hint(885, 455)}`)}
-    ${arrow('M319 393H350')}${arrow('M675 393H721')}
-    ${text(202, 579, 'Tapeout', 'scene-large-label', 'middle')}${text(202, 610, 'Signed-off layout + data', 'scene-body-label', 'middle')}${text(515, 579, 'Fabrication', 'scene-large-label', 'middle')}${text(515, 610, 'Manufactured silicon', 'scene-body-label', 'middle')}${text(826, 579, 'Packaging + test', 'scene-large-label', 'middle')}${text(826, 610, 'Then silicon bring-up', 'scene-body-label', 'middle')}
-    ${bottom('TAPEOUT CLOSES DESIGN · SILICON STILL NEEDS VALIDATION', 'ILLUSTRATIVE MANUFACTURING SEQUENCE')}`;
-}
 function racksFinal() {
-  return `${title(10, 'Software to deployment', 'The complete system must deliver the intended experience.')}
+  return `${title(9, 'Software to deployment', 'The complete system must deliver the intended experience.')}
     <ellipse cx="499" cy="673" rx="386" ry="29" class="scene-ground"/>
     ${comp('rack', 'Explore the deployed multi-rack inference system', `${rack(84, 300, .68, { muted: true })}${rack(391, 237, .84)}${rack(716, 300, .68, { muted: true })}`)}
     ${comp('links', 'Explore multi-chip communication and latency', `${flow('M267 374H350Q368 374 368 359V346H409', 'rack-link-a')}${flow('M617 346H658Q674 346 674 364V374H732', 'rack-link-b')}${flow('M267 466H340Q358 466 358 478V499H409', 'rack-link-c')}${flow('M617 499H666Q684 499 684 483V466H732', 'rack-link-d')}${text(500, 180, 'MODEL → EXECUTION SOFTWARE → CUSTOMER INFERENCE', 'scene-mono scene-accent-label', 'middle')}${hint(680, 413)}`)}
@@ -162,7 +141,7 @@ function aiScene() {
     { x: 94, y: 488, w: 226, h: 118, label: 'VERIFICATION', sub: 'Tests + coverage', id: 'testbench', cls: 'scene-reference' },
     { x: 680, y: 488, w: 226, h: 118, label: 'PHYSICAL DESIGN', sub: 'Area + timing + power', id: 'cells', cls: 'scene-control' },
   ];
-  return `${title(9, 'AI across the process', 'Connect a proposed change to the evidence it needs.')}
+  return `${title(8, 'AI across the process', 'Connect a proposed change to the evidence it needs.')}
     ${nodes.map(n => comp(n.id, `Explore ${n.label.toLowerCase()} and cross-team coordination`, `${rect(n.x, n.y, n.w, n.h, n.cls, 5)}${text(n.x + 20, n.y + 42, n.label, 'scene-mono scene-block-label')}${text(n.x + 20, n.y + 75, n.sub, 'scene-body-label')}${hint(n.x + n.w - 22, n.y + n.h - 22)}`)).join('')}
     ${comp('ai', 'Explore AI assistance and proposed coordination tools', `<circle cx="500" cy="406" r="100" class="scene-ai-ring"/><circle cx="500" cy="406" r="86" class="scene-ai-core"/>${text(500, 391, 'AI ASSISTANCE', 'scene-mono scene-block-label', 'middle')}${text(500, 423, 'Trace a format change', 'scene-body-label', 'middle')}${text(500, 449, 'Keep evidence connected', 'scene-body-label', 'middle')}${hint(568, 346)}`)}
     ${flow('M320 265H373V347H420', 'ai-spec')}${flow('M580 347H627V265H680', 'ai-rtl')}${flow('M320 548H373V465H420', 'ai-dv')}${flow('M580 465H627V548H680', 'ai-pd')}
@@ -176,16 +155,16 @@ const photoDetail = (file,x,y,w,h,viewBox,nativeWidth,nativeHeight,label) => `<s
 function hardwareScene(index) {
   if (index === 0) return `${hardwareImage('etched-rack-detail.webp',40,140,920,500,'The exact rack photograph displayed on Etched’s current homepage, showing a compute tray and rack cabling')}${text(500,689,'Etched’s current rack hardware · official homepage photography','scene-hardware-caption','middle')}`;
   if (index === 1) return `${photoDetail('etched-chip.webp',210,140,580,510,'900 500 1400 1600',3200,2562,'Photograph of Etched’s actual packaged chip, from its official media kit')}${text(500,687,'Packaged chip · official Etched photography','scene-hardware-caption','middle')}`;
-  return `<g class="hardware-wide">${photoDetail('etched-tray.webp',90,140,395,510,'1100 180 1050 1400',3200,1800,'Actual liquid-cooled Etched compute tray with copper cold plates and braided tubing')}${photoDetail('etched-rack.webp',565,140,335,510,'800 550 1000 2450',2525,3200,'Actual current Etched inference rack, front view')}${text(285,684,'Compute tray','scene-hardware-label','middle')}${text(735,684,'Inference rack','scene-hardware-label','middle')}</g><g class="hardware-compact">${hardwareImage('etched-rack-detail.webp',40,140,920,438,'Etched’s actual rack and extracted compute tray, photographed from above')}</g>`;
+  return `<g class="hardware-wide">${photoDetail('etched-tray.webp',90,140,395,510,'1190 275 820 1250',3200,1800,'Actual liquid-cooled Etched compute tray with copper cold plates and braided tubing')}${photoDetail('etched-rack.webp',565,140,335,510,'820 600 900 2370',2525,3200,'Actual current Etched inference rack, front view')}${text(285,684,'Compute tray','scene-hardware-label','middle')}${text(735,684,'Inference rack','scene-hardware-label','middle')}</g><g class="hardware-compact">${hardwareImage('etched-rack-detail.webp',40,140,920,438,'Etched’s actual rack and extracted compute tray, photographed from above')}</g>`;
 }
 
-const chapterBuilders = [rackOpening, packageScene, architectureScene, quantizationScene, microScene, verificationScene, physicalScene, tapeoutScene, aiScene, racksFinal];
+const chapterBuilders = [rackOpening, packageScene, architectureScene, microScene, verificationScene, physicalScene, () => organizationScene({comp,rect,text,hint,flow,arrow,title,bottom}), aiScene, racksFinal];
 
 /** A dependency-free, accessible SVG stage for the chip design story. */
 export function createScene(host, callbacks = {}) {
   const prefix = `etched-scene-${++sceneSequence}`;
   const svgMarkup = `<svg class="etched-scene" viewBox="0 110 1000 610" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="Interactive diagrams of Etched’s chip design process">
-    <title>From an AI request to silicon and back</title><desc>Official Etched hardware imagery and ten conceptual engineering diagrams. Use Hardware or Diagram to switch presentations. Select a labeled component to read its role and tradeoffs.</desc>
+    <title>From an AI request to silicon and back</title><desc>Official Etched hardware imagery and conceptual engineering diagrams. Use Hardware or Diagram to switch presentations. Select a labeled component to read its role and tradeoffs.</desc>
     <defs>
       <pattern id="__ID__-grid" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".85" fill="#aeb5a8" opacity=".33"/></pattern>
       <marker id="__ID__-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M1 1L9 5L1 9" fill="none" stroke="#e95932" stroke-width="1.5"/></marker>
@@ -193,7 +172,7 @@ export function createScene(host, callbacks = {}) {
     </defs>
     <rect width="1000" height="800" fill="#ffffff"/>
     <path d="M37 128v-11h11 M952 117h11v11 M37 706v11h11 M952 717h11v-11" class="scene-corner"/>
-    ${chapterBuilders.map((builder, i) => `<g class="scene-layer ${i === 0 ? 'is-active' : ''}" data-scene="${i}" aria-hidden="${i !== 0}"><g class="scene-camera">${[0,1,9].includes(i) ? `<g class="scene-presentation" data-presentation="hardware" aria-hidden="false">${hardwareScene(i)}</g><g class="scene-presentation" data-presentation="diagram" aria-hidden="true">${builder()}</g>` : builder()}</g></g>`).join('')}
+    ${chapterBuilders.map((builder, i) => `<g class="scene-layer ${i === 0 ? 'is-active' : ''}" data-scene="${i}" aria-hidden="${i !== 0}"><g class="scene-camera">${[0,1,8].includes(i) ? `<g class="scene-presentation" data-presentation="hardware" aria-hidden="false">${hardwareScene(i)}</g><g class="scene-presentation" data-presentation="diagram" aria-hidden="true">${builder()}</g>` : builder()}</g></g>`).join('')}
     ${teardownMarkup()}
   </svg>`;
   host.innerHTML = svgMarkup.replaceAll('__ID__', prefix);
@@ -225,11 +204,11 @@ export function createScene(host, callbacks = {}) {
   setTabStops();
   function syncTeardown() {
     const show = hardwareMode && activeIndex <= 2;
-    layers[9].querySelector('.hardware-wide').setAttribute('aria-hidden',String(compactPreference.matches));
-    layers[9].querySelector('.hardware-compact').setAttribute('aria-hidden',String(!compactPreference.matches));
+    layers[8].querySelector('.hardware-wide').setAttribute('aria-hidden',String(compactPreference.matches));
+    layers[8].querySelector('.hardware-compact').setAttribute('aria-hidden',String(!compactPreference.matches));
     teardown.setCompact(compactPreference.matches, svg.clientWidth / Math.max(1,svg.clientHeight));
     const view = teardown.setPosition(activeIndex, chapterProgress, motionPreference.matches || !playing);
-    svg.setAttribute('viewBox',show && view.viewBox ? view.viewBox : compactPreference.matches && hardwareMode && activeIndex===9 ? '40 140 920 438' : '0 110 1000 610');
+    svg.setAttribute('viewBox',show && view.viewBox ? view.viewBox : compactPreference.matches && hardwareMode && activeIndex===8 ? '40 140 920 438' : hardwareMode && activeIndex===8 ? '110 140 725 565' : '0 110 1000 610');
     teardown.setVisible(show);
     teardown.element.setAttribute('aria-hidden', String(!show || view.architectureMix >= 1));
     teardown.element.setAttribute('role','img');

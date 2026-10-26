@@ -46,8 +46,6 @@
   .view-heading { flex:0 0 auto; padding:3px 0 0; display:flex; justify-content:space-between; align-items:flex-start; gap:20px; pointer-events:none; }
   .view-heading h2 { font-size:clamp(24px,2.2vw,32px); line-height:1.25; letter-spacing:-.03em; font-weight:400; margin:8px 0 9px; }
   .view-heading p { font-size:13px; line-height:1.7; color:var(--muted); max-width:520px; }
-  .view-count { display:flex; align-items:baseline; gap:7px; padding-top:10px; font:9px ui-monospace,SFMono-Regular,Menlo,monospace; color:#8a8a8a; white-space:nowrap; }
-  .view-count #view-number { font-size:22px; font-weight:400; color:var(--ink); letter-spacing:-.045em; }
   .visual-canvas-wrap { position:relative; flex:1 1 auto; min-height:0; padding-top:8px; }
   .scene-canvas { position:absolute; inset:7px 0 0; background:var(--paper) !important; }
   .scene-canvas > svg { display:block; height:100%; width:100%; }
@@ -58,9 +56,6 @@
   .components-toggle { display:none; background:transparent; border:0; padding:4px 0; color:var(--muted); font:inherit; white-space:nowrap; }
   .concept-label { display:none; font-size:8px; letter-spacing:.04em; }
   .component-strip { flex:0 0 auto; display:flex; justify-content:flex-start; gap:5px; overflow-x:auto; padding:10px 2px 14px; scrollbar-width:thin; }
-  .journey-footer { position:relative; flex:0 0 auto; height:69px; display:flex; align-items:center; gap:10px; border-top:1px solid var(--line); background:var(--paper); }
-  .chapter-nav { display:flex; flex:1; overflow-x:auto; gap:0; padding:8px 1px; scrollbar-width:none; }
-  .chapter-nav::-webkit-scrollbar { display:none; }
   .inspector { position:absolute; z-index:25; right:0; top:15px; width:min(280px,92%); max-height:calc(100% - 30px); overflow-y:auto; padding:19px 21px 24px; background:var(--paper); border:1px solid var(--line); border-radius:2px; box-shadow:0 12px 40px #0000000d; }
   .inspector-heading { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; }
   .inspector h3 { font-size:24px; line-height:1.28; font-weight:400; letter-spacing:-.03em; margin:12px 0; }
@@ -90,16 +85,6 @@
   .component-chip { flex:0 0 auto; background:transparent; border:1px solid var(--line); border-radius:2px; padding:7px 10px; font-size:10px; color:#555; display:flex; align-items:center; gap:9px; }
   .component-chip::after { content:'+'; color:#888; font-size:12px; }
   .component-chip:hover,.component-chip[aria-pressed=true] { border-color:var(--orange); color:#b44320; background:#fff7f3; }
-  .view-arrow { display:grid; place-items:center; flex:0 0 29px; height:30px; background:transparent; border:1px solid var(--line); border-radius:50%; font-size:16px; line-height:1; }
-  .view-arrow:disabled { opacity:.3; }
-  .view-arrow:not(:disabled):hover { border-color:var(--orange); color:var(--orange); }
-  .chapter-nav button { flex:1 0 66px; position:relative; padding:10px 3px 7px; min-height:48px; border:0; background:transparent; border-radius:2px; text-align:center; }
-  .chapter-nav button::before { position:absolute; content:''; top:1px; left:7px; right:7px; height:1px; background:#d7d7d7; }
-  .chapter-nav .nav-number { display:block; margin-bottom:6px; color:#888; font:8px/1 ui-monospace,SFMono-Regular,Menlo,monospace; }
-  .chapter-nav .nav-label { display:block; color:#555; font-size:9px; line-height:1.3; white-space:nowrap; }
-  .chapter-nav button[aria-current=step]::before { background:var(--orange); }
-  .chapter-nav button[aria-current=step] .nav-number,.chapter-nav button[aria-current=step] .nav-label { color:#bd4822; }
-  .chapter-nav button:hover { background:#f7f7f7; }
   .icon-button { background:transparent; border:0; width:30px; height:30px; padding:0; color:var(--muted); font-size:23px; line-height:1; }
   .component-tooltip { position:fixed; z-index:70; width:245px; padding:14px 16px; color:#fff; background:#202020; border:1px solid #333; border-radius:2px; box-shadow:0 5px 25px #00000012; pointer-events:none; }
   .component-tooltip strong { display:block; font-size:13px; font-weight:400; margin-bottom:6px; }
@@ -141,8 +126,6 @@
     .eyebrow { font-size:9px; }
     .view-heading h2 { font-size:16px; line-height:1.2; margin:0 0 3px; }
     .view-heading p { display:none; }
-    .view-count { padding-top:2px; font-size:8px; gap:6px; }
-    .view-count #view-number { font-size:15px; }
     .visual-canvas-wrap { padding-top:0; }
     .scene-canvas { inset:0 -4px; }
     .scene-canvas > svg { width:100%; height:100%; }
@@ -154,12 +137,6 @@
     .component-strip { display:none; padding:4px 1px 6px; }
     .components-open .component-strip { display:flex; }
     .component-chip { min-height:25px; padding:4px 8px; font-size:9px; }
-    .journey-footer { height:30px; gap:8px; }
-    .view-arrow { flex-basis:27px; height:28px; font-size:15px; }
-    .chapter-nav { padding:5px 1px; }
-    .chapter-nav button { flex:1 0 70px; min-height:24px; padding:4px 2px; }
-    .chapter-nav .nav-label { font-size:8px; }
-    .chapter-nav .nav-number { display:none; }
     .essay-column { max-width:680px; width:100%; margin:auto; padding:36px 28px calc(var(--mobile-visual) + env(safe-area-inset-bottom,0px) + 70px); }
     .essay-intro { min-height:58svh; padding:0 0 52px; }
     .essay-title { font-size:36px; line-height:1.25; margin:16px 0 22px; }
@@ -193,7 +170,6 @@
     .view-heading p { font-size:11px; }
     .component-strip { padding:5px 0 8px; }
     .component-chip { font-size:9px; padding:5px 8px; }
-    .journey-footer { height:58px; }
     :root { --header:65px; }
   }
   @media (max-height:600px) and (max-width:900px) {
@@ -202,14 +178,8 @@
     .view-heading { position:absolute; top:6px; left:16px; right:16px; z-index:2; }
     .view-heading h2 { font-size:16px; margin:0; }
     .view-heading .eyebrow { display:none; }
-    .view-count { padding-top:0; }
-    .view-count #view-number { font-size:16px; }
     .component-strip { padding:2px 1px 4px; }
     .component-chip { min-height:23px; padding:3px 7px; font-size:8px; }
-    .journey-footer { height:30px; }
-    .view-arrow { height:24px; flex-basis:24px; }
-    .chapter-nav button { min-height:24px; padding:4px 2px; }
-    .chapter-nav .nav-number { display:none; }
     .visual-toolbar { min-height:25px; }
     .visual-toolbar > span:first-child { display:none; }
   }

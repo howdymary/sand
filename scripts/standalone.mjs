@@ -6,7 +6,7 @@ const root = fileURLToPath(new URL('../', import.meta.url));
 const read = name => readFile(path.join(root,name),'utf8');
 const html = await read('index.html');
 const styleFiles = ['styles.css','src/scene.css','src/teardown.css'];
-const sourceFiles = ['src/content.js','src/essay.js','src/teardown.js','src/scene.js','src/app.js'];
+const sourceFiles = ['src/content.js','src/essay.js','src/teardown.js','src/organization.js','src/scene.js','src/app.js'];
 const embeddedHardware = {};
 for (const name of await readdir(path.join(root,'assets/hardware'))) {
   if (!/\.(?:webp|png|jpg)$/i.test(name)) continue;

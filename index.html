@@ -8,11 +8,11 @@
     <title>Sand to Silicon: How Etched Designs Chips</title>
     <link rel="canonical" href="https://howdymary.github.io/sand/" />
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='8' fill='%23e95932'/%3E%3Cpath d='M10 13h20M10 20h14M10 27h20' stroke='%23fff' stroke-width='3'/%3E%3C/svg%3E" />
-    <link rel="stylesheet" href="./styles.css?v=20261026-sand-silicon-3" />
-    <link rel="stylesheet" href="./src/scene.css?v=20261026-sand-silicon-3" />
-    <link rel="stylesheet" href="./src/teardown.css?v=20261026-sand-silicon-3" />
+    <link rel="stylesheet" href="./styles.css?v=20261026-focus-3" />
+    <link rel="stylesheet" href="./src/scene.css?v=20261026-focus-3" />
+    <link rel="stylesheet" href="./src/teardown.css?v=20261026-focus-3" />
     <script>if ('scrollRestoration' in history) history.scrollRestoration = 'manual';</script>
-    <script type="module" src="./src/app.js?v=20261026-sand-silicon-3"></script>
+    <script type="module" src="./src/app.js?v=20261026-focus-3"></script>
   </head>
   <body>
     <a class="skip-link" href="#essay">Skip to the essay</a>
@@ -27,7 +27,7 @@
       <article id="essay" class="essay-column" aria-label="Engineering essay"><noscript><p>Enable JavaScript to read the essay with its interactive hardware walkthrough.</p></noscript></article>
       <aside class="visual-column" id="visual-column" aria-label="Hardware walkthrough paired with the essay">
       <section id="visual-explorer" class="visual-explorer" aria-label="Interactive chip design explorer">
-      <div class="view-heading"><div><div class="eyebrow" id="view-kicker">01 / THE SYSTEM</div><h2 id="view-title">System</h2><p id="view-caption"></p></div><span class="view-count"><span id="view-number">01</span><span>/ 10</span></span></div>
+      <div class="view-heading"><div><div class="eyebrow" id="view-kicker">01 / THE SYSTEM</div><h2 id="view-title">System</h2><p id="view-caption"></p></div></div>
       <div class="visual-canvas-wrap">
         <div id="scene" class="scene-canvas" aria-label="Hardware imagery and interactive diagrams. Select a component to inspect it."></div>
         <section id="inspector" class="inspector" aria-labelledby="inspector-title" tabindex="-1" hidden>
@@ -37,7 +37,6 @@
       </div>
       <div class="visual-toolbar"><span id="explore-hint">Hover to inspect · click to focus</span><div class="toolbar-actions"><button type="button" id="components-toggle" class="components-toggle" aria-label="Inspect components" aria-expanded="false" aria-controls="component-strip">Inspect +</button><div class="view-mode-switch" id="view-mode-switch" role="group" aria-label="View presentation"><button type="button" id="hardware-mode" aria-pressed="true">Hardware</button><button type="button" id="diagram-mode" aria-pressed="false">Diagram</button></div><button id="fault-toggle" class="fault-button" type="button" aria-pressed="false" hidden>Introduce a mismatch</button><button id="motion-toggle" class="motion-button" type="button" aria-label="Pause diagram animation" aria-pressed="false"><span id="motion-icon" aria-hidden="true">Ⅱ</span><span id="motion-label">Pause</span></button><a class="photo-original" id="photo-original" href="https://www.etched.com/media-kit" target="_blank" rel="noopener noreferrer">View original ↗</a><span class="concept-label" id="view-medium">HARDWARE IMAGERY · ETCHED</span></div></div>
       <div class="component-strip" id="component-strip" aria-label="Components in this view"></div>
-    <footer class="journey-footer"><button type="button" class="view-arrow" id="previous-view" aria-label="Previous view">←</button><nav class="chapter-nav" aria-label="Chip design views" id="chapter-nav" tabindex="-1"></nav><button type="button" class="view-arrow" id="next-view" aria-label="Next view">→</button></footer>
       </section>
       </aside>
     </main>

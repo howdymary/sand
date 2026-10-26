@@ -87,8 +87,8 @@ const union = boxes => {
   return rectangle(x,y,Math.max(...boxes.map(box=>box.x+box.width))-x,Math.max(...boxes.map(box=>box.y+box.height))-y);
 };
 const blendFrame = (a,b,t) => Object.fromEntries(['x','y','width','height'].map(key=>[key,mix(a[key],b[key],t)]));
-const fitFrame = (box,aspect) => {
-  let width=box.width+28,height=box.height+28;
+const fitFrame = (box,aspect,padding=28) => {
+  let width=box.width+padding,height=box.height+padding;
   if (width/height<aspect) width=height*aspect; else height=width/aspect;
   return rectangle(box.x+box.width/2-width/2,box.y+box.height/2-height/2,width,height);
 };
@@ -182,10 +182,11 @@ export function createTeardown(svg) {
     parts.caption.textContent = first && p < .2 ? 'Official hardware photography · start at the delivered system' : separation > .05 && separation < .96 ? 'Visible photo regions separated for explanation; hidden board detail is not depicted.' : 'Official hardware photography · explanatory sequence';
     const architectureMix = chapterIndex < 2 ? 0 : chapterIndex === 2 ? smooth(.04, .38, p) : 1;
     let hardwareBounds=null,viewBox=null;
+    const parent={x:cx,y:cy,sx:scaleX,sy:scaleY,rotate,skew};
+    const trayBounds=cropBounds(rectangle(1190,275,820,1250),parent);
+    const chipCrop=compact ? rectangle(1120,750,980,1100) : rectangle(1155,770,890,1030);
+    const chipBounds=rectangle(565+(chipCrop.x-1600)*packageScale,mix(460,425,packageReveal)+(chipCrop.y-1280)*packageScale,chipCrop.width*packageScale,chipCrop.height*packageScale);
     if (compact) {
-      const parent={x:cx,y:cy,sx:scaleX,sy:scaleY,rotate,skew};
-      const trayBounds=cropBounds(rectangle(1190,275,820,1250),parent);
-      const chipBounds=rectangle(565+(1120-1600)*packageScale,mix(460,425,packageReveal)+(750-1280)*packageScale,980*packageScale,1100*packageScale);
       const openingFrame=rectangle(225,150,1030,550);
       if (first) {
         // Rack and detail have disappeared before the camera closes around the
@@ -204,10 +205,29 @@ export function createTeardown(svg) {
         if (packageReveal>0) visibleBounds.push(chipBounds);
         hardwareBounds=union([hardwareBounds,...visibleBounds]);
       } else hardwareBounds=chipBounds;
-      const camera=blendFrame(fitFrame(hardwareBounds,canvasAspect),defaultFrame,architectureMix);
-      viewBox=['x','y','width','height'].map(key=>fixed(camera[key])).join(' ');
+    } else {
+      if (first) {
+        const rackBounds=rectangle(315-75*rackRetreat,165,900*.215,2370*.215);
+        const openingBounds=union([rackBounds,trayBounds]);
+        // The complete rack stays inside the frame until it is invisible.
+        // The last part of the pull-in then follows the tray alone.
+        hardwareBounds=blendFrame(openingBounds,trayBounds,smooth(.94,1,p));
+      } else if (second) {
+        const tubingBounds=cropBounds(rectangle(1230,345,740,1050),parent,{x:-365*tubingLift,y:-115*tubingLift,rotate:-8*tubingLift});
+        const copperBounds=cropBounds(rectangle(1350,420,500,415),parent,{x:330*copperLift,y:-115*copperLift,rotate:6*copperLift,oy:680});
+        const assemblyBounds=union([trayBounds,tubingBounds,copperBounds,...(packageReveal>0 ? [chipBounds] : [])]);
+        // Follow actual transformed photo regions during separation. Once the
+        // tubing and base have faded, close the camera around the package;
+        // still-visible cold plates remain included until their parent fades.
+        const focus=blendFrame(assemblyBounds,chipBounds,smooth(.88,1,p));
+        const plateFrame=p<.96 ? copperBounds : blendFrame(copperBounds,chipBounds,smooth(.96,1,p));
+        hardwareBounds=union([focus,plateFrame,...(packageReveal>0 ? [chipBounds] : [])]);
+      } else hardwareBounds=chipBounds;
     }
+    const camera=blendFrame(fitFrame(hardwareBounds,canvasAspect,compact ? 28 : 16),defaultFrame,architectureMix);
+    viewBox=['x','y','width','height'].map(key=>fixed(camera[key])).join(' ');
     stage.setAttribute('data-compact',String(compact));
+    stage.setAttribute('data-framed','true');
     stage.setAttribute('opacity', fixed(1 - architectureMix));
     stage.setAttribute('data-reduced-motion', String(Boolean(reducedMotion)));
     stage.style.display = visible && architectureMix < 1 ? '' : 'none';
@@ -222,7 +242,7 @@ export function createTeardown(svg) {
   function setCompact(value,aspect=1000/610) {
     compact=Boolean(value);
     const next=Number(aspect);
-    canvasAspect=Number.isFinite(next) && next>0 ? Math.max(.5,Math.min(4,next)) : 1000/610;
+    canvasAspect=Number.isFinite(next) && next>0 ? Math.max(.2,Math.min(6,next)) : 1000/610;
   }
   setPosition(0, 0, false);
   return { setPosition, setVisible, setCompact, getState: () => ({ ...state }), element: stage };

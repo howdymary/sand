@@ -1,19 +1,19 @@
 export const essay = {
   "title": "Sand to Silicon: How Etched Designs Chips",
-  "deck": "How customer workloads become silicon—and how we connect four engineering disciplines to move better ideas into production.",
-  "kicker": "Engineering / From workload to production",
+  "deck": "How architecture, RTL, verification and physical design work together to build an inference system.",
+  "kicker": "Engineering / Chip development",
   "introduction": [
-    "Long before a design reaches a wafer, someone has to decide what experience the hardware should make possible. An inference chip begins with a model, a customer, and a set of constraints. Its architecture turns those constraints into a machine; its development process determines how effectively engineers can improve that machine.",
-    "At Etched, we treat chips, packages, racks, software, and manufacturing as parts of the same problem. Following that path reveals two connected design challenges: rethink the hardware assumptions that limit inference, and rethink the organizational assumptions that slow a good idea on its way to production."
+    "A chip specification cannot settle every implementation question. RTL exposes gaps in the interfaces, verification uncovers different readings of the requirements, and physical design puts costs on connections that looked straightforward in a block diagram. The work depends on engineers being able to resolve those disagreements across team boundaries.",
+    "At Etched, four disciplines share this responsibility: architecture, microarchitecture and RTL, design verification, and physical design. Their work extends into software and manufacturing because we build complete inference systems. The organization has to support that scope. A block owner needs access to the people who wrote the requirement and the people dealing with its consequences elsewhere in the machine."
   ],
   "sections": [
     {
       "chapter": 0,
       "id": "experience",
-      "title": "Start with the experience the customer needs",
+      "title": "Start with the workload",
       "paragraphs": [
-        "A person asking a model a question experiences the hardware as a pause before the answer, a stream of tokens, and a service that remains responsive as demand grows. Behind those observations are different requirements: time to first token, generation latency, aggregate throughput, availability, and cost.",
-        "We design frontier inference systems for both prefill and decode. The objective is to connect customer requirements to the machine that serves them. A model’s arithmetic is one part of the problem. Memory, communication, scheduling, power, and cooling determine how much of the hardware’s capability becomes a useful customer experience."
+        "A customer cares about the wait before an answer and how quickly the response arrives. Serving more users introduces another set of demands on the same hardware. The interaction between latency and throughput depends on the model and the traffic the system receives.",
+        "We design for both prefill and decode, with software, memory and cooling developed alongside the silicon. This gives the teams a common reference during a technical disagreement. An improvement to a block has to be considered in the workload it serves, including the demands it places on neighboring hardware and the software that schedules it."
       ],
       "sourceLinks": [
         {
@@ -25,82 +25,72 @@ export const essay = {
     {
       "chapter": 1,
       "id": "requirements",
-      "title": "Translate tokens and latency into engineering requirements",
+      "title": "Make the requirements usable",
       "paragraphs": [
-        "A target such as tokens per second needs a workload attached to it: model, numerical precision, context lengths, request mix, and concurrency. From there, engineers estimate the arithmetic rate, memory capacity and bandwidth, communication, and power required. A model divided across chips brings link latency and bandwidth into the token-generation path.",
-        "Those requirements are coupled. More arithmetic helps only if operands arrive fast enough. Additional memory capacity may require communication that changes latency. Power delivery and cooling limit the operating point the rack can sustain.",
-        "Customer conversations and performance models help make these dependencies explicit before they become physical commitments. The result is a set of budgets and assumptions that architecture, implementation, and evaluation can share—and challenge."
+        "Customer conversations and workload analysis establish the conditions behind a performance target. Model size, precision, context length and concurrency all affect the arithmetic rate and memory bandwidth required. Distributing a model across chips adds communication latency to the generation path.",
+        "Architecture uses these requirements to allocate resources. RTL engineers need the corresponding behavior and rate assumptions; verification needs enough detail to derive expected results. Physical designers need operating conditions and budgets they can evaluate against an implementation.",
+        "A bandwidth target that depends on unrealistic utilization deserves another look at the system model. Giving the block owner a larger target leaves the underlying problem unresolved. The review needs the architect and the engineers familiar with the workload, along with the implementation results that exposed the discrepancy."
       ],
       "sourceLinks": []
     },
     {
       "chapter": 2,
       "id": "architecture",
-      "title": "Architecture: decide what the chip must do",
+      "title": "Architecture sets the specification",
       "paragraphs": [
-        "The architecture team converts system requirements into block responsibilities, interfaces, budgets, specifications, and performance models. Its objective is a chip organization that can meet the workload goals. It needs implementation feedback early enough to distinguish an attractive model from a realizable design.",
-        "Open the package into a conceptual dataflow. Memory supplies values; buffering, conversion, and layout transformations prepare them; arithmetic produces results that must move onward. At every boundary, architecture commits to a representation, a rate, and a way to coordinate the work.",
-        "Our low-voltage inference work illustrates the scope of these decisions: math-array organization and scheduling connect to power delivery and cooling. Our Cluster Scale Memory joins an HBM/SRAM design with a shared memory pool and interconnect across the scale-up domain. The architectural question reaches beyond one block, and often beyond one die."
+        "Architects define the chip’s organization and write the specifications that connect its blocks. Performance models help them evaluate the design against customer workloads before the hardware exists. The specifications also give RTL designers and verifiers a common account of the intended behavior.",
+        "Some choices reach well beyond the die. Our low-voltage inference architecture involves math-array organization and scheduling as well as power delivery, packaging and cold plates. The relevant specialists need to work through these constraints together.",
+        "Other changes look local at first. A numerical format affects the representation at an interface, the conversion logic and the corresponding checks. Implementation feedback can send the discussion back to architecture to revise the requirement or its budget. Keeping the specification current is part of that work."
       ],
       "sourceLinks": [
         {
-          "label": "Etched: Low-voltage inference and Cluster Scale Memory",
+          "label": "Etched: System architecture and low-voltage inference",
           "url": "https://www.etched.com/progress/frontier-inference-clusters"
         }
       ]
     },
     {
       "chapter": 3,
-      "id": "quantization",
-      "title": "Quantization: make an architectural choice concrete",
+      "id": "microarchitecture",
+      "title": "RTL designers work through the implementation",
       "paragraphs": [
-        "Numerical formats show how a workload requirement becomes hardware. In the accompanying visual, 32 eight-bit values occupy 256 raw bits; at four bits, their payload occupies 128 bits before scales and other metadata. That reduction can change memory traffic, storage, and arithmetic opportunities.",
-        "The architectural work is deciding what else must change. Where does conversion happen? Which representation does the consumer accept? What numerical behavior must be preserved, and can the conversion path sustain the required rate?",
-        "Quantization belongs inside these architectural decisions. Its effects reach RTL, verification, performance modeling, and physical implementation. The example is illustrative; it does not specify Etched’s formats or package layout. The useful outcome is a complete requirement whose numerical and implementation consequences can be evaluated together."
+        "Microarchitects choose the detailed organization of a block and express it in RTL. Power, performance and area constrain that work throughout development. Meeting the functional requirement still leaves choices about storage, control and the flow of data through the circuit.",
+        "Much of the coordination happens at interfaces. The designer of a producing block and the designer of its consumer need the same understanding of ordering and backpressure. Changes to buffering or accepted rates affect both sides, even with the arithmetic unchanged.",
+        "The block owner works with verification to investigate behavior and with physical design to understand implementation costs. Architecture remains involved in questions about the original allocation. A block that exceeds its area budget may need a different implementation, or the system may justify revising the budget. That discussion needs all the relevant constraints in view."
       ],
       "sourceLinks": []
     },
     {
       "chapter": 4,
-      "id": "microarchitecture",
-      "title": "Microarchitecture and RTL: implement the contract",
+      "id": "verification",
+      "title": "Verification challenges the implementation",
       "paragraphs": [
-        "Microarchitecture turns a block’s requirements into cycle-by-cycle behavior. RTL designers choose datapaths, storage, control, sequencing, and interfaces while meeting power, performance, and area constraints. Several implementations can compute the same answer and place very different demands on the rest of the chip.",
-        "Consider a block expected to accept a new value each cycle under defined conditions. Pipeline stages, intermediate widths, valid-data handling, and backpressure determine whether that rate is achievable. Its receiving block has to agree on the contract.",
-        "The touchpoints are continuous: architecture supplies intent and budgets; verification challenges behavior; physical design exposes timing and implementation costs. Experienced judgment matters because a local improvement can move work, latency, or power into a neighboring block."
+        "Verifiers develop their own understanding of the specification before building the checks around it. Deriving expected behavior directly from the RTL risks copying an implementation mistake into the testbench. Independent interpretation is particularly useful for requirements with subtle numerical or interface behavior.",
+        "A mismatch starts a conversation between verification and the RTL designer. Implementation errors lead to corrections and further testing; ambiguity in the specification brings the architect back into the discussion. Performance checks also examine the rates and stalls the architecture model assumed.",
+        "This makes verification a regular participant in defining the design. Resolving an unclear requirement early saves the neighboring teams from carrying incompatible interpretations into their own work."
       ],
       "sourceLinks": []
     },
     {
       "chapter": 5,
-      "id": "verification",
-      "title": "Design verification: test an independent understanding",
+      "id": "physical-design",
+      "title": "Physical design brings the constraints back",
       "paragraphs": [
-        "The verification team determines whether the implementation satisfies its intended behavior. Its reference must come from an independent understanding of the specification, including numerical rules, interface conditions, sequencing, and progress. A test that simply repeats the RTL’s assumption can reproduce the same mistake.",
-        "When expected and observed behavior disagree, verification and RTL engineers investigate together. An implementation defect calls for a fix and continued testing. An ambiguous requirement brings the discussion back to architecture. Performance-oriented checks also examine whether implemented behavior supports the assumed rates.",
-        "Verification therefore contributes more than a final gate. It improves the shared description of the design while changes are still possible. Its independence becomes especially valuable when tools make it easier to generate additional candidate implementations."
+        "Physical designers arrange and connect the circuit under timing, power and manufacturing constraints. Routing congestion or a long path can make an otherwise attractive organization difficult to implement. The block diagram and RTL provide an incomplete picture of those costs.",
+        "The response may involve moving logic, changing the RTL or reconsidering an architectural allocation. Reports need to reach the relevant owner with enough context to assess the alternatives. A timing result without its constraints is a poor starting point for that discussion.",
+        "Verification and physical implementation proceed in parallel as usable RTL becomes available. Both can require changes to the design, so their findings need to remain visible to the block owners and architects throughout the work."
       ],
       "sourceLinks": []
     },
     {
       "chapter": 6,
-      "id": "physical-design",
-      "title": "Physical design: make the circuit realizable",
-      "paragraphs": [
-        "Synthesis maps RTL into cells and connections. Physical design gives that circuit an arrangement, routing, clocks, and power delivery that can meet timing and manufacturing constraints. The apparent efficiency of a logical description has to survive those physical conditions.",
-        "A floorplan can expose congestion or long paths that require moving a block, revising its microarchitecture, or reconsidering an architectural budget. That finding needs to reach the engineer who can act on it, with the constraints and analysis that explain the tradeoff.",
-        "Physical implementation and verification proceed in parallel as usable RTL becomes available. They produce different evidence about the same design. Keeping both connected to architecture and block owners makes their discoveries useful before the manufacturing release."
-      ],
-      "sourceLinks": []
-    },
-    {
-      "chapter": 7,
       "id": "tapeout",
-      "title": "From idea to manufacturing: design the organization too",
+      "title": "Keep the work connected through manufacturing",
       "paragraphs": [
-        "After the relevant checks and signoff, tapeout releases the completed layout and manufacturing data to the foundry. Fabrication, packaging, test, bring-up, and system validation follow. Reaching that boundary requires evidence to remain connected as the design changes.",
-        "The four teams have distinct responsibilities, but their work does not fit a sequence of isolated handoffs. When information stops at a team boundary, a problem can wait for another review or be rediscovered downstream. The organization needs explicit paths for changing an assumption as well as implementing it.",
-        "Our math-block designers work alongside inference engineers, and co-design extends into manufacturing. We put twenty years of inherited chip-design habits back on the table, including how we organize the work. First-principles reasoning applies to who needs to see a result, who can change the decision, and which tools remove avoidable waiting. The goal is an efficient workplace where deep experience can carry an idea through to production."
+        "Clear responsibilities help engineers make progress. They also need a practical way to resolve problems that cross those responsibilities. A timing issue can involve a physical designer, an RTL owner and an architect; waiting for each group to reconstruct the history adds little to the solution.",
+        "Our math-block designers work alongside inference engineers, and co-design extends into manufacturing. This gives engineers access to colleagues working on other parts of the same problem. The opportunity is to use that access well, including revisiting the division of work itself.",
+        "We question inherited assumptions about the hardware, and the organization deserves the same scrutiny. A review should include the people able to change the relevant requirement. A specialist should be able to follow a finding into another part of the design without losing responsibility for the original problem. Tools and documentation should make the supporting work easy to find.",
+        "These habits matter through tapeout, the release of the completed layout and manufacturing data after checks and signoff. Fabrication, packaging, test and bring-up follow. The engineers taking the product through those stages need to understand what changed during development and how the resulting design was checked."
       ],
       "sourceLinks": [
         {
@@ -110,13 +100,13 @@ export const essay = {
       ]
     },
     {
-      "chapter": 8,
+      "chapter": 7,
       "id": "ai-and-coordination",
-      "title": "AI-native engineering: improve implementation and coordination",
+      "title": "AI assistance in the engineering process",
       "paragraphs": [
-        "One focus is using AI to examine RTL and assist with performance analysis. The engineering test is concrete: does a proposed change improve the resulting implementation while preserving required behavior and physical constraints? Fewer lines of code are insufficient evidence. A promising candidate still needs independent functional checks and the relevant implementation analysis.",
-        "There is a second opportunity in coordination. Connecting a requirement to its RTL, tests, performance assumptions, and physical findings would make the consequences of a change easier to trace. AI could help locate inconsistent interfaces, identify affected checks, or assemble a reproducible failure for the responsible engineers. Building that connected workflow is an engineering problem in its own right.",
-        "Self-improving kernel agents are also part of the work ahead. Across these efforts, experienced engineers help define the search space and the evidence standard. Faster exploration remains valuable only when the accepted result deserves trust."
+        "One focus is using AI to examine RTL and assist with performance analysis. Proposed changes need the same functional and physical evaluation as other implementation work. Producing more candidates also puts more demands on the engineers selecting which ones deserve further analysis.",
+        "Coordination offers another use for AI. Requirements, RTL, tests and physical reports contain related information that engineers often have to assemble themselves. A connected workflow could help locate a conflicting interface assumption or collect the relevant context around a failure. This remains an opportunity to develop, with expected behavior still derived independently of the implementation.",
+        "Self-improving kernel agents are also part of the work ahead. Building these tools requires engineers who understand the constraints well enough to define what the tool may change and how its output will be evaluated."
       ],
       "sourceLinks": [
         {
@@ -126,13 +116,13 @@ export const essay = {
       ]
     },
     {
-      "chapter": 9,
+      "chapter": 8,
       "id": "rack-scale",
-      "title": "Software and deployment: return to the customer’s model",
+      "title": "Software takes the hardware into deployment",
       "paragraphs": [
-        "The design becomes useful when software turns a customer’s model into correct, efficient execution. Our inference software work spans model porting, abstractions and tests, multi-node runtime, communication, and profiling. Firmware and drivers connect the physical machine to that execution. Hardware capability has to survive the complete path to a running model.",
-        "Operating a fleet adds staged software and firmware rollouts, recovery, and telemetry. Deployment failures and performance observations need to return as engineering priorities. We have tested racks in representative deployments, and in August 2026 we announced our first rack shipment to Jane Street. Each customer environment brings the design back to the conditions it was built to serve.",
-        "The process returns to its starting question: what experience does the customer need? We want engineers who have shipped difficult silicon to bring that judgment to both the machine and the way it is built. Reconsidering hardware and organizational assumptions together can give a useful idea a shorter, better-informed path to production."
+        "Our inference software work includes porting models and building the abstractions, tests and multi-node runtime needed to execute them. Communication and profiling sit close to this work. Firmware and drivers connect the machine’s physical behavior to the software using it.",
+        "Deployment adds staged rollouts, recovery and telemetry. Observations from the fleet need to feed back into engineering priorities. We have tested racks in representative deployments, and in August 2026 we announced our first rack shipment to Jane Street. Customer environments continue to expose questions for the hardware and software teams.",
+        "Engineers who have shipped silicon know how much of a product is settled between specialties. We want people who can follow a difficult problem across those boundaries and help improve how the work gets done. Their experience has a direct use here, from questioning an early requirement to understanding the behavior of a system in a customer’s data center."
       ],
       "sourceLinks": [
         {
