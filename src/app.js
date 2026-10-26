@@ -1,6 +1,6 @@
-import { chapters, components, sources } from './content.js?v=20261026-volume-1';
-import { createScene } from './scene.js?v=20261026-volume-1';
-import { essay } from './essay.js?v=20261026-volume-1';
+import { chapters, components, sources } from './content.js?v=20261026-closing-1';
+import { createScene } from './scene.js?v=20261026-closing-1';
+import { essay } from './essay.js?v=20261026-closing-1';
 
 const $ = (id) => document.getElementById(id);
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
@@ -16,7 +16,11 @@ const originalPhotos = {
 const sectionLabels = ['Workload','Requirements','Architecture','RTL','Verification','Layout','Organization','AI tools','Deployment'];
 
 const paragraphHTML = paragraphs => paragraphs.map(p => `<p>${escapeHTML(p)}</p>`).join('');
-$('essay').innerHTML = `<header class="essay-intro"><div class="eyebrow">${escapeHTML(essay.kicker)}</div><h1 class="essay-title" id="essay-title">${escapeHTML(essay.title)}</h1><p class="essay-deck">${escapeHTML(essay.deck)}</p>${paragraphHTML(essay.introduction)}</header>` + essay.sections.map(section => `<section class="essay-section" id="${escapeHTML(section.id)}" data-essay-chapter="${section.chapter}" aria-labelledby="essay-heading-${section.chapter}"><div class="eyebrow">${String(section.chapter+1).padStart(2,'0')} / ${escapeHTML(sectionLabels[section.chapter])}</div><h2 id="essay-heading-${section.chapter}">${escapeHTML(section.title)}</h2>${paragraphHTML(section.paragraphs)}${section.sourceLinks?.length ? `<div class="essay-sources">${section.sourceLinks.map(source => `<a href="${escapeHTML(source.url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(source.label)} ↗</a>`).join('')}</div>`:''}</section>`).join('') + '<p class="essay-endnote">Independent editorial draft. Official Etched photographs are combined with reconstructed geometry. Hidden board details and chip interiors are illustrative. Diagrams explain engineering relationships and are not Etched specifications.</p>';
+$('essay').innerHTML = `<header class="essay-intro"><div class="eyebrow">${escapeHTML(essay.kicker)}</div><h1 class="essay-title" id="essay-title">${escapeHTML(essay.title)}</h1><p class="essay-deck">${escapeHTML(essay.deck)}</p>${paragraphHTML(essay.introduction)}</header>` + essay.sections.map(section => `<section class="essay-section" id="${escapeHTML(section.id)}" data-essay-chapter="${section.chapter}" aria-labelledby="essay-heading-${section.chapter}"><div class="eyebrow">${String(section.chapter+1).padStart(2,'0')} / ${escapeHTML(sectionLabels[section.chapter])}</div><h2 id="essay-heading-${section.chapter}">${escapeHTML(section.title)}</h2>${paragraphHTML(section.paragraphs)}${section.sourceLinks?.length ? `<div class="essay-sources">${section.sourceLinks.map(source => `<a href="${escapeHTML(source.url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(source.label)} ↗</a>`).join('')}</div>`:''}</section>`).join('');
+// The closing deployment section leaves the illustrated two-column reading flow.
+const deploymentSection = document.getElementById('rack-scale');
+deploymentSection.classList.add('essay-deployment', 'essay-column');
+document.querySelector('.essay-layout').append(deploymentSection);
 document.title = essay.title;
 const essaySections = [...document.querySelectorAll('[data-essay-chapter]')];
 const compactLayout = matchMedia('(max-width: 900px)');
@@ -87,10 +91,10 @@ function activateChapter(index,progress=0) {
     updateViewMode();
     $('component-strip').innerHTML=chapter.componentIds.map((id) => `<button type="button" class="component-chip" data-component-link="${id}" aria-pressed="false">${escapeHTML(components[id]?.name || id)}</button>`).join('');
     $('component-strip').scrollLeft=0;
-    $('view-announcement').textContent=`${chapter.title}. ${chapter.caption}`;
+    $('view-announcement').textContent=index===8 ? essay.sections[index].title : `${chapter.title}. ${chapter.caption}`;
   }
   state.progress = progress;
-  scene.setChapter(index,progress);
+  if (index!==8) scene.setChapter(index,progress);
 }
 
 let scrollFrame=0;
@@ -108,6 +112,12 @@ function updateOnScroll() {
   const rect = section.getBoundingClientRect();
   const progress = Math.max(0,Math.min(1,(readingLine-rect.top)/Math.max(1,rect.height)));
   activateChapter(active,progress);
+  const closingInView = deploymentSection.getBoundingClientRect().top <= Math.max(readingLine+25,innerHeight*.65);
+  const hideVisual = active===8 || compactLayout.matches && closingInView;
+  if ($('visual-column').hidden!==hideVisual) {
+    $('visual-column').hidden=hideVisual;
+    scene.setPlaying(!state.paused && !hideVisual);
+  }
   const max=Math.max(1,document.documentElement.scrollHeight-innerHeight);
   $('journey-progress').style.transform=`scaleX(${Math.min(1,scrollY/max)})`;
 }
@@ -134,8 +144,8 @@ function updateMotionButton() {
   $('motion-toggle').setAttribute('aria-label',reducedMotion.matches?'Animation is off to respect your reduced motion preference':state.paused?'Play diagram animation':'Pause diagram animation');
   $('motion-toggle').setAttribute('aria-pressed',String(state.paused));
 }
-$('motion-toggle').addEventListener('click',() => { state.paused=!state.paused; scene.setPlaying(!state.paused); updateMotionButton(); });
-reducedMotion.addEventListener('change',() => { state.paused=reducedMotion.matches; scene.setPlaying(!state.paused); updateMotionButton(); });
+$('motion-toggle').addEventListener('click',() => { state.paused=!state.paused; scene.setPlaying(!state.paused && !$('visual-column').hidden); updateMotionButton(); });
+reducedMotion.addEventListener('change',() => { state.paused=reducedMotion.matches; scene.setPlaying(!state.paused && !$('visual-column').hidden); updateMotionButton(); });
 function hasHardwareView() { return [0,1,2,8].includes(state.chapter); }
 function updateViewMode() {
   const hardware = hasHardwareView() && state.hardware;
@@ -176,7 +186,7 @@ $('fault-toggle').addEventListener('click',() => {
 $('sources-open').addEventListener('click',() => { hideTooltip(); $('sources-dialog').showModal(); });
 $('sources-close').addEventListener('click',() => $('sources-dialog').close());
 $('sources-dialog').addEventListener('click',(event) => { if (event.target===$('sources-dialog')) { const r=$('sources-dialog').getBoundingClientRect(); if (event.clientX<r.left || event.clientX>r.right || event.clientY<r.top || event.clientY>r.bottom) $('sources-dialog').close(); } });
-document.addEventListener('visibilitychange',() => scene.setPlaying(!state.paused && !document.hidden));
+document.addEventListener('visibilitychange',() => scene.setPlaying(!state.paused && !$('visual-column').hidden && !document.hidden));
 updateMotionButton(); updateHint(); updateOnScroll();
 function chapterIndexForHash(hash) {
   const sectionHash=hash==='#quantization'?'#architecture':hash;
