@@ -1,4 +1,4 @@
-import { teardownMarkup, createTeardown } from './teardown.js?v=20261026-sand-silicon-2';
+import { teardownMarkup, createTeardown } from './teardown.js?v=20261026-sand-silicon-3';
 
 let sceneSequence = 0;
 

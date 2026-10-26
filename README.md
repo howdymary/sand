@@ -1,4 +1,4 @@
-# From Sand to Silicon: How Etched Designs Chips
+# Sand to Silicon: How Etched Designs Chips
 
 [Open the visual explorer](https://howdymary.github.io/sand/) · [Source repository](https://github.com/howdymary/sand)
 

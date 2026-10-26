@@ -1,5 +1,5 @@
 export const essay = {
-  "title": "From Sand to Silicon: How Etched Designs Chips",
+  "title": "Sand to Silicon: How Etched Designs Chips",
   "deck": "How customer workloads become silicon—and how we connect four engineering disciplines to move better ideas into production.",
   "kicker": "Engineering / From workload to production",
   "introduction": [

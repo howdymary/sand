@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#ffffff" />
     <meta name="description" content="From customer workloads to manufactured silicon and deployment: the engineering teams and AI-native organization behind Etched’s inference chips." />
-    <title>From Sand to Silicon: How Etched Designs Chips</title>
+    <title>Sand to Silicon: How Etched Designs Chips</title>
     <link rel="canonical" href="https://howdymary.github.io/sand/" />
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='8' fill='%23e95932'/%3E%3Cpath d='M10 13h20M10 20h14M10 27h20' stroke='%23fff' stroke-width='3'/%3E%3C/svg%3E" />
     <script>if ('scrollRestoration' in history) history.scrollRestoration = 'manual';</script>
@@ -805,7 +805,7 @@ const sources = [
 
 
 const essay = {
-  "title": "From Sand to Silicon: How Etched Designs Chips",
+  "title": "Sand to Silicon: How Etched Designs Chips",
   "deck": "How customer workloads become silicon—and how we connect four engineering disciplines to move better ideas into production.",
   "kicker": "Engineering / From workload to production",
   "introduction": [
@@ -1601,7 +1601,7 @@ const navLabels = ['Workload','Requirements','Architecture','Formats','RTL','Ver
 
 const paragraphHTML = paragraphs => paragraphs.map(p => `<p>${escapeHTML(p)}</p>`).join('');
 $('essay').innerHTML = `<header class="essay-intro"><div class="eyebrow">${escapeHTML(essay.kicker)}</div><h1 class="essay-title" id="essay-title">${escapeHTML(essay.title)}</h1><p class="essay-deck">${escapeHTML(essay.deck)}</p>${paragraphHTML(essay.introduction)}</header>` + essay.sections.map(section => `<section class="essay-section" id="${escapeHTML(section.id)}" data-essay-chapter="${section.chapter}" aria-labelledby="essay-heading-${section.chapter}"><div class="eyebrow">${String(section.chapter+1).padStart(2,'0')} / ${escapeHTML(navLabels[section.chapter])}</div><h2 id="essay-heading-${section.chapter}">${escapeHTML(section.title)}</h2>${paragraphHTML(section.paragraphs)}${section.sourceLinks?.length ? `<div class="essay-sources">${section.sourceLinks.map(source => `<a href="${escapeHTML(source.url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(source.label)} ↗</a>`).join('')}</div>`:''}</section>`).join('') + '<p class="essay-endnote">Independent editorial draft. Hardware photographs are from Etched’s official website and media kit. Diagrams explain engineering relationships and are not Etched specifications.</p>';
-document.title = `${essay.title} — Inside the chip`;
+document.title = essay.title;
 const essaySections = [...document.querySelectorAll('[data-essay-chapter]')];
 const compactLayout = matchMedia('(max-width: 900px)');
 

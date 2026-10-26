@@ -1,6 +1,6 @@
-import { chapters, components, sources } from './content.js?v=20261026-sand-silicon-2';
-import { createScene } from './scene.js?v=20261026-sand-silicon-2';
-import { essay } from './essay.js?v=20261026-sand-silicon-2';
+import { chapters, components, sources } from './content.js?v=20261026-sand-silicon-3';
+import { createScene } from './scene.js?v=20261026-sand-silicon-3';
+import { essay } from './essay.js?v=20261026-sand-silicon-3';
 
 const $ = (id) => document.getElementById(id);
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
@@ -17,7 +17,7 @@ const navLabels = ['Workload','Requirements','Architecture','Formats','RTL','Ver
 
 const paragraphHTML = paragraphs => paragraphs.map(p => `<p>${escapeHTML(p)}</p>`).join('');
 $('essay').innerHTML = `<header class="essay-intro"><div class="eyebrow">${escapeHTML(essay.kicker)}</div><h1 class="essay-title" id="essay-title">${escapeHTML(essay.title)}</h1><p class="essay-deck">${escapeHTML(essay.deck)}</p>${paragraphHTML(essay.introduction)}</header>` + essay.sections.map(section => `<section class="essay-section" id="${escapeHTML(section.id)}" data-essay-chapter="${section.chapter}" aria-labelledby="essay-heading-${section.chapter}"><div class="eyebrow">${String(section.chapter+1).padStart(2,'0')} / ${escapeHTML(navLabels[section.chapter])}</div><h2 id="essay-heading-${section.chapter}">${escapeHTML(section.title)}</h2>${paragraphHTML(section.paragraphs)}${section.sourceLinks?.length ? `<div class="essay-sources">${section.sourceLinks.map(source => `<a href="${escapeHTML(source.url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(source.label)} ↗</a>`).join('')}</div>`:''}</section>`).join('') + '<p class="essay-endnote">Independent editorial draft. Hardware photographs are from Etched’s official website and media kit. Diagrams explain engineering relationships and are not Etched specifications.</p>';
-document.title = `${essay.title} — Inside the chip`;
+document.title = essay.title;
 const essaySections = [...document.querySelectorAll('[data-essay-chapter]')];
 const compactLayout = matchMedia('(max-width: 900px)');
 
