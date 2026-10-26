@@ -1,6 +1,6 @@
-import { chapters, components, sources } from './content.js?v=20261026-rack-in-6';
-import { createScene } from './scene.js?v=20261026-rack-in-6';
-import { essay } from './essay.js?v=20261026-rack-in-6';
+import { chapters, components, sources } from './content.js?v=20261026-sand-silicon-2';
+import { createScene } from './scene.js?v=20261026-sand-silicon-2';
+import { essay } from './essay.js?v=20261026-sand-silicon-2';
 
 const $ = (id) => document.getElementById(id);
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
@@ -11,9 +11,9 @@ const originalPhotos = {
   0:'https://cdn.sanity.io/images/rwbees58/production/f1facc083ac390c9607940c12b1eb64d3e387544-2525x3200.png',
   1:'https://cdn.sanity.io/images/rwbees58/production/5465c0a1c0301168e9aa18acb49febce0dc7c358-3200x1800.png',
   2:'https://cdn.sanity.io/images/rwbees58/production/144906a8cf416b08acc145128d2bdd4900b42783-13700x10969.jpg',
-  8:'https://www.etched.com/media-kit'
+  9:'https://www.etched.com/media-kit'
 };
-const navLabels = ['Rack','Tray','Chip','Formats','RTL','Verification','Layout','Tapeout','System','AI tools'];
+const navLabels = ['Workload','Requirements','Architecture','Formats','RTL','Verification','Layout','Organization','AI tools','Deployment'];
 
 const paragraphHTML = paragraphs => paragraphs.map(p => `<p>${escapeHTML(p)}</p>`).join('');
 $('essay').innerHTML = `<header class="essay-intro"><div class="eyebrow">${escapeHTML(essay.kicker)}</div><h1 class="essay-title" id="essay-title">${escapeHTML(essay.title)}</h1><p class="essay-deck">${escapeHTML(essay.deck)}</p>${paragraphHTML(essay.introduction)}</header>` + essay.sections.map(section => `<section class="essay-section" id="${escapeHTML(section.id)}" data-essay-chapter="${section.chapter}" aria-labelledby="essay-heading-${section.chapter}"><div class="eyebrow">${String(section.chapter+1).padStart(2,'0')} / ${escapeHTML(navLabels[section.chapter])}</div><h2 id="essay-heading-${section.chapter}">${escapeHTML(section.title)}</h2>${paragraphHTML(section.paragraphs)}${section.sourceLinks?.length ? `<div class="essay-sources">${section.sourceLinks.map(source => `<a href="${escapeHTML(source.url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(source.label)} ↗</a>`).join('')}</div>`:''}</section>`).join('') + '<p class="essay-endnote">Independent editorial draft. Hardware photographs are from Etched’s official website and media kit. Diagrams explain engineering relationships and are not Etched specifications.</p>';
@@ -26,7 +26,6 @@ $('source-links').innerHTML = sources.map((source) => `<li><a href="${escapeHTML
 
 const scene = createScene($('scene'),{onSelect:selectComponent,onHover:showTooltip,onLeave:hideTooltip});
 // The explorer supplies its own chapter labels; frame the actual diagram more closely.
-$('scene').querySelector('svg').setAttribute('viewBox','0 110 1000 610');
 scene.setPlaying(!state.paused);
 
 function hideTooltip() { $('component-tooltip').hidden = true; }
@@ -162,7 +161,7 @@ function updateMotionButton() {
 }
 $('motion-toggle').addEventListener('click',() => { state.paused=!state.paused; scene.setPlaying(!state.paused); updateMotionButton(); });
 reducedMotion.addEventListener('change',() => { state.paused=reducedMotion.matches; scene.setPlaying(!state.paused); updateMotionButton(); });
-function hasHardwareView() { return [0,1,2,8].includes(state.chapter); }
+function hasHardwareView() { return [0,1,2,9].includes(state.chapter); }
 function updateViewMode() {
   const hardware = hasHardwareView() && state.hardware;
   $('view-mode-switch').hidden = !hasHardwareView();
@@ -172,7 +171,7 @@ function updateViewMode() {
   $('motion-toggle').hidden = hardware;
   $('photo-original').hidden = !hardware;
   if (originalPhotos[state.chapter]) $('photo-original').href = originalPhotos[state.chapter];
-  $('photo-original').textContent = state.chapter===8 ? 'Original photos ↗' : 'View original ↗';
+  $('photo-original').textContent = state.chapter===9 ? 'Original photos ↗' : 'View original ↗';
   scene.setHardwareMode(state.hardware);
   updateHint();
 }
@@ -187,6 +186,12 @@ for (const [id,value] of [['hardware-mode',true],['diagram-mode',false]]) {
   });
 }
 smallScreen.addEventListener('change',updateHint);
+$('components-toggle').addEventListener('click',() => {
+  const open=$('visual-explorer').classList.toggle('components-open');
+  $('components-toggle').setAttribute('aria-expanded',String(open));
+  $('components-toggle').textContent=open?'Inspect −':'Inspect +';
+  scheduleScroll();
+});
 $('fault-toggle').addEventListener('click',() => {
   state.fault=!state.fault; scene.setVerificationFault(state.fault);
   $('fault-toggle').setAttribute('aria-pressed',String(state.fault));

@@ -1,20 +1,19 @@
 export const essay = {
-  "title": "Build From the Rack In",
-  "deck": "Inference is a chance to rethink the machine around the silicon—and give experienced engineering judgment more room to act.",
-  "kicker": "Engineering / The whole inference system",
+  "title": "From Sand to Silicon: How Etched Designs Chips",
+  "deck": "How customer workloads become silicon—and how we connect four engineering disciplines to move better ideas into production.",
+  "kicker": "Engineering / From workload to production",
   "introduction": [
-    "The reason to leave a team that builds extraordinary chips has to be a better engineering problem. After several generations of silicon, the interesting moments arrive when your conclusion is bigger than your block: the memory organization should change; the scheduler is asking the hardware for the wrong thing; the thermal solution is setting the architectural limit.",
-    "An AI-native lab should be a place where those observations can shape the machine. That takes proximity to the workload, engineers who can reason across boundaries, and tools that make a hard idea faster to evaluate. Etched’s inference systems put those boundaries in play. Start with the rack and follow the hardware inward."
+    "Long before a design reaches a wafer, someone has to decide what experience the hardware should make possible. An inference chip begins with a model, a customer, and a set of constraints. Its architecture turns those constraints into a machine; its development process determines how effectively engineers can improve that machine.",
+    "At Etched, we treat chips, packages, racks, software, and manufacturing as parts of the same problem. Following that path reveals two connected design challenges: rethink the hardware assumptions that limit inference, and rethink the organizational assumptions that slow a good idea on its way to production."
   ],
   "sections": [
     {
       "chapter": 0,
       "id": "experience",
-      "title": "System: start at the rack",
+      "title": "Start with the experience the customer needs",
       "paragraphs": [
-        "From the aisle, the rack looks like a finished object. Inside it, decisions about arithmetic, memory, communication, power, and heat are still negotiating with one another. The result reaches a user as an answer delivered under a latency and cost constraint. That is the performance the machine has to sustain.",
-        "Etched describes co-design across chips, racks, software, and manufacturing. A constraint found at one layer can be a reason to revisit another. A thermal limit can reach the circuit. A workload characteristic can reach the memory system.",
-        "For an experienced engineer, that is a reason to consider a different environment. The hard-earned ability to identify the wrong assumption becomes more valuable when the people who can change it are close enough to work through the consequence."
+        "A person asking a model a question experiences the hardware as a pause before the answer, a stream of tokens, and a service that remains responsive as demand grows. Behind those observations are different requirements: time to first token, generation latency, aggregate throughput, availability, and cost.",
+        "We design frontier inference systems for both prefill and decode. The objective is to connect customer requirements to the machine that serves them. A model’s arithmetic is one part of the problem. Memory, communication, scheduling, power, and cooling determine how much of the hardware’s capability becomes a useful customer experience."
       ],
       "sourceLinks": [
         {
@@ -26,31 +25,26 @@ export const essay = {
     {
       "chapter": 1,
       "id": "requirements",
-      "title": "Tray and package: expose the physical bargain",
+      "title": "Translate tokens and latency into engineering requirements",
       "paragraphs": [
-        "Slide the tray out. As tubing and cold plates lift away, the view moves toward the package. What disappears visually remains essential to the engineering: every surrounding layer helps establish the conditions under which the silicon can operate.",
-        "Etched’s low-voltage inference work connects math arrays and scheduling with power delivery, packaging, and cold plates. Voltage is therefore a system bet. The circuit must meet timing and operating requirements; the surrounding machine must make that operating point useful.",
-        "Seen from the package, an architectural choice acquires physical consequences: paths, connections, margins, power integrity, and heat. Experience matters at these interfaces, where a promising local idea encounters the constraints that decide whether it belongs in the machine. The tray is the first place those disciplines become visibly inseparable."
+        "A target such as tokens per second needs a workload attached to it: model, numerical precision, context lengths, request mix, and concurrency. From there, engineers estimate the arithmetic rate, memory capacity and bandwidth, communication, and power required. A model divided across chips brings link latency and bandwidth into the token-generation path.",
+        "Those requirements are coupled. More arithmetic helps only if operands arrive fast enough. Additional memory capacity may require communication that changes latency. Power delivery and cooling limit the operating point the rack can sustain.",
+        "Customer conversations and performance models help make these dependencies explicit before they become physical commitments. The result is a set of budgets and assumptions that architecture, implementation, and evaluation can share—and challenge."
       ],
-      "sourceLinks": [
-        {
-          "label": "Etched: Low-voltage inference and system co-design",
-          "url": "https://www.etched.com/progress/frontier-inference-clusters"
-        }
-      ]
+      "sourceLinks": []
     },
     {
       "chapter": 2,
       "id": "architecture",
-      "title": "Chip architecture: remove the cover, follow the data",
+      "title": "Architecture: decide what the chip must do",
       "paragraphs": [
-        "Now the package opens into a conceptual view of the chip. Compute and memory remain distinct; the view follows their dataflow. A single accelerator becomes a set of obligations: deliver operands, prepare representations, keep arithmetic occupied, and move results without turning the next stage into the bottleneck.",
-        "Etched’s Cluster Scale Memory combines HBM and SRAM with a shared memory pool across its scale-up domain and a purpose-built interconnect. It places memory behavior among the central architectural bets. The relevant boundary extends beyond one die.",
-        "This is fertile ground for someone who has watched an elegant block wait on the rest of the system. The useful insight may concern allocation, scheduling, communication, or the contract between them. Its value lies in changing the assumption that limits the workload."
+        "The architecture team converts system requirements into block responsibilities, interfaces, budgets, specifications, and performance models. Its objective is a chip organization that can meet the workload goals. It needs implementation feedback early enough to distinguish an attractive model from a realizable design.",
+        "Open the package into a conceptual dataflow. Memory supplies values; buffering, conversion, and layout transformations prepare them; arithmetic produces results that must move onward. At every boundary, architecture commits to a representation, a rate, and a way to coordinate the work.",
+        "Our low-voltage inference work illustrates the scope of these decisions: math-array organization and scheduling connect to power delivery and cooling. Our Cluster Scale Memory joins an HBM/SRAM design with a shared memory pool and interconnect across the scale-up domain. The architectural question reaches beyond one block, and often beyond one die."
       ],
       "sourceLinks": [
         {
-          "label": "Etched: Cluster Scale Memory",
+          "label": "Etched: Low-voltage inference and Cluster Scale Memory",
           "url": "https://www.etched.com/progress/frontier-inference-clusters"
         }
       ]
@@ -58,90 +52,108 @@ export const essay = {
     {
       "chapter": 3,
       "id": "quantization",
-      "title": "Numerical formats: carry the representation through",
+      "title": "Quantization: make an architectural choice concrete",
       "paragraphs": [
-        "Follow the operands toward compute. A lower-precision format changes storage and traffic, but also grouping, scales, layout, conversion, accumulation, and error. A favorable payload calculation is only the beginning of the implementation argument.",
-        "The eight-bit and four-bit views isolate that payload change. In a real design, the surrounding path must carry the metadata and perform the required transformations at the accepted rate. Numerical quality has to survive the intended workload. A designer who understands both the format and its physical consequences can recognize when an apparent efficiency has simply become work somewhere else."
+        "Numerical formats show how a workload requirement becomes hardware. In the accompanying visual, 32 eight-bit values occupy 256 raw bits; at four bits, their payload occupies 128 bits before scales and other metadata. That reduction can change memory traffic, storage, and arithmetic opportunities.",
+        "The architectural work is deciding what else must change. Where does conversion happen? Which representation does the consumer accept? What numerical behavior must be preserved, and can the conversion path sustain the required rate?",
+        "Quantization belongs inside these architectural decisions. Its effects reach RTL, verification, performance modeling, and physical implementation. The example is illustrative; it does not specify Etched’s formats or package layout. The useful outcome is a complete requirement whose numerical and implementation consequences can be evaluated together."
       ],
       "sourceLinks": []
     },
     {
       "chapter": 4,
       "id": "microarchitecture",
-      "title": "RTL: a pipeline decision travels",
+      "title": "Microarchitecture and RTL: implement the contract",
       "paragraphs": [
-        "Inside the arithmetic path, the decisions become cycle-specific. Add a stage and the timing problem changes, along with latency, live state, clock load, and the receiving block’s obligations. Remove storage and a different path may become difficult to close. The neighboring logic inherits the consequence.",
-        "Years of implementation experience make those consequences easier to anticipate. That judgment is especially useful when a tool can produce more candidates than an engineer could write by hand. The scarce resource becomes the ability to choose a meaningful comparison and recognize which candidate deserves deeper evaluation. Even the small datapath shown here has obligations that reach beyond it."
+        "Microarchitecture turns a block’s requirements into cycle-by-cycle behavior. RTL designers choose datapaths, storage, control, sequencing, and interfaces while meeting power, performance, and area constraints. Several implementations can compute the same answer and place very different demands on the rest of the chip.",
+        "Consider a block expected to accept a new value each cycle under defined conditions. Pipeline stages, intermediate widths, valid-data handling, and backpressure determine whether that rate is achievable. Its receiving block has to agree on the contract.",
+        "The touchpoints are continuous: architecture supplies intent and budgets; verification challenges behavior; physical design exposes timing and implementation costs. Experienced judgment matters because a local improvement can move work, latency, or power into a neighboring block."
       ],
       "sourceLinks": []
     },
     {
       "chapter": 5,
       "id": "verification",
-      "title": "Verification: keep a separate account of intent",
+      "title": "Design verification: test an independent understanding",
       "paragraphs": [
-        "More candidates increase the importance of independent reasoning. An implementation and a test generated from the same mistaken assumption can agree perfectly. The specification still has to establish numerical behavior, ordering, flow control, and the conditions under which the block must make progress.",
-        "A verification engineer brings a different account of what the machine owes its neighbors. A failure can expose a bad implementation, a bad check, or an unresolved architectural choice. Preserving that distinction gives experimentation a foundation. AI assistance becomes more useful when a persuasive result can be rejected for a precise, reproducible reason."
+        "The verification team determines whether the implementation satisfies its intended behavior. Its reference must come from an independent understanding of the specification, including numerical rules, interface conditions, sequencing, and progress. A test that simply repeats the RTL’s assumption can reproduce the same mistake.",
+        "When expected and observed behavior disagree, verification and RTL engineers investigate together. An implementation defect calls for a fix and continued testing. An ambiguous requirement brings the discussion back to architecture. Performance-oriented checks also examine whether implemented behavior supports the assumed rates.",
+        "Verification therefore contributes more than a final gate. It improves the shared description of the design while changes are still possible. Its independence becomes especially valuable when tools make it easier to generate additional candidate implementations."
       ],
       "sourceLinks": []
     },
     {
       "chapter": 6,
       "id": "physical-design",
-      "title": "Physical design: let the layout change the argument",
+      "title": "Physical design: make the circuit realizable",
       "paragraphs": [
-        "Expose the cells and wiring. The dataflow now occupies space, with congestion, clock distribution, power delivery, and delay. A good synthesis result can acquire costs after placement and routing that change the preferred implementation.",
-        "This is another point where senior judgment should travel upstream. A physical finding may justify a local fix, a different floorplan, or a revised architectural budget. Verification and physical implementation develop in parallel as usable RTL appears. Their findings are most valuable when the people making the next decision can see the assumptions behind them. The layout belongs inside the architectural conversation."
+        "Synthesis maps RTL into cells and connections. Physical design gives that circuit an arrangement, routing, clocks, and power delivery that can meet timing and manufacturing constraints. The apparent efficiency of a logical description has to survive those physical conditions.",
+        "A floorplan can expose congestion or long paths that require moving a block, revising its microarchitecture, or reconsidering an architectural budget. That finding needs to reach the engineer who can act on it, with the constraints and analysis that explain the tradeoff.",
+        "Physical implementation and verification proceed in parallel as usable RTL becomes available. They produce different evidence about the same design. Keeping both connected to architecture and block owners makes their discoveries useful before the manufacturing release."
       ],
       "sourceLinks": []
     },
     {
       "chapter": 7,
       "id": "tapeout",
-      "title": "Tapeout: make the decision durable",
+      "title": "From idea to manufacturing: design the organization too",
       "paragraphs": [
-        "The exploratory freedom has a manufacturing boundary. At tapeout, intended behavior and physical implementation have to be supported by the relevant signoff evidence. Every accepted change carries obligations into the release: what was checked, under which conditions, and what other evidence the change affected.",
-        "Fabrication, packaging, test, and bring-up expose the design to another kind of evidence. A model predicted behavior; hardware exhibits it. The engineer who can reconcile the two helps improve both the product and the next model. Move outward again: from layout to silicon, package to board, and board back into the tray."
-      ],
-      "sourceLinks": []
-    },
-    {
-      "chapter": 8,
-      "id": "rack-scale",
-      "title": "Rack systems: return to the delivered machine",
-      "paragraphs": [
-        "Slide the tray home. The local decisions now meet traffic, other chips, scheduling, and sustained thermal conditions. Communication sits on the token path. A burst or access pattern can reveal a limitation that a steady, idealized load concealed.",
-        "Etched reports rack testing in representative deployments and simulation with production-traffic patterns. Its August 2026 update announced the first rack shipment to Jane Street. These system milestones leave substantial engineering work in reliability, production, and scaling.",
-        "This is the return path for an insight developed deep inside a block: did it improve the machine under the conditions that matter? That question connects the specialist’s work to the reason the system exists. Etched describes math-block designers sitting next to inference engineers. The proximity makes the system question a concrete conversation."
+        "After the relevant checks and signoff, tapeout releases the completed layout and manufacturing data to the foundry. Fabrication, packaging, test, bring-up, and system validation follow. Reaching that boundary requires evidence to remain connected as the design changes.",
+        "The four teams have distinct responsibilities, but their work does not fit a sequence of isolated handoffs. When information stops at a team boundary, a problem can wait for another review or be rediscovered downstream. The organization needs explicit paths for changing an assumption as well as implementing it.",
+        "Our math-block designers work alongside inference engineers, and co-design extends into manufacturing. We put twenty years of inherited chip-design habits back on the table, including how we organize the work. First-principles reasoning applies to who needs to see a result, who can change the decision, and which tools remove avoidable waiting. The goal is an efficient workplace where deep experience can carry an idea through to production."
       ],
       "sourceLinks": [
         {
-          "label": "Etched: Rack testing and engineering co-design",
+          "label": "Etched: System co-design and engineering organization",
           "url": "https://www.etched.com/progress/frontier-inference-clusters"
-        },
+        }
+      ]
+    },
+    {
+      "chapter": 8,
+      "id": "ai-and-coordination",
+      "title": "AI-native engineering: improve implementation and coordination",
+      "paragraphs": [
+        "One focus is using AI to examine RTL and assist with performance analysis. The engineering test is concrete: does a proposed change improve the resulting implementation while preserving required behavior and physical constraints? Fewer lines of code are insufficient evidence. A promising candidate still needs independent functional checks and the relevant implementation analysis.",
+        "There is a second opportunity in coordination. Connecting a requirement to its RTL, tests, performance assumptions, and physical findings would make the consequences of a change easier to trace. AI could help locate inconsistent interfaces, identify affected checks, or assemble a reproducible failure for the responsible engineers. Building that connected workflow is an engineering problem in its own right.",
+        "Self-improving kernel agents are also part of the work ahead. Across these efforts, experienced engineers help define the search space and the evidence standard. Faster exploration remains valuable only when the accepted result deserves trust."
+      ],
+      "sourceLinks": [
         {
-          "label": "Etched: From Zero to One",
+          "label": "Etched: The work ahead",
           "url": "https://www.etched.com/progress/from-zero-to-one"
         }
       ]
     },
     {
       "chapter": 9,
-      "id": "ai-and-coordination",
-      "title": "AI tools: build a better way to decide",
+      "id": "rack-scale",
+      "title": "Software and deployment: return to the customer’s model",
       "paragraphs": [
-        "An AI-native lab earns the name by changing how an engineering idea gets tested. Etched names self-improving kernel agents among the work ahead. Extending that ambition into RTL and performance analysis raises a demanding problem: give a tool useful room to search, then establish whether its proposal improves the machine.",
-        "There is a serious engineering problem in deciding what these tools may change, what they must preserve, and which evidence earns trust. Experienced engineers know the failure modes that a plausible output can hide. They can help turn a search over candidates into a process that produces better decisions.",
-        "Etched’s careers page emphasizes ownership and production, with openings across RTL, verification, physical design, SI/PI, and inference performance. The useful interview conversation is specific: which system decision could this role influence, who would work through the tradeoff with you, and how would you know the result improved? Bring the judgment earned from shipping difficult hardware—and the ideas you still have about how the whole machine could be better."
+        "The design becomes useful when software turns a customer’s model into correct, efficient execution. Our inference software work spans model porting, abstractions and tests, multi-node runtime, communication, and profiling. Firmware and drivers connect the physical machine to that execution. Hardware capability has to survive the complete path to a running model.",
+        "Operating a fleet adds staged software and firmware rollouts, recovery, and telemetry. Deployment failures and performance observations need to return as engineering priorities. We have tested racks in representative deployments, and in August 2026 we announced our first rack shipment to Jane Street. Each customer environment brings the design back to the conditions it was built to serve.",
+        "The process returns to its starting question: what experience does the customer need? We want engineers who have shipped difficult silicon to bring that judgment to both the machine and the way it is built. Reconsidering hardware and organizational assumptions together can give a useful idea a shorter, better-informed path to production."
       ],
       "sourceLinks": [
         {
-          "label": "Etched: The work ahead",
-          "url": "https://www.etched.com/progress/from-zero-to-one"
+          "label": "Etched: Inference software engineering",
+          "url": "https://jobs.ashbyhq.com/Etched/0f9c0162-97c6-4be6-9cb7-d9afdcf0fa7c"
         },
         {
-          "label": "Etched: Engineering roles",
-          "url": "https://www.etched.com/join"
+          "label": "Etched: Fleet software engineering",
+          "url": "https://jobs.ashbyhq.com/etched/5726311f-4db2-4c95-8628-d9c8f0f9639d"
+        },
+        {
+          "label": "Etched: Firmware engineering",
+          "url": "https://jobs.ashbyhq.com/etched/8e280db7-f954-4467-b3ea-b9b4386d6632/"
+        },
+        {
+          "label": "Etched: Customer testing and system design",
+          "url": "https://www.etched.com/progress/frontier-inference-clusters"
+        },
+        {
+          "label": "Etched: First rack shipment",
+          "url": "https://www.etched.com/progress/from-zero-to-one"
         }
       ]
     }

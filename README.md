@@ -1,12 +1,14 @@
-# Build From the Rack In
+# From Sand to Silicon: How Etched Designs Chips
 
-[Open the visual explorer](https://howdymary.github.io/etched-visual-explorer/) · [Source repository](https://github.com/howdymary/etched-visual-explorer)
+[Open the visual explorer](https://howdymary.github.io/sand/) · [Source repository](https://github.com/howdymary/sand)
 
 A technical essay for experienced engineers paired with a sticky interactive walkthrough, following an inference chip from a server rack into architecture, microarchitecture, design verification, and physical design, then back to the finished system. Ten essay sections synchronize with ten visual chapters: scrolling the prose updates the adjacent visual, and chapter navigation jumps to the corresponding article section. On narrow screens, the prose reads above a synchronized visual panel at the bottom of the window. Hover over a component for a short explanation, or click, tap, or use the keyboard to open its details.
 
 The experience uses a white background, restrained typography, thin rules, and concise captions, drawing on Etched's current technical publishing style. Its opening follows a continuous sequence: the rack comes into focus, a compute tray slides out and turns to an overhead view, photographed tubing and copper surfaces separate, and the real packaged chip leads into conceptual architecture. Scrolling controls the sequence directly, including reversing it; reduced-motion preferences snap between its stages.
 
-Views 1, 2, 3, and 9 offer a **Hardware / Diagram** switch. Hardware mode defaults to the photographic opening across the first three views and to current hardware photographs in view 9; Diagram mode illustrates engineering relationships. **View original** opens the full-resolution source photograph. The opening is an explanatory arrangement of photographed regions, rather than a documented service procedure; it depicts no invented hidden board detail.
+The essay follows customer experience and requirements through the four engineering disciplines, organizational design, AI assistance, and software deployment. Views 1, 2, 3, and 10 offer a **Hardware / Diagram** switch. Hardware mode defaults to the photographic opening across the first three views and to current hardware photographs in view 10; Diagram mode illustrates engineering relationships. **View original** opens the full-resolution source photograph. The opening is an explanatory arrangement of photographed regions, rather than a documented service procedure; it depicts no invented hidden board detail.
+
+Compact windows keep the text above a larger photographic canvas. Tight camera bounds follow the rack, extracted tray, cooling, and chip; a linked rack-bay detail uses real pixels from the same official photo. Component controls open through **Inspect** so they do not consume the default viewing area. Wide pages retain the adjacent article and sticky visual.
 
 The implementation uses four local WebP photographs, SVG illustrations, CSS, and native JavaScript modules, with no runtime packages, external fonts, backend, or credentials. The WebP files are quality-95 delivery copies of official high-resolution originals. Image provenance, source and display dimensions, and the observed media-use statement are recorded in [`assets/hardware/README.md`](assets/hardware/README.md). No small website cutouts or older board renders are included; a standalone high-resolution photograph of the current bare board was not found in the available official material or broader coverage.
 

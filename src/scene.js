@@ -1,4 +1,4 @@
-import { teardownMarkup, createTeardown } from './teardown.js?v=20261026-rack-in-6';
+import { teardownMarkup, createTeardown } from './teardown.js?v=20261026-sand-silicon-2';
 
 let sceneSequence = 0;
 
@@ -148,25 +148,25 @@ function tapeoutScene() {
     ${bottom('TAPEOUT CLOSES DESIGN · SILICON STILL NEEDS VALIDATION', 'ILLUSTRATIVE MANUFACTURING SEQUENCE')}`;
 }
 function racksFinal() {
-  return `${title(9, 'Back to the rack', 'The complete system must deliver the intended experience.')}
+  return `${title(10, 'Software to deployment', 'The complete system must deliver the intended experience.')}
     <ellipse cx="499" cy="673" rx="386" ry="29" class="scene-ground"/>
     ${comp('rack', 'Explore the deployed multi-rack inference system', `${rack(84, 300, .68, { muted: true })}${rack(391, 237, .84)}${rack(716, 300, .68, { muted: true })}`)}
-    ${comp('links', 'Explore multi-chip communication and latency', `${flow('M267 374H350Q368 374 368 359V346H409', 'rack-link-a')}${flow('M617 346H658Q674 346 674 364V374H732', 'rack-link-b')}${flow('M267 466H340Q358 466 358 478V499H409', 'rack-link-c')}${flow('M617 499H666Q684 499 684 483V466H732', 'rack-link-d')}${text(500, 180, 'COMPUTE + MEMORY + INTERCONNECT', 'scene-mono scene-accent-label', 'middle')}${hint(680, 413)}`)}
+    ${comp('links', 'Explore multi-chip communication and latency', `${flow('M267 374H350Q368 374 368 359V346H409', 'rack-link-a')}${flow('M617 346H658Q674 346 674 364V374H732', 'rack-link-b')}${flow('M267 466H340Q358 466 358 478V499H409', 'rack-link-c')}${flow('M617 499H666Q684 499 684 483V466H732', 'rack-link-d')}${text(500, 180, 'MODEL → EXECUTION SOFTWARE → CUSTOMER INFERENCE', 'scene-mono scene-accent-label', 'middle')}${hint(680, 413)}`)}
     ${comp('cooling', 'Explore sustained power and cooling requirements', `${line('M73 646H925', 'scene-cooling-manifold')}${line('M131 646V619 M438 646V630 M763 646V619', 'scene-cooling-branch')}${text(501, 705, 'Power and cooling set the operating envelope.', 'scene-body-label', 'middle')}${hint(922, 646)}`)}
     ${bottom('LATENCY · THROUGHPUT · RELIABILITY · EFFICIENCY', 'ILLUSTRATIVE SYSTEM')}`;
 }
 function aiScene() {
   const nodes = [
-    { x: 94, y: 206, w: 226, h: 118, label: 'SPECIFICATION', sub: 'Intent + interfaces', id: 'specification', cls: 'scene-control' },
-    { x: 680, y: 206, w: 226, h: 118, label: 'RTL', sub: 'Logic + implementation', id: 'compute', cls: 'scene-compute' },
+    { x: 94, y: 206, w: 226, h: 118, label: 'ARCHITECTURE', sub: 'Intent + interfaces', id: 'specification', cls: 'scene-control' },
+    { x: 680, y: 206, w: 226, h: 118, label: 'MICROARCH / RTL', sub: 'Logic within PPA budgets', id: 'rtl', cls: 'scene-compute' },
     { x: 94, y: 488, w: 226, h: 118, label: 'VERIFICATION', sub: 'Tests + coverage', id: 'testbench', cls: 'scene-reference' },
     { x: 680, y: 488, w: 226, h: 118, label: 'PHYSICAL DESIGN', sub: 'Area + timing + power', id: 'cells', cls: 'scene-control' },
   ];
-  return `${title(10, 'AI across the process', 'Connect a proposed change to the evidence it needs.')}
+  return `${title(9, 'AI across the process', 'Connect a proposed change to the evidence it needs.')}
     ${nodes.map(n => comp(n.id, `Explore ${n.label.toLowerCase()} and cross-team coordination`, `${rect(n.x, n.y, n.w, n.h, n.cls, 5)}${text(n.x + 20, n.y + 42, n.label, 'scene-mono scene-block-label')}${text(n.x + 20, n.y + 75, n.sub, 'scene-body-label')}${hint(n.x + n.w - 22, n.y + n.h - 22)}`)).join('')}
     ${comp('ai', 'Explore AI assistance and proposed coordination tools', `<circle cx="500" cy="406" r="100" class="scene-ai-ring"/><circle cx="500" cy="406" r="86" class="scene-ai-core"/>${text(500, 391, 'AI ASSISTANCE', 'scene-mono scene-block-label', 'middle')}${text(500, 423, 'Trace a format change', 'scene-body-label', 'middle')}${text(500, 449, 'Keep evidence connected', 'scene-body-label', 'middle')}${hint(568, 346)}`)}
     ${flow('M320 265H373V347H420', 'ai-spec')}${flow('M580 347H627V265H680', 'ai-rtl')}${flow('M320 548H373V465H420', 'ai-dv')}${flow('M580 465H627V548H680', 'ai-pd')}
-    ${text(500, 677, 'Implementation support today. Better coordination is an opportunity.', 'scene-body-label', 'middle')}
+    ${text(500, 677, 'AI for RTL and performance analysis. Coordination is an opportunity.', 'scene-body-label', 'middle')}
     ${bottom('PROPOSALS STILL NEED ENGINEERING REVIEW & VALIDATION', 'CURRENT FOCUS & PROPOSED USES DISTINGUISHED IN THE STORY')}`;
 }
 
@@ -176,15 +176,15 @@ const photoDetail = (file,x,y,w,h,viewBox,nativeWidth,nativeHeight,label) => `<s
 function hardwareScene(index) {
   if (index === 0) return `${hardwareImage('etched-rack-detail.webp',40,140,920,500,'The exact rack photograph displayed on Etched’s current homepage, showing a compute tray and rack cabling')}${text(500,689,'Etched’s current rack hardware · official homepage photography','scene-hardware-caption','middle')}`;
   if (index === 1) return `${photoDetail('etched-chip.webp',210,140,580,510,'900 500 1400 1600',3200,2562,'Photograph of Etched’s actual packaged chip, from its official media kit')}${text(500,687,'Packaged chip · official Etched photography','scene-hardware-caption','middle')}`;
-  return `${photoDetail('etched-tray.webp',90,140,395,510,'1100 180 1050 1400',3200,1800,'Actual liquid-cooled Etched compute tray with copper cold plates and braided tubing')}${photoDetail('etched-rack.webp',565,140,335,510,'800 550 1000 2450',2525,3200,'Actual current Etched inference rack, front view')}${text(285,684,'Compute tray','scene-hardware-label','middle')}${text(735,684,'Inference rack','scene-hardware-label','middle')}`;
+  return `<g class="hardware-wide">${photoDetail('etched-tray.webp',90,140,395,510,'1100 180 1050 1400',3200,1800,'Actual liquid-cooled Etched compute tray with copper cold plates and braided tubing')}${photoDetail('etched-rack.webp',565,140,335,510,'800 550 1000 2450',2525,3200,'Actual current Etched inference rack, front view')}${text(285,684,'Compute tray','scene-hardware-label','middle')}${text(735,684,'Inference rack','scene-hardware-label','middle')}</g><g class="hardware-compact">${hardwareImage('etched-rack-detail.webp',40,140,920,438,'Etched’s actual rack and extracted compute tray, photographed from above')}</g>`;
 }
 
-const chapterBuilders = [rackOpening, packageScene, architectureScene, quantizationScene, microScene, verificationScene, physicalScene, tapeoutScene, racksFinal, aiScene];
+const chapterBuilders = [rackOpening, packageScene, architectureScene, quantizationScene, microScene, verificationScene, physicalScene, tapeoutScene, aiScene, racksFinal];
 
 /** A dependency-free, accessible SVG stage for the chip design story. */
 export function createScene(host, callbacks = {}) {
   const prefix = `etched-scene-${++sceneSequence}`;
-  const svgMarkup = `<svg class="etched-scene" viewBox="0 0 1000 800" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="Interactive diagrams of Etched’s chip design process">
+  const svgMarkup = `<svg class="etched-scene" viewBox="0 110 1000 610" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="Interactive diagrams of Etched’s chip design process">
     <title>From an AI request to silicon and back</title><desc>Official Etched hardware imagery and ten conceptual engineering diagrams. Use Hardware or Diagram to switch presentations. Select a labeled component to read its role and tradeoffs.</desc>
     <defs>
       <pattern id="__ID__-grid" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".85" fill="#aeb5a8" opacity=".33"/></pattern>
@@ -193,7 +193,7 @@ export function createScene(host, callbacks = {}) {
     </defs>
     <rect width="1000" height="800" fill="#ffffff"/>
     <path d="M37 128v-11h11 M952 117h11v11 M37 706v11h11 M952 717h11v-11" class="scene-corner"/>
-    ${chapterBuilders.map((builder, i) => `<g class="scene-layer ${i === 0 ? 'is-active' : ''}" data-scene="${i}" aria-hidden="${i !== 0}"><g class="scene-camera">${[0,1,8].includes(i) ? `<g class="scene-presentation" data-presentation="hardware" aria-hidden="false">${hardwareScene(i)}</g><g class="scene-presentation" data-presentation="diagram" aria-hidden="true">${builder()}</g>` : builder()}</g></g>`).join('')}
+    ${chapterBuilders.map((builder, i) => `<g class="scene-layer ${i === 0 ? 'is-active' : ''}" data-scene="${i}" aria-hidden="${i !== 0}"><g class="scene-camera">${[0,1,9].includes(i) ? `<g class="scene-presentation" data-presentation="hardware" aria-hidden="false">${hardwareScene(i)}</g><g class="scene-presentation" data-presentation="diagram" aria-hidden="true">${builder()}</g>` : builder()}</g></g>`).join('')}
     ${teardownMarkup()}
   </svg>`;
   host.innerHTML = svgMarkup.replaceAll('__ID__', prefix);
@@ -215,6 +215,7 @@ export function createScene(host, callbacks = {}) {
   let cameraResetTimer = 0;
   let focusedCamera = null;
   const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const compactPreference = window.matchMedia('(max-width: 900px)');
   const particles = [...host.querySelectorAll('[data-path]')].map(node => {
     const path = host.querySelector(`#${node.dataset.path}`);
     return { node, path, length: path.getTotalLength(), chapter: Number(node.closest('[data-scene]').dataset.scene) };
@@ -224,7 +225,11 @@ export function createScene(host, callbacks = {}) {
   setTabStops();
   function syncTeardown() {
     const show = hardwareMode && activeIndex <= 2;
+    layers[9].querySelector('.hardware-wide').setAttribute('aria-hidden',String(compactPreference.matches));
+    layers[9].querySelector('.hardware-compact').setAttribute('aria-hidden',String(!compactPreference.matches));
+    teardown.setCompact(compactPreference.matches, svg.clientWidth / Math.max(1,svg.clientHeight));
     const view = teardown.setPosition(activeIndex, chapterProgress, motionPreference.matches || !playing);
+    svg.setAttribute('viewBox',show && view.viewBox ? view.viewBox : compactPreference.matches && hardwareMode && activeIndex===9 ? '40 140 920 438' : '0 110 1000 610');
     teardown.setVisible(show);
     teardown.element.setAttribute('aria-hidden', String(!show || view.architectureMix >= 1));
     teardown.element.setAttribute('role','img');

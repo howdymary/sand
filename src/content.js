@@ -1,9 +1,9 @@
 export const chapters = [
   {
     "id": "experience",
-    "kicker": "01 / From rack to tray",
-    "title": "Inside the rack",
-    "caption": "Select a tray, follow it out of the rack, and turn toward the hardware inside.",
+    "kicker": "01 / Start with the workload",
+    "title": "From a request to a rack",
+    "caption": "Follow the serving system inward: select a compute tray, slide it out, and turn toward the hardware inside.",
     "sceneTitle": "Start with the system",
     "sceneSubtitle": "Conceptual request → server rack → response tokens.",
     "componentIds": [
@@ -14,9 +14,9 @@ export const chapters = [
   },
   {
     "id": "requirements",
-    "kicker": "02 / From tray to silicon",
-    "title": "Under the cooling",
-    "caption": "Separate the photographed cooling surfaces, then follow the view into the actual package.",
+    "kicker": "02 / Workload to requirements",
+    "title": "Translate the workload",
+    "caption": "Throughput and latency become budgets for arithmetic, memory, communication, power, and cooling.",
     "sceneTitle": "Inside the accelerator package",
     "sceneSubtitle": "Compute die and HBM are distinct devices. Arrangement is illustrative.",
     "componentIds": [
@@ -28,9 +28,9 @@ export const chapters = [
   },
   {
     "id": "architecture",
-    "kicker": "03 / Inside the chip",
-    "title": "Follow the data",
-    "caption": "The package gives way to a conceptual view of memory delivery, data preparation, and compute.",
+    "kicker": "03 / Team one · Architecture",
+    "title": "Architecture",
+    "caption": "Organize compute, storage, and communication around the workload, then define the contracts each block must meet.",
     "sceneTitle": "Follow the data",
     "sceneSubtitle": "Select a block to inspect its role, inputs, outputs, and tradeoffs.",
     "componentIds": [
@@ -45,9 +45,9 @@ export const chapters = [
   },
   {
     "id": "quantization",
-    "kicker": "04 / Quantization",
-    "title": "Quantization",
-    "caption": "Compare 32 values at eight and four bits: smaller payloads reduce storage, with numerical tradeoffs.",
+    "kicker": "04 / An architectural tradeoff",
+    "title": "Formats are system decisions",
+    "caption": "Compare the payload for 32 values at eight and four bits, then account for conversion, metadata, and numerical quality.",
     "sceneTitle": "One block, two representations",
     "sceneSubtitle": "32 × 8 = 256 bits → 32 × 4 = 128 bits, before scales and metadata.",
     "componentIds": [
@@ -60,12 +60,13 @@ export const chapters = [
   },
   {
     "id": "microarchitecture",
-    "kicker": "05 / Microarchitecture",
-    "title": "Microarchitecture",
-    "caption": "Follow an illustrative 32-bit value through registers, arithmetic, and the output interface, one clock cycle at a time.",
+    "kicker": "05 / Team two · Microarchitecture & RTL",
+    "title": "Microarchitecture and RTL",
+    "caption": "Turn the block contract into cycle-by-cycle behavior within power, performance, and area constraints.",
     "sceneTitle": "Inside the math block",
     "sceneSubtitle": "Input → register → multiply → add → output. Widths and timing are illustrative.",
     "componentIds": [
+      "rtl",
       "register",
       "multiply",
       "add",
@@ -76,9 +77,9 @@ export const chapters = [
   },
   {
     "id": "verification",
-    "kicker": "06 / Verification",
-    "title": "Verification",
-    "caption": "Compare observed results against independent expectations, investigate a mismatch, and test the corrected implementation.",
+    "kicker": "06 / Team three · Design verification",
+    "title": "Design verification",
+    "caption": "Check intended behavior independently, investigate disagreements, and feed ambiguous requirements back to architecture.",
     "sceneTitle": "Test the intended behavior",
     "sceneSubtitle": "Specification → expected result. Testbench → observed result. Compare and retest.",
     "componentIds": [
@@ -92,9 +93,9 @@ export const chapters = [
   },
   {
     "id": "physical-design",
-    "kicker": "07 / Physical design",
+    "kicker": "07 / Team four · Physical design",
     "title": "Physical design",
-    "caption": "Reveal cells, wiring, clocks, and power, then inspect the constraints that shape a realizable circuit.",
+    "caption": "Place and connect the circuit, then return timing, congestion, and power findings to the designers who can act on them.",
     "sceneTitle": "From logic to physical layout",
     "sceneSubtitle": "Stylized placement and routing. Physical design and verification proceed in parallel.",
     "componentIds": [
@@ -109,9 +110,9 @@ export const chapters = [
   },
   {
     "id": "tapeout",
-    "kicker": "08 / Tapeout",
-    "title": "Tapeout",
-    "caption": "Follow the signed-off layout through fabrication and packaging toward tested silicon.",
+    "kicker": "08 / The organization behind the chip",
+    "title": "From idea to production",
+    "caption": "Four disciplines converge on signoff, fabrication, packaging, and silicon bring-up, with evidence feeding back across the boundaries.",
     "sceneTitle": "Layout → wafer → package",
     "sceneSubtitle": "A conceptual manufacturing sequence after design signoff.",
     "componentIds": [
@@ -121,35 +122,37 @@ export const chapters = [
     ]
   },
   {
+    "id": "ai-and-coordination",
+    "kicker": "09 / An AI-native engineering loop",
+    "title": "AI across the engineering loop",
+    "caption": "Explore AI assistance for RTL and performance analysis, and the opportunity to keep requirements, changes, and evidence connected.",
+    "sceneTitle": "Connect the engineering evidence",
+    "sceneSubtitle": "Explore implementation assistance and proposed feedback across teams.",
+    "componentIds": [
+      "ai",
+      "specification",
+      "rtl",
+      "testbench",
+      "cells",
+      "rack"
+    ]
+  },
+  {
     "id": "rack-scale",
-    "kicker": "09 / Rack systems",
-    "title": "Rack systems",
-    "caption": "Return to multiple chips, where communication, power, and cooling shape sustainable inference performance.",
+    "kicker": "10 / Software to deployment",
+    "title": "Software to deployment",
+    "caption": "Return to the rack: model execution, serving software, and system validation turn hardware capability into customer inference.",
     "sceneTitle": "The chip returns to the system",
     "sceneSubtitle": "Select compute, links, or cooling. Topology and traffic are illustrative.",
     "componentIds": [
+      "software",
+      "deployment",
       "rack",
       "links",
       "cooling",
       "hbm",
       "compute",
       "power"
-    ]
-  },
-  {
-    "id": "ai-and-coordination",
-    "kicker": "10 / AI across engineering",
-    "title": "AI across engineering",
-    "caption": "Explore AI-assisted implementation and a proposed coordination workflow connecting requirements, code, tests, and physical findings.",
-    "sceneTitle": "Connect the engineering evidence",
-    "sceneSubtitle": "Explore implementation assistance and proposed feedback across teams.",
-    "componentIds": [
-      "ai",
-      "specification",
-      "compute",
-      "testbench",
-      "cells",
-      "rack"
     ]
   }
 ];
@@ -205,6 +208,13 @@ export const components = {
     why: 'Arithmetic and storage need a complete operating protocol, including stalls and downstream backpressure.',
     inputs: 'Operation state and interface conditions.', outputs: 'Signals coordinating computation, storage, and transfer.',
     tradeoff: 'Control must cover required situations without creating unnecessary complexity or limiting throughput.', chapter: 2
+  },
+  rtl: {
+    name: 'Microarchitecture & RTL', type: 'Team two · Implementation',
+    description: 'Microarchitects turn the architectural contract into datapaths, control, storage, and cycle-by-cycle behavior in RTL.',
+    why: 'The implementation must satisfy functional requirements and its power, performance, and area budgets.',
+    inputs: 'Block specifications, interfaces, workload assumptions, and physical feedback.', outputs: 'RTL and implementation choices for verification, synthesis, and physical design.',
+    tradeoff: 'Pipeline stages, buffering, bit widths, and flow control affect neighboring blocks as well as local PPA.', chapter: 4
   },
   register: {
     name: 'Register', type: 'Microarchitecture',
@@ -288,21 +298,21 @@ export const components = {
     description: 'The rack brings compute, memory, communication, power delivery, and cooling into an operating system.',
     why: 'The workload is served by the complete deployment rather than a chip in isolation.',
     inputs: 'Workloads, software, electrical power, and the required operating environment.', outputs: 'Sustained inference performance under defined conditions.',
-    tradeoff: 'Capacity, interconnect, thermal limits, reliability, and economics all shape useful operation.', chapter: 8
+    tradeoff: 'Capacity, interconnect, thermal limits, reliability, and economics all shape useful operation.', chapter: 9
   },
   cooling: {
     name: 'Cooling', type: 'Rack engineering',
     description: 'Cooling removes heat generated by the system so that hardware can remain within operating limits.',
     why: 'The performance target needs to be sustainable when many chips operate together.',
     inputs: 'Heat from active system components.', outputs: 'Heat removal within the deployment’s thermal design.',
-    tradeoff: 'Thermal capacity and operating cost constrain the performance the system can maintain.', chapter: 8
+    tradeoff: 'Thermal capacity and operating cost constrain the performance the system can maintain.', chapter: 9
   },
   links: {
     name: 'Chip-to-chip communication', type: 'System interconnect',
     description: 'Communication moves data when a model or its execution spans multiple devices.',
     why: 'A token’s generation path can depend on results arriving from another chip.',
     inputs: 'Distributed-workload traffic and the selected communication configuration.', outputs: 'Data delivered with the path’s effective bandwidth and latency.',
-    tradeoff: 'Topology, protocols, contention, electronics, and traffic matter alongside medium and distance.', chapter: 8
+    tradeoff: 'Topology, protocols, contention, electronics, and traffic matter alongside medium and distance.', chapter: 9
   },
   tapeout: {
     name: 'Tapeout release', type: 'Manufacturing handoff',
@@ -330,20 +340,39 @@ export const components = {
     description: 'The interview describes a focus on AI assistance for RTL and performance analysis. Connecting cross-team evidence is a further opportunity.',
     why: 'Candidate implementations and relevant findings can be easier to explore when their context is explicit.',
     inputs: 'Requirements, RTL, analysis, tests, and engineering context.', outputs: 'Proposals or organized evidence for engineers to evaluate.',
-    tradeoff: 'Changes still require relevant functional, performance, and physical checks; verification must retain independent intent.', chapter: 9
+    tradeoff: 'Changes still require relevant functional, performance, and physical checks; verification must retain independent intent.', chapter: 8
+  },
+  software: {
+    name: 'Model execution', type: 'Software and hardware co-design',
+    description: 'Kernels, scheduling, memory use, and communication determine how a model uses the available hardware.',
+    why: 'Peak arithmetic throughput becomes useful only when the execution path keeps the system productively occupied.',
+    inputs: 'The customer model, numerical requirements, workload shape, and hardware interfaces.', outputs: 'An execution plan and software implementation to evaluate on the system.',
+    tradeoff: 'A software choice can change hardware utilization, numerical behavior, memory demand, or communication.', chapter: 9
+  },
+  deployment: {
+    name: 'Customer deployment', type: 'The delivered inference service',
+    description: 'Bring-up, integration, and validation establish how the complete system serves the intended customer workload.',
+    why: 'The design target is a sustainable user experience under defined latency, throughput, reliability, and power conditions.',
+    inputs: 'A model execution path, serving software, tested hardware, and representative traffic.', outputs: 'Evidence about the model running on the complete deployment.',
+    tradeoff: 'A deployment result depends on its model, request mix, concurrency, software, and measurement boundary.', chapter: 9
   },
   specification: {
     name: 'Architectural specification', type: 'The shared intent',
     description: 'The specification defines block responsibilities, interfaces, required behavior, and applicable budgets.',
     why: 'Designers, verifiers, performance modelers, and physical engineers need a shared statement of the goal.',
     inputs: 'Workload needs, system goals, and architectural analysis.', outputs: 'Requirements that implementation and independent checks can use.',
-    tradeoff: 'Ambiguities and changing assumptions need explicit feedback rather than separate interpretations.', chapter: 1
+    tradeoff: 'Ambiguities and changing assumptions need explicit feedback rather than separate interpretations.', chapter: 2
   }
 };
 
 export const sources = [
   { label: "Etched — official hardware imagery and media kit", url: "https://www.etched.com/media-kit" },
   { label: "Etched — Frontier Inference Clusters", url: "https://www.etched.com/progress/frontier-inference-clusters" },
+  { label: 'Etched — From Zero to One', url: 'https://www.etched.com/progress/from-zero-to-one' },
+  { label: 'Etched — Engineering roles and ownership', url: 'https://www.etched.com/join' },
+  { label: 'Etched — Inference software and model execution', url: 'https://jobs.ashbyhq.com/Etched/0f9c0162-97c6-4be6-9cb7-d9afdcf0fa7c' },
+  { label: 'Etched — Fleet software and customer deployments', url: 'https://jobs.ashbyhq.com/etched/5726311f-4db2-4c95-8628-d9c8f0f9639d' },
+  { label: 'Etched — Embedded software, bring-up, and production', url: 'https://jobs.ashbyhq.com/etched/8e280db7-f954-4467-b3ea-b9b4386d6632/' },
   { label: 'Etched · Chips, racks, software, and manufacturing', url: 'https://www.etched.com/' },
   { label: 'NVIDIA · LLM inference benchmarking terminology', url: 'https://developer.nvidia.com/blog/llm-benchmarking-fundamental-concepts/' },
   { label: 'NVIDIA cuDNN · Block scaling formats', url: 'https://docs.nvidia.com/cudnn/operations/BlockScaling/' },
