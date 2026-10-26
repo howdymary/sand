@@ -36,11 +36,9 @@
   .essay-section h2 { font-size:32px; line-height:1.3; letter-spacing:-.03em; font-weight:400; margin:18px 0 28px; }
   .essay-section[data-essay-chapter="0"] p:not(:last-of-type), .essay-section[data-essay-chapter="1"] p:not(:last-of-type) { margin-bottom:clamp(24px,4svh,55px); }
   .essay-section p:last-of-type { margin-bottom:26px; }
-  .essay-sources { display:flex; flex-wrap:wrap; align-items:center; gap:8px 17px; padding-top:8px; font:10px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace; color:var(--muted); }
-  .essay-sources a { text-decoration-color:#c7c7c7; }
-  .essay-sources a:hover { color:var(--ink); }
-  .visual-column { position:sticky; top:calc(var(--header) + 20px); align-self:start; min-width:0; height:calc(100svh - var(--header) - 40px); }
-  .visual-explorer { position:relative; width:100%; height:100%; display:flex; flex-direction:column; min-height:0; border-left:1px solid var(--line); padding-left:25px; }
+  .deployment-copy { opacity:var(--deployment-opacity,1); transform:translate3d(0,var(--deployment-offset,0px),0); }
+  .visual-column { clip-path:inset(0 0 var(--visual-clip,0px) 0); background:var(--paper); transform:translate3d(0,var(--visual-offset,0px),0); position:sticky; top:calc(var(--header) + 20px); align-self:start; min-width:0; height:calc(100svh - var(--header) - 40px); }
+  .visual-explorer { opacity:var(--visual-opacity,1); position:relative; width:100%; height:100%; display:flex; flex-direction:column; min-height:0; border-left:1px solid var(--line); padding-left:25px; }
   .view-heading { flex:0 0 auto; padding:3px 0 0; display:flex; justify-content:space-between; align-items:flex-start; gap:20px; pointer-events:none; }
   .view-heading h2 { font-size:clamp(24px,2.2vw,32px); line-height:1.25; letter-spacing:-.03em; font-weight:400; margin:8px 0 9px; }
   .view-heading p { font-size:13px; line-height:1.7; color:var(--muted); max-width:520px; }
@@ -178,5 +176,5 @@
     .visual-toolbar { min-height:25px; }
     .visual-toolbar > span:first-child { display:none; }
   }
-  @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*::before,*::after { animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; } }
+  @media (prefers-reduced-motion:reduce) { .visual-column,.deployment-copy { transform:none; } html { scroll-behavior:auto; } *,*::before,*::after { animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; } }
 }

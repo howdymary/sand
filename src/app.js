@@ -1,6 +1,6 @@
-import { chapters, components, sources } from './content.js?v=20261026-closing-1';
-import { createScene } from './scene.js?v=20261026-closing-1';
-import { essay } from './essay.js?v=20261026-closing-1';
+import { chapters, components, sources } from './content.js?v=20261026-flow-1';
+import { createScene } from './scene.js?v=20261026-flow-1';
+import { essay } from './essay.js?v=20261026-flow-1';
 
 const $ = (id) => document.getElementById(id);
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
@@ -16,10 +16,14 @@ const originalPhotos = {
 const sectionLabels = ['Workload','Requirements','Architecture','RTL','Verification','Layout','Organization','AI tools','Deployment'];
 
 const paragraphHTML = paragraphs => paragraphs.map(p => `<p>${escapeHTML(p)}</p>`).join('');
-$('essay').innerHTML = `<header class="essay-intro"><div class="eyebrow">${escapeHTML(essay.kicker)}</div><h1 class="essay-title" id="essay-title">${escapeHTML(essay.title)}</h1><p class="essay-deck">${escapeHTML(essay.deck)}</p>${paragraphHTML(essay.introduction)}</header>` + essay.sections.map(section => `<section class="essay-section" id="${escapeHTML(section.id)}" data-essay-chapter="${section.chapter}" aria-labelledby="essay-heading-${section.chapter}"><div class="eyebrow">${String(section.chapter+1).padStart(2,'0')} / ${escapeHTML(sectionLabels[section.chapter])}</div><h2 id="essay-heading-${section.chapter}">${escapeHTML(section.title)}</h2>${paragraphHTML(section.paragraphs)}${section.sourceLinks?.length ? `<div class="essay-sources">${section.sourceLinks.map(source => `<a href="${escapeHTML(source.url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(source.label)} ↗</a>`).join('')}</div>`:''}</section>`).join('');
+$('essay').innerHTML = `<header class="essay-intro"><div class="eyebrow">${escapeHTML(essay.kicker)}</div><h1 class="essay-title" id="essay-title">${escapeHTML(essay.title)}</h1><p class="essay-deck">${escapeHTML(essay.deck)}</p>${paragraphHTML(essay.introduction)}</header>` + essay.sections.map(section => `<section class="essay-section" id="${escapeHTML(section.id)}" data-essay-chapter="${section.chapter}" aria-labelledby="essay-heading-${section.chapter}"><div class="eyebrow">${String(section.chapter+1).padStart(2,'0')} / ${escapeHTML(sectionLabels[section.chapter])}</div><h2 id="essay-heading-${section.chapter}">${escapeHTML(section.title)}</h2>${paragraphHTML(section.paragraphs)}</section>`).join('');
 // The closing deployment section leaves the illustrated two-column reading flow.
 const deploymentSection = document.getElementById('rack-scale');
 deploymentSection.classList.add('essay-deployment', 'essay-column');
+const deploymentCopy = document.createElement('div');
+deploymentCopy.className='deployment-copy';
+deploymentCopy.append(...deploymentSection.childNodes);
+deploymentSection.append(deploymentCopy);
 document.querySelector('.essay-layout').append(deploymentSection);
 document.title = essay.title;
 const essaySections = [...document.querySelectorAll('[data-essay-chapter]')];
@@ -83,6 +87,11 @@ function closeInspector(restore=false) {
 function activateChapter(index,progress=0) {
   if (state.chapter!==index) {
     state.chapter=index; closeInspector(); hideTooltip();
+    if (index===8) {
+      $('view-announcement').textContent=essay.sections[index].title;
+      state.progress=progress;
+      return;
+    }
     const chapter=chapters[index];
     $('view-kicker').textContent=chapter.kicker.replace(/^\d+\s*\/\s*/,'');
     $('view-title').textContent=chapter.title;
@@ -91,7 +100,7 @@ function activateChapter(index,progress=0) {
     updateViewMode();
     $('component-strip').innerHTML=chapter.componentIds.map((id) => `<button type="button" class="component-chip" data-component-link="${id}" aria-pressed="false">${escapeHTML(components[id]?.name || id)}</button>`).join('');
     $('component-strip').scrollLeft=0;
-    $('view-announcement').textContent=index===8 ? essay.sections[index].title : `${chapter.title}. ${chapter.caption}`;
+    $('view-announcement').textContent=`${chapter.title}. ${chapter.caption}`;
   }
   state.progress = progress;
   if (index!==8) scene.setChapter(index,progress);
@@ -112,12 +121,30 @@ function updateOnScroll() {
   const rect = section.getBoundingClientRect();
   const progress = Math.max(0,Math.min(1,(readingLine-rect.top)/Math.max(1,rect.height)));
   activateChapter(active,progress);
-  const closingInView = deploymentSection.getBoundingClientRect().top <= Math.max(readingLine+25,innerHeight*.65);
-  const hideVisual = active===8 || compactLayout.matches && closingInView;
-  if ($('visual-column').hidden!==hideVisual) {
-    $('visual-column').hidden=hideVisual;
-    scene.setPlaying(!state.paused && !hideVisual);
-  }
+  // Measure the section shell, which stays fixed in document flow while its
+  // inner copy settles into place. The same scroll position reverses the exit.
+  const closingTop=deploymentSection.getBoundingClientRect().top;
+  const fadeStart=innerHeight*(compactLayout.matches ? .88 : .82);
+  const fadeEnd=compactLayout.matches ? Math.max(readingLine+25,innerHeight*.56) : readingLine+40;
+  const linear=Math.max(0,Math.min(1,(fadeStart-closingTop)/Math.max(1,fadeStart-fadeEnd)));
+  const exit=reducedMotion.matches ? Number(closingTop<=fadeEnd) : linear*linear*(3-2*linear);
+  const visual=$('visual-column');
+  const hideVisual=exit>=1;
+  const visibilityChanged=visual.hidden!==hideVisual;
+  visual.hidden=hideVisual;
+  visual.inert=hideVisual;
+  visual.setAttribute('aria-hidden',String(hideVisual));
+  visual.style.setProperty('--visual-opacity',String(1-exit));
+  visual.style.setProperty('--visual-offset',`${-24*exit}px`);
+  visual.dataset.closingProgress=exit.toFixed(3);
+  // Keep the outgoing panel above the closing section instead of allowing its
+  // sticky/fixed canvas to overlap the full-width copy during the fade.
+  const panelRect=visual.getBoundingClientRect();
+  const clip=hideVisual ? 0 : Math.min(panelRect.height,Math.max(0,panelRect.bottom-closingTop));
+  visual.style.setProperty('--visual-clip',`${clip}px`);
+  deploymentSection.style.setProperty('--deployment-opacity',String(reducedMotion.matches ? 1 : .6+.4*exit));
+  deploymentSection.style.setProperty('--deployment-offset',`${16*(1-exit)}px`);
+  if (visibilityChanged) scene.setPlaying(!state.paused && !hideVisual);
   const max=Math.max(1,document.documentElement.scrollHeight-innerHeight);
   $('journey-progress').style.transform=`scaleX(${Math.min(1,scrollY/max)})`;
 }
@@ -145,7 +172,7 @@ function updateMotionButton() {
   $('motion-toggle').setAttribute('aria-pressed',String(state.paused));
 }
 $('motion-toggle').addEventListener('click',() => { state.paused=!state.paused; scene.setPlaying(!state.paused && !$('visual-column').hidden); updateMotionButton(); });
-reducedMotion.addEventListener('change',() => { state.paused=reducedMotion.matches; scene.setPlaying(!state.paused && !$('visual-column').hidden); updateMotionButton(); });
+reducedMotion.addEventListener('change',() => { state.paused=reducedMotion.matches; scene.setPlaying(!state.paused && !$('visual-column').hidden); updateMotionButton(); scheduleScroll(); });
 function hasHardwareView() { return [0,1,2,8].includes(state.chapter); }
 function updateViewMode() {
   const hardware = hasHardwareView() && state.hardware;
