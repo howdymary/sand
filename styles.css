@@ -37,6 +37,14 @@
   .essay-section[data-essay-chapter="0"] p:not(:last-of-type), .essay-section[data-essay-chapter="1"] p:not(:last-of-type) { margin-bottom:clamp(24px,4svh,55px); }
   .essay-section p:last-of-type { margin-bottom:26px; }
   .deployment-copy { opacity:var(--deployment-opacity,1); transform:translate3d(0,var(--deployment-offset,0px),0); }
+  .essay-join { margin-top:clamp(52px,8svh,100px); padding-top:clamp(42px,6svh,76px); border-top:1px solid var(--line); scroll-margin-top:calc(var(--header) + 35px); }
+  .essay-join h2 { max-width:1000px; font-size:clamp(34px,3.4vw,52px); line-height:1.16; letter-spacing:-.035em; margin:17px 0 28px; }
+  .join-copy { max-width:920px; }
+  .essay-join .join-copy p { font-size:18px; line-height:1.7; }
+  .join-action { display:inline-flex; align-items:center; justify-content:space-between; gap:36px; min-height:50px; margin-top:9px; padding:14px 20px; color:#fff; background:var(--ink); border:1px solid var(--ink); font-size:14px; line-height:1.4; text-decoration:none; }
+  .join-action span { color:#ffab8c; }
+  .join-action:hover { color:var(--ink); background:var(--orange); border-color:var(--orange); }
+  .join-action:hover span { color:var(--ink); }
   .visual-column { clip-path:inset(0 0 var(--visual-clip,0px) 0); background:var(--paper); transform:translate3d(0,var(--visual-offset,0px),0); position:sticky; top:calc(var(--header) + 20px); align-self:start; min-width:0; height:calc(100svh - var(--header) - 40px); }
   .visual-explorer { opacity:var(--visual-opacity,1); position:relative; width:100%; height:100%; display:flex; flex-direction:column; min-height:0; border-left:1px solid var(--line); padding-left:25px; }
   .view-heading { flex:0 0 auto; padding:3px 0 0; display:flex; justify-content:space-between; align-items:flex-start; gap:20px; pointer-events:none; }
@@ -138,6 +146,9 @@
     .essay-column p { font-size:16px; line-height:1.7; }
     .essay-section { min-height:58svh; padding:39px 0 50px; scroll-margin-top:calc(var(--header) + 24px); }
     .essay-section h2 { font-size:29px; margin:14px 0 23px; }
+    .essay-join { margin-top:48px; padding-top:38px; }
+    .essay-join h2 { font-size:34px; line-height:1.2; }
+    .essay-join .join-copy p { font-size:16px; line-height:1.7; }
     .inspector { top:0; right:0; width:min(280px,100%); max-height:100%; padding:13px 17px 18px; box-shadow:0 5px 25px #00000016; }
     .inspector h3 { font-size:20px; margin:8px 0; }
     .inspector > p { font-size:11px; line-height:1.7; }
@@ -156,6 +167,8 @@
     .essay-column,.essay-column.essay-deployment { padding-left:22px; padding-right:22px; }
     .essay-title { font-size:33px; }
     .essay-section h2 { font-size:27px; }
+    .essay-join h2 { font-size:32px; }
+    .join-action { width:100%; }
   }
   @media (max-height:650px) and (min-width:901px) {
     .essay-layout { margin-top:calc(var(--header) + 24px); }

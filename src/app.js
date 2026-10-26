@@ -1,6 +1,6 @@
-import { chapters, components, sources } from './content.js?v=20261026-flow-1';
-import { createScene } from './scene.js?v=20261026-flow-1';
-import { essay } from './essay.js?v=20261026-flow-1';
+import { chapters, components, sources } from './content.js?v=20261026-join-1';
+import { createScene } from './scene.js?v=20261026-join-1';
+import { essay } from './essay.js?v=20261026-join-1';
 
 const $ = (id) => document.getElementById(id);
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
@@ -24,6 +24,12 @@ const deploymentCopy = document.createElement('div');
 deploymentCopy.className='deployment-copy';
 deploymentCopy.append(...deploymentSection.childNodes);
 deploymentSection.append(deploymentCopy);
+const joinSection=document.createElement('section');
+joinSection.id=essay.join.id;
+joinSection.className='essay-join';
+joinSection.setAttribute('aria-labelledby','join-title');
+joinSection.innerHTML=`<div class="eyebrow">${escapeHTML(essay.join.kicker)}</div><h2 id="join-title">${escapeHTML(essay.join.title)}</h2><div class="join-copy">${paragraphHTML(essay.join.paragraphs)}</div><a class="join-action" href="${escapeHTML(essay.join.action.url)}" target="_blank" rel="noopener noreferrer" aria-label="Explore open roles at Etched">${escapeHTML(essay.join.action.label)}<span aria-hidden="true">↗</span></a>`;
+deploymentCopy.append(joinSection);
 document.querySelector('.essay-layout').append(deploymentSection);
 document.title = essay.title;
 const essaySections = [...document.querySelectorAll('[data-essay-chapter]')];
@@ -149,11 +155,9 @@ function updateOnScroll() {
   $('journey-progress').style.transform=`scaleX(${Math.min(1,scrollY/max)})`;
 }
 function scheduleScroll() { if (!scrollFrame) scrollFrame=requestAnimationFrame(updateOnScroll); }
-function goToChapter(index,instant=false) {
-  const target=Math.max(0,Math.min(chapters.length-1,index));
-  const section=essaySections[target];
+function goToSection(section,instant=false) {
   window.scrollTo({top:Math.max(0,scrollY+section.getBoundingClientRect().top-readingTop()),behavior:instant || reducedMotion.matches?'instant':'smooth'});
-  history.replaceState(null,'',`#${chapters[target].id}`);
+  history.replaceState(null,'',`#${section.id}`);
 }
 window.addEventListener('scroll',scheduleScroll,{passive:true});
 window.addEventListener('resize',scheduleScroll,{passive:true});
@@ -215,20 +219,20 @@ $('sources-close').addEventListener('click',() => $('sources-dialog').close());
 $('sources-dialog').addEventListener('click',(event) => { if (event.target===$('sources-dialog')) { const r=$('sources-dialog').getBoundingClientRect(); if (event.clientX<r.left || event.clientX>r.right || event.clientY<r.top || event.clientY>r.bottom) $('sources-dialog').close(); } });
 document.addEventListener('visibilitychange',() => scene.setPlaying(!state.paused && !$('visual-column').hidden && !document.hidden));
 updateMotionButton(); updateHint(); updateOnScroll();
-function chapterIndexForHash(hash) {
+function sectionForHash(hash) {
   const sectionHash=hash==='#quantization'?'#architecture':hash;
-  return chapters.findIndex(chapter => `#${chapter.id}`===sectionHash);
+  return [...essaySections,joinSection].find(section=>`#${section.id}`===sectionHash);
 }
 window.addEventListener('hashchange',() => {
-  const index=chapterIndexForHash(location.hash);
-  if (index>=0) goToChapter(index,true);
+  const section=sectionForHash(location.hash);
+  if (section) { goToSection(section,true); updateOnScroll(); }
 });
 if (location.hash) {
-  const initialIndex=chapterIndexForHash(location.hash);
-  const alignInitialChapter=() => {
-    if (chapterIndexForHash(location.hash)===initialIndex && initialIndex>=0) { goToChapter(initialIndex,true); updateOnScroll(); }
+  const initialSection=sectionForHash(location.hash);
+  const alignInitialSection=() => {
+    if (initialSection && sectionForHash(location.hash)===initialSection) { goToSection(initialSection,true); updateOnScroll(); }
   };
-  alignInitialChapter();
+  alignInitialSection();
   // The browser can restore its fragment position after module initialization.
-  if (document.readyState!=='complete') window.addEventListener('load',alignInitialChapter,{once:true});
+  if (document.readyState!=='complete') window.addEventListener('load',alignInitialSection,{once:true});
 }

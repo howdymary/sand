@@ -1,6 +1,6 @@
-import { teardownMarkup, createTeardown } from './teardown.js?v=20261026-flow-1';
-import { organizationScene } from './organization.js?v=20261026-flow-1';
-import { createHardwareRenderer } from './hardware-renderer.js?v=20261026-flow-1';
+import { teardownMarkup, createTeardown } from './teardown.js?v=20261026-join-1';
+import { organizationScene } from './organization.js?v=20261026-join-1';
+import { createHardwareRenderer } from './hardware-renderer.js?v=20261026-join-1';
 
 let sceneSequence = 0;
 

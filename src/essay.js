@@ -121,8 +121,7 @@ export const essay = {
       "title": "Software takes the hardware into deployment",
       "paragraphs": [
         "Our inference software work includes porting models and building the abstractions, tests and multi-node runtime needed to execute them. Communication and profiling sit close to this work. Firmware and drivers connect the machine’s physical behavior to the software using it.",
-        "Deployment adds staged rollouts, recovery and telemetry. Observations from the fleet need to feed back into engineering priorities. We have tested racks in representative deployments, and in August 2026 we announced our first rack shipment to Jane Street. Customer environments continue to expose questions for the hardware and software teams.",
-        "Engineers who have shipped silicon know how much of a product is settled between specialties. We want people who can follow a difficult problem across those boundaries and help improve how the work gets done. Their experience has a direct use here, from questioning an early requirement to understanding the behavior of a system in a customer’s data center."
+        "Deployment adds staged rollouts, recovery and telemetry. Observations from the fleet need to feed back into engineering priorities. We have tested racks in representative deployments, and in August 2026 we announced our first rack shipment to Jane Street. Customer environments continue to expose questions for the hardware and software teams."
       ],
       "sourceLinks": [
         {
@@ -147,5 +146,18 @@ export const essay = {
         }
       ]
     }
-  ]
+  ],
+  "join": {
+    "id": "join-us",
+    "kicker": "Join us",
+    "title": "Build the next inference system with us.",
+    "paragraphs": [
+      "After several generations of silicon, you have ideas about what you’d build differently and how you’d get it into production. We want to work on those ideas with you.",
+      "Etched is hiring across architecture, RTL, verification, physical design, and inference software. Bring the judgment you’ve earned through tapeouts and bring-up. Help shape an AI-native lab where you can follow a hard problem from the workload and architecture to a system running a customer’s model."
+    ],
+    "action": {
+      "label": "Explore open roles",
+      "url": "https://www.etched.com/join"
+    }
+  }
 };
