@@ -1,0 +1,10 @@
+.hardware-renderer { position:absolute; inset:0; overflow:hidden; background:transparent; pointer-events:none; isolation:isolate; }
+.hardware-renderer-canvas { display:block; width:100%; height:100%; opacity:1; }
+.hardware-renderer-note { position:absolute; z-index:3; left:12px; bottom:9px; width:max-content; max-width:calc(100% - 24px); padding:4px 6px; color:#555; background:rgba(255,255,255,.93); font:9px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.01em; text-align:left; pointer-events:none; }
+.hardware-renderer-label { position:absolute; z-index:4; max-width:150px; padding:4px 6px; color:#222; background:rgba(255,255,255,.91); border-left:1px solid #ff642e; font:10px/1.45 "Helvetica Neue",Helvetica,Arial,sans-serif; white-space:nowrap; pointer-events:none; }
+.hardware-renderer-label-memory { transform:translate(-85%,-140%); }
+.hardware-renderer-label-compute { transform:translate(12%,-140%); }
+.hardware-renderer-label-storage { transform:translate(0,-140%); }
+.hardware-renderer-label-tray { transform:translate(8px,-50%); }
+@media(max-width:900px) { .hardware-renderer-note { left:7px; max-width:calc(100% - 14px); bottom:4px; font-size:8px; } .hardware-renderer-label { font-size:9px; padding:3px 5px; } }
+@media(prefers-reduced-motion:reduce) { .hardware-renderer,.hardware-renderer * { animation:none!important; transition:none!important; } }

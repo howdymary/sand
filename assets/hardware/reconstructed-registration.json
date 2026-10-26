@@ -1,0 +1,116 @@
+{
+  "asset": "reconstructed-board.png",
+  "kind": "illustrative-reconstruction",
+  "generatedAt": "2026-10-26",
+  "width": 1672,
+  "height": 941,
+  "alpha": true,
+  "recommendedCrop": {
+    "x": 480,
+    "y": 12,
+    "width": 714,
+    "height": 915
+  },
+  "innerChassisBounds": {
+    "x": 514,
+    "y": 19,
+    "width": 644,
+    "height": 898
+  },
+  "packageCenters": [
+    {
+      "x": 709,
+      "y": 226
+    },
+    {
+      "x": 965,
+      "y": 226
+    },
+    {
+      "x": 709,
+      "y": 418
+    },
+    {
+      "x": 965,
+      "y": 418
+    },
+    {
+      "x": 709,
+      "y": 606
+    },
+    {
+      "x": 965,
+      "y": 606
+    },
+    {
+      "x": 709,
+      "y": 778
+    },
+    {
+      "x": 965,
+      "y": 778
+    }
+  ],
+  "registrationNotes": "Approximate image coordinates, origin top-left. Generation preserved the two-column/four-row organization but enlarged the chassis relative to the source canvas. Map the recommended crop to the physical tray plane; do not assume source-pixel alignment. Package centers describe this reconstruction, not verified hardware specifications.",
+  "sourceTray": {
+    "url": "https://cdn.sanity.io/images/rwbees58/production/5465c0a1c0301168e9aa18acb49febce0dc7c358-3200x1800.png",
+    "width": 3200,
+    "height": 1800,
+    "approximateChassisBounds": {
+      "x": 1235,
+      "y": 300,
+      "width": 730,
+      "height": 1088
+    }
+  },
+  "coolingLayers": [
+    {
+      "asset": "reconstructed-hoses.png",
+      "kind": "photo-conditioned-illustrative-extraction",
+      "width": 1672,
+      "height": 941,
+      "alpha": true,
+      "recommendedCrop": {
+        "x": 540,
+        "y": 5,
+        "width": 595,
+        "height": 925
+      },
+      "principalOpaqueBounds": {
+        "x": 553,
+        "y": 13,
+        "width": 570,
+        "height": 908
+      },
+      "notes": "Dense source-photo-conditioned hose assembly; top connectors, parallel braided runs, center curves, and bottom loops. Generated extraction is not lossless pixel segmentation. Crop maps to the tray surface; source-pixel registration drift must be accounted for."
+    },
+    {
+      "asset": "reconstructed-coldplates.png",
+      "kind": "photo-conditioned-illustrative-extraction",
+      "width": 1672,
+      "height": 941,
+      "alpha": true,
+      "recommendedMaterialCrops": [
+        {
+          "x": 660,
+          "y": 198,
+          "width": 146,
+          "height": 130
+        },
+        {
+          "x": 867,
+          "y": 198,
+          "width": 146,
+          "height": 130
+        }
+      ],
+      "principalOpaqueBounds": {
+        "x": 624,
+        "y": 191,
+        "width": 425,
+        "height": 546
+      },
+      "notes": "Use interior material crops from the visible upper copper plates to avoid colored alpha-edge artifacts. Lower fragments are only source-visible portions, not new lower copper banks. Geometry and material application are illustrative; the cutout is not a verified service view."
+    }
+  ]
+}

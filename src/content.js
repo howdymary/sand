@@ -3,7 +3,7 @@ export const chapters = [
     "id": "experience",
     "kicker": "01 / Start with the workload",
     "title": "From a request to a rack",
-    "caption": "Follow the serving system inward: select a compute tray, slide it out, and turn toward the hardware inside.",
+    "caption": "Follow one compute tray from the front of the rack to an overhead view of the hardware inside.",
     "sceneTitle": "Start with the system",
     "sceneSubtitle": "Conceptual request → server rack → response tokens.",
     "componentIds": [

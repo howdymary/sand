@@ -94,7 +94,7 @@ for (const file of files) {
     }
   }
   if (/\.(?:js|mjs)$/i.test(file)) {
-    for (const match of source.matchAll(/(?:import|export)\s+(?:[^;"']*?\s+from\s*)?["']([^"']+)["']|import\(\s*["']([^"']+)["']\s*\)/g)) {
+    for (const match of source.matchAll(/\b(?:import|export)\s*(?:[\w*$,\s{}]+?\s*from\s*)?["']([^"']+)["']|\bimport\(\s*["']([^"']+)["']\s*\)/g)) {
       const ref = match[1] || match[2];
       if (!/^(?:\.{1,2}\/|\/|[a-z][a-z\d+.-]*:)/i.test(ref)) {
         fail(`Bare module import needs a bundler: ${path.relative(base, file)} → ${ref}`);

@@ -1,6 +1,6 @@
-import { chapters, components, sources } from './content.js?v=20261026-focus-3';
-import { createScene } from './scene.js?v=20261026-focus-3';
-import { essay } from './essay.js?v=20261026-focus-3';
+import { chapters, components, sources } from './content.js?v=20261026-volume-1';
+import { createScene } from './scene.js?v=20261026-volume-1';
+import { essay } from './essay.js?v=20261026-volume-1';
 
 const $ = (id) => document.getElementById(id);
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
@@ -16,7 +16,7 @@ const originalPhotos = {
 const sectionLabels = ['Workload','Requirements','Architecture','RTL','Verification','Layout','Organization','AI tools','Deployment'];
 
 const paragraphHTML = paragraphs => paragraphs.map(p => `<p>${escapeHTML(p)}</p>`).join('');
-$('essay').innerHTML = `<header class="essay-intro"><div class="eyebrow">${escapeHTML(essay.kicker)}</div><h1 class="essay-title" id="essay-title">${escapeHTML(essay.title)}</h1><p class="essay-deck">${escapeHTML(essay.deck)}</p>${paragraphHTML(essay.introduction)}</header>` + essay.sections.map(section => `<section class="essay-section" id="${escapeHTML(section.id)}" data-essay-chapter="${section.chapter}" aria-labelledby="essay-heading-${section.chapter}"><div class="eyebrow">${String(section.chapter+1).padStart(2,'0')} / ${escapeHTML(sectionLabels[section.chapter])}</div><h2 id="essay-heading-${section.chapter}">${escapeHTML(section.title)}</h2>${paragraphHTML(section.paragraphs)}${section.sourceLinks?.length ? `<div class="essay-sources">${section.sourceLinks.map(source => `<a href="${escapeHTML(source.url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(source.label)} ↗</a>`).join('')}</div>`:''}</section>`).join('') + '<p class="essay-endnote">Independent editorial draft. Hardware photographs are from Etched’s official website and media kit. Diagrams explain engineering relationships and are not Etched specifications.</p>';
+$('essay').innerHTML = `<header class="essay-intro"><div class="eyebrow">${escapeHTML(essay.kicker)}</div><h1 class="essay-title" id="essay-title">${escapeHTML(essay.title)}</h1><p class="essay-deck">${escapeHTML(essay.deck)}</p>${paragraphHTML(essay.introduction)}</header>` + essay.sections.map(section => `<section class="essay-section" id="${escapeHTML(section.id)}" data-essay-chapter="${section.chapter}" aria-labelledby="essay-heading-${section.chapter}"><div class="eyebrow">${String(section.chapter+1).padStart(2,'0')} / ${escapeHTML(sectionLabels[section.chapter])}</div><h2 id="essay-heading-${section.chapter}">${escapeHTML(section.title)}</h2>${paragraphHTML(section.paragraphs)}${section.sourceLinks?.length ? `<div class="essay-sources">${section.sourceLinks.map(source => `<a href="${escapeHTML(source.url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(source.label)} ↗</a>`).join('')}</div>`:''}</section>`).join('') + '<p class="essay-endnote">Independent editorial draft. Official Etched photographs are combined with reconstructed geometry. Hidden board details and chip interiors are illustrative. Diagrams explain engineering relationships and are not Etched specifications.</p>';
 document.title = essay.title;
 const essaySections = [...document.querySelectorAll('[data-essay-chapter]')];
 const compactLayout = matchMedia('(max-width: 900px)');
@@ -142,7 +142,7 @@ function updateViewMode() {
   $('view-mode-switch').hidden = !hasHardwareView();
   $('hardware-mode').setAttribute('aria-pressed',String(state.hardware));
   $('diagram-mode').setAttribute('aria-pressed',String(!state.hardware));
-  $('view-medium').textContent = hardware ? state.chapter<3 ? 'PHOTO-BASED EXPLANATORY SEQUENCE' : 'HARDWARE PHOTOGRAPHY · ETCHED' : 'CONCEPTUAL DIAGRAM';
+  $('view-medium').textContent = hardware ? state.chapter<3 ? 'PHOTO-REFERENCED 3D RECONSTRUCTION' : 'HARDWARE PHOTOGRAPHY · ETCHED' : 'CONCEPTUAL DIAGRAM';
   $('motion-toggle').hidden = hardware;
   $('photo-original').hidden = !hardware;
   if (originalPhotos[state.chapter]) $('photo-original').href = originalPhotos[state.chapter];
@@ -157,7 +157,7 @@ function updateHint() {
 for (const [id,value] of [['hardware-mode',true],['diagram-mode',false]]) {
   $(id).addEventListener('click',() => {
     closeInspector(); hideTooltip(); state.hardware=value; updateViewMode();
-    $('view-announcement').textContent = value ? 'Scroll-controlled photographic hardware sequence.' : 'Conceptual engineering diagram.';
+    $('view-announcement').textContent = value ? 'Scroll-controlled reconstruction using official hardware photographs.' : 'Conceptual engineering diagram.';
   });
 }
 smallScreen.addEventListener('change',updateHint);

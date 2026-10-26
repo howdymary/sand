@@ -1,5 +1,6 @@
-import { teardownMarkup, createTeardown } from './teardown.js?v=20261026-focus-3';
-import { organizationScene } from './organization.js?v=20261026-focus-3';
+import { teardownMarkup, createTeardown } from './teardown.js?v=20261026-volume-1';
+import { organizationScene } from './organization.js?v=20261026-volume-1';
+import { createHardwareRenderer } from './hardware-renderer.js?v=20261026-volume-1';
 
 let sceneSequence = 0;
 
@@ -160,7 +161,7 @@ function hardwareScene(index) {
 
 const chapterBuilders = [rackOpening, packageScene, architectureScene, microScene, verificationScene, physicalScene, () => organizationScene({comp,rect,text,hint,flow,arrow,title,bottom}), aiScene, racksFinal];
 
-/** A dependency-free, accessible SVG stage for the chip design story. */
+/** Accessible diagrams paired with a continuous, scroll-controlled hardware scene. */
 export function createScene(host, callbacks = {}) {
   const prefix = `etched-scene-${++sceneSequence}`;
   const svgMarkup = `<svg class="etched-scene" viewBox="0 110 1000 610" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="Interactive diagrams of Etched’s chip design process">
@@ -179,6 +180,14 @@ export function createScene(host, callbacks = {}) {
   host.classList.add('scene-host', 'scene-is-playing');
   const svg = host.querySelector('svg');
   const teardown = createTeardown(svg);
+  const hardwareHost = document.createElement('div');
+  hardwareHost.className = 'hardware-renderer-host';
+  hardwareHost.setAttribute('role','img');
+  host.append(hardwareHost);
+  const hardware = createHardwareRenderer(hardwareHost, {
+    onReady: () => queueMicrotask(() => { if (!destroyed) syncTeardown(); })
+  });
+  let hardwareView = teardown.getState();
   const layers = [...host.querySelectorAll('[data-scene]')];
   let activeIndex = 0;
   let selected = '';
@@ -199,18 +208,37 @@ export function createScene(host, callbacks = {}) {
     const path = host.querySelector(`#${node.dataset.path}`);
     return { node, path, length: path.getTotalLength(), chapter: Number(node.closest('[data-scene]').dataset.scene) };
   });
-  const isVisibleComponent = node => !(hardwareMode && activeIndex <= 2 && teardown.getState().architectureMix < .95) && node.closest('[data-presentation]')?.getAttribute('aria-hidden') !== 'true';
+  const isVisibleComponent = node => !(hardwareMode && activeIndex <= 2 && hardwareView.architectureMix < .95) && node.closest('[data-presentation]')?.getAttribute('aria-hidden') !== 'true';
   const setTabStops = () => layers.forEach((layer, i) => layer.querySelectorAll('[data-component]').forEach(node => node.setAttribute('tabindex', i === activeIndex && isVisibleComponent(node) ? '0' : '-1')));
   setTabStops();
   function syncTeardown() {
     const show = hardwareMode && activeIndex <= 2;
     layers[8].querySelector('.hardware-wide').setAttribute('aria-hidden',String(compactPreference.matches));
     layers[8].querySelector('.hardware-compact').setAttribute('aria-hidden',String(!compactPreference.matches));
-    teardown.setCompact(compactPreference.matches, svg.clientWidth / Math.max(1,svg.clientHeight));
-    const view = teardown.setPosition(activeIndex, chapterProgress, motionPreference.matches || !playing);
-    svg.setAttribute('viewBox',show && view.viewBox ? view.viewBox : compactPreference.matches && hardwareMode && activeIndex===8 ? '40 140 920 438' : hardwareMode && activeIndex===8 ? '110 140 725 565' : '0 110 1000 610');
-    teardown.setVisible(show);
-    teardown.element.setAttribute('aria-hidden', String(!show || view.architectureMix >= 1));
+    const aspect = host.clientWidth / Math.max(1,host.clientHeight);
+    const reduced = motionPreference.matches || !playing;
+    const volume = hardware.getState().available && hardware.getState().loaded;
+    hardware.setCompact(compactPreference.matches, aspect);
+    hardware.setVisible(show);
+    teardown.setCompact(compactPreference.matches, aspect);
+    const view = volume ? hardware.setPosition(activeIndex, chapterProgress, reduced) : teardown.setPosition(activeIndex, chapterProgress, reduced);
+    hardwareView = view;
+    hardwareHost.hidden = !show || !volume || view.architectureMix >= 1;
+    hardwareHost.setAttribute('aria-hidden', String(hardwareHost.hidden));
+    hardwareHost.setAttribute('aria-label', {
+      rack:'The complete Etched rack, viewed from the front. A compute tray is highlighted before extraction.',
+      extract:'One compute tray slides along its rails while the camera moves from the front of the rack toward an overhead view. Photo-referenced reconstruction.',
+      tray:'The extracted compute tray, shown overhead using Etched’s official photograph.',
+      cooling:'The cooling lines and cold plates lift from the same tray. Explanatory reconstruction of their spatial relationship.',
+      board:'The board beneath the cooling assembly is revealed. Hidden board details and component placement are illustrative.',
+      package:'The camera approaches one package on the illustrative board. The package surface uses Etched’s official chip photograph.',
+      anatomy:'An inferred package anatomy overlay identifies the central compute device and six flanking HBM locations.',
+      storage:'A conceptual cutaway explains storage inside the compute device. It does not show an Etched floorplan.'
+    }[view.phase] || 'A photo-referenced reconstruction of the hardware system.');
+    host.dataset.hardwarePhase = view.phase;
+    svg.setAttribute('viewBox',show && !volume && view.viewBox ? view.viewBox : compactPreference.matches && hardwareMode && activeIndex===8 ? '40 140 920 438' : hardwareMode && activeIndex===8 ? '110 140 725 565' : '0 110 1000 610');
+    teardown.setVisible(show && !volume);
+    teardown.element.setAttribute('aria-hidden', String(volume || !show || view.architectureMix >= 1));
     teardown.element.setAttribute('role','img');
     teardown.element.setAttribute('aria-label', {
       rack:'Photograph of the inference rack. One compute tray is selected.',
@@ -352,6 +380,7 @@ export function createScene(host, callbacks = {}) {
       clearTimeout(transitionTimer);
       clearTimeout(cameraResetTimer);
       cancelAnimationFrame(frame);
+      hardware.dispose();
       motionPreference.removeEventListener('change', updateMotion);
       document.removeEventListener('visibilitychange', updateMotion);
       svg.removeEventListener('click', onClick); svg.removeEventListener('keydown', onKeydown);
